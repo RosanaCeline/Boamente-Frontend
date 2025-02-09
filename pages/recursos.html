@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boamente - Recursos</title>
+    <link rel="stylesheet" href="../assets/css/recursos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container-header">
+            <div id="logo-header">
+                <img src="../assets/img/logo-boamente.png" alt="Logo Boamente">
+                <span>BOAMENTE</span>
+            </div>
+            <div id="menu-header">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Visão Geral</a></li>
+                        <li><a href="#">Recursos</a></li>
+                        <li><a href="">Contato</a></li>
+                        <li>
+                            <button class="button btn-login">Entrar</button>
+                        </li>
+                        <li><button class="button btn-cadastro">Cadastre-se</button></li>
+                    </ul>
+
+                    <svg id="button-menu" class="Header__toggle-svg" viewBox="0 0 60 40">
+                        <g stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                            <path id="top-line" d="M10,10 L50,10 Z"></path>
+                            <path id="middle-line" d="M10,20 L50,20 Z"></path>
+                            <path id="bottom-line" d="M10,30 L50,30 Z"></path>
+                        </g>
+                    </svg>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container-artigos">
+            <h1>Artigos</h1>
+            <div id="artigos">
+                <div class="artigo">
+                    <h3>Comparative analysis of BERT-based and generative large language models for detecting suicidal ideation: a performance evaluation study</h3>
+                    <span>Autores:<br>Adonias Caetano<br>Renato Freitas Bessa<br>Ariel Soares Teles</span>
+                    <button class="button btn-recursos" onclick="window.open('https://doi.org/10.1590/0102-311XEN028824')">Acessar Artigo</button>
+                </div>
+                <div class="artigo">
+                    <h3>Boamente: A Natural Language Processing-Based Digital Phenotyping Tool for Smart Monitoring of Suicidal Ideation</h3>
+                    <span>Autores:<br>Evandro J. S. Diniz<br>Ariel Soares Teles</span>
+                    <button class="button btn-recursos" onclick="window.open('https://doi.org/10.3390/healthcare10040698')">Acessar Artigo</button>
+                </div>
+                <div class="artigo">
+                    <h3>How can machine learning identify suicidal ideation from user’s texts? Towards the explation of the Boamente system</h3>
+                    <span>Autores:<br>Evandro J. S. Diniz<br>Ariel Soares Teles</span>
+                    <button class="button btn-recursos" onclick="window.open('https://doi.org/10.1016/j.procs.2022.09.093')">Acessar Artigo</button>
+                </div>
+            </div>
+        </div>
+        <div class="container-materiais">
+            <h1>Materiais de Desenvolvimento</h1>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container-footer">
+            <div id="logo-footer">
+                <img src="../assets/img/logo-ufdpar.png" alt="Logo da UFDPar">
+                <img src="../assets/img/logo-ifce.png" alt="Logo do IFCE">
+            </div>
+            <div id="creators-footer">
+                <span>Desenvolvido por Laís Carvalho e Rosana Celine</span>
+            </div>
+            <div id="bolsas-footer">
+                <span>PIBIC e PIBITI</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/button.js"></script>
+</body>
+</html>
