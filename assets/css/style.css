@@ -91,6 +91,12 @@
     color: #F8F9FA;
 }
 
+.button:hover {
+    background-color: #417D6D;
+    color: #F8F9FA;
+    transition: all 0.2s ease-in-out;
+}
+
 .btn-recursos {
     background-color: #FFD95A;
     color: #000000;
@@ -395,12 +401,6 @@
         
         border-radius: 50px;
         cursor: pointer;
-    }
-
-    .button:hover {
-        background-color: #417D6D;
-        color: #F8F9FA;
-        transition: all 0.2s ease-in-out;
     }
 
     .btn-login {

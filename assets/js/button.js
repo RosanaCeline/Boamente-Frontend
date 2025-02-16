@@ -16,7 +16,6 @@ button.addEventListener("click", () => {
         bottomLine.style.transition = "transform 0.6s ease-out";
         bottomLine.style.transform = "translateY(-10px) rotate(45deg) scale(0.9)";
 
-        middleLine.style.transition = "opacity 0.6s ease-out";
         middleLine.style.opacity = "0";
 
         menu.style.display = "block"

@@ -1,0 +1,108 @@
+:root {
+    --cor-blue-dark: #012538;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+#login {
+    display: flex;
+    height: 100vh;
+    background-color: var(--cor-blue-dark);
+}
+
+#logo-boamente {
+    background-color: var(--cor-blue-dark);
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#logo-boamente img {
+    width: 512px;
+    height: 512px;
+}
+
+#form-login {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    background-color: #FFFFFF;
+    border-radius: 25px 0px 0px 25px;
+}
+
+#form-login h1 { 
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#form-login form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 400px;
+}
+
+#form-login label {
+    margin-bottom: 10px;
+}
+
+#form-login input {
+    display: block;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    border-radius: 30px;
+    width: 350px;
+    background-color: #F2F2F2;
+    border: 0px;
+    box-shadow: 0px 2px 4px #aaaaaa;
+}
+
+#form-login input:focus {
+    outline: 0;
+}
+
+.button {
+    background-color: #FFD95A;
+    border: 0px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #000000;
+
+    height: 40px;
+    width: 150px;
+    padding: 0px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 50px;
+}
+
+.button:hover {
+    background-color: #417D6D;
+    color: #F8F9FA;
+    transition: all 0.2s ease-in-out;
+}
+
+#form-login form button {
+    align-self: center;
+}
+
+a {
+    color: #004F73;
+    text-decoration: none;
+}
+
+#form-login form a {
+    display: flex;
+    align-self: flex-end;
+    margin: 20px 0px;
+}

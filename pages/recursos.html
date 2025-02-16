@@ -13,7 +13,7 @@
     <header>
         <div class="container-header">
             <div id="logo-header">
-                <img src="../assets/img/logo-boamente.png" alt="Logo Boamente">
+                <img src="../assets/img/logo-boamente-upscale.png" alt="Logo Boamente">
                 <span>BOAMENTE</span>
             </div>
             <div id="menu-header">
@@ -21,11 +21,11 @@
                     <ul>
                         <li><a href="index.html">Visão Geral</a></li>
                         <li><a href="#">Recursos</a></li>
-                        <li><a href="">Contato</a></li>
+                        <li><a href="contato.html">Contato</a></li>
                         <li>
-                            <button class="button btn-login">Entrar</button>
+                            <button class="button btn-login"  onclick="window.location.href='login.html'">Entrar</button>
                         </li>
-                        <li><button class="button btn-cadastro">Cadastre-se</button></li>
+                        <li><button class="button btn-cadastro" onclick="window.location.href='cadastro.html'">Cadastre-se</button></li>
                     </ul>
 
                     <svg id="button-menu" class="Header__toggle-svg" viewBox="0 0 60 40">
@@ -44,17 +44,17 @@
         <div class="container-artigos">
             <h1>Artigos</h1>
             <div id="artigos">
-                <div class="artigo">
+                <div class="artigo container-recursos">
                     <h3>Comparative analysis of BERT-based and generative large language models for detecting suicidal ideation: a performance evaluation study</h3>
                     <span>Autores:<br>Adonias Caetano<br>Renato Freitas Bessa<br>Ariel Soares Teles</span>
                     <button class="button btn-recursos" onclick="window.open('https://doi.org/10.1590/0102-311XEN028824')">Acessar Artigo</button>
                 </div>
-                <div class="artigo">
+                <div class="artigo container-recursos">
                     <h3>Boamente: A Natural Language Processing-Based Digital Phenotyping Tool for Smart Monitoring of Suicidal Ideation</h3>
                     <span>Autores:<br>Evandro J. S. Diniz<br>Ariel Soares Teles</span>
                     <button class="button btn-recursos" onclick="window.open('https://doi.org/10.3390/healthcare10040698')">Acessar Artigo</button>
                 </div>
-                <div class="artigo">
+                <div class="artigo container-recursos">
                     <h3>How can machine learning identify suicidal ideation from user’s texts? Towards the explation of the Boamente system</h3>
                     <span>Autores:<br>Evandro J. S. Diniz<br>Ariel Soares Teles</span>
                     <button class="button btn-recursos" onclick="window.open('https://doi.org/10.1016/j.procs.2022.09.093')">Acessar Artigo</button>
@@ -63,6 +63,23 @@
         </div>
         <div class="container-materiais">
             <h1>Materiais de Desenvolvimento</h1>
+            <div id="materiais">
+                <div class="material container-recursos">
+                    <h3>Repositório do Modelo BERT</h3>
+                    <span>Última versão - por Adonias Caetano de Oliveira</span>
+                    <button class="button btn-recursos" onclick="window.open('https://github.com/adonias-caetano/Suicidal-Ideation-BERTvsLLM')">Acessar Repositório GitHub </button>
+                </div>
+                <div class="material container-recursos">
+                    <h3>Repositório do Teclado Virtual</h3>
+                    <span>Última versão - por Rosana Celine Pinheiro Damaceno</span>
+                    <button class="button btn-recursos" onclick="window.open('https://github.com/RosanaCeline/Teclado-Boamente')">Acessar Repositório GitHub </button>
+                </div>
+                <div class="material container-recursos">
+                    <h3>Repositório da API Boamente</h3>
+                    <span>Última versão - por Laís Carvalho Coutinho</span>
+                    <button class="button btn-recursos" onclick="window.open('https://github.com/laisdeveloper/API-Boamente')">Acessar Repositório GitHub </button>
+                </div>
+            </div>
         </div>
     </main>
 

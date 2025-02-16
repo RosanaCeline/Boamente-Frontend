@@ -121,16 +121,16 @@
 	transform-origin: center;
 }
 
-.container-artigos {
+.container-pesquisadores {
     height: 100vh;
 }
 
-.container-materiais {
+.container-alunos {
     height: calc(100vh - var(--footer-height));
 }
 
-.container-artigos,
-.container-materiais {
+.container-pesquisadores,
+.container-alunos {
     padding-top: 100px;
     display: flex;
     justify-content: space-evenly;
@@ -141,7 +141,7 @@
     gap: 20px;
 }
 
-.container-recursos {
+.container-cont {
     display: flex;
     flex-direction: column;
     justify-content:space-evenly;
@@ -153,39 +153,40 @@
     border-radius: 15px;
 }
 
-.container-artigos h1,
-.container-recursos h1 {
+.container-pesquisadores h1,
+.container-alunos h1 {
     font-size: 40px;
     font-weight: 700;
 }
 
-#artigos,
-#materiais {
+#pesquisadores,
+#alunos {
     display: flex;
     flex-direction: row;
     gap: 15px;
 }
 
-.artigo {
-    height: 500px;
+.pesquisador,
+.aluno {
+    height: 650px;
+    width: 450px;
+}
+
+.pesquisador span,
+.aluno span {
     width: 400px;
 }
 
-.artigo:hover,
-.material:hover {
+.pesquisador:hover,
+.aluno:hover {
     box-shadow: 0px 0px 8px #333333;
     transition: all 0.2s ease-in-out;
 }
 
-.artigo h3,
-.material h3 {
+.pesquisador h3,
+.aluno h3 {
     font-size: 28px;
     width: 325px;
-}
-
-.material {
-    height: 400px;
-    width: 400px;
 }
 
 .container-footer {
@@ -393,6 +394,7 @@
         border-radius: 50px;
         cursor: pointer;
     }
+
 
     .btn-login {
         font-size: 18px;
