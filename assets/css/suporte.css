@@ -47,7 +47,6 @@ body.active .side-bar ul li:hover {
 
 .side-bar {
     position: absolute;
-    transition: .5s;
     height: 100vh;
     width: 60px;
     border-radius: 0px 40px 40px 0px;
@@ -253,7 +252,6 @@ body.active .side-bar ul li:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
 }
 
 .container label {
@@ -261,20 +259,29 @@ body.active .side-bar ul li:hover {
     margin: 10px 0px;
 }
 
-.container input {
+.container input,
+.container textarea {
     outline: none;
     border: none;
     width: 700px;
-    height: 40px;
-    border-radius: 5px;
     padding: 20px;
     font-size: 18px;
     background-color: #f2f2f2;
     box-shadow: 0px 1px 4px #777777;
 }
 
-.container input:focus {
+.container input {
+    height: 40px;
+}
+
+.container input:focus,
+.container textarea:focus {
     box-shadow: 0px 1px 4px #000000;
+}
+
+.container #descricao {
+    height: 170px;
+    resize: none;
 }
 
 .container #legenda {
@@ -288,7 +295,7 @@ body.active .side-bar ul li:hover {
     color: #000000;
 
     height: 50px;
-    width: 200px;
+    width: 270px;
     padding: 0px 25px;
     font-size: 20px;
     font-weight: 600;
@@ -309,10 +316,24 @@ body.active .container {
     background-color: #EFEFEF;
 }
 
-body.active .container input {
+body.active .container input,
+body.active .container textarea {
     background-color: #cecece;
 }
 
-body.active .container input::placeholder {
+body.active .container input::placeholder,
+body.active .container textarea::placeholder {
     color: #000000;
+}
+
+.erro {
+    height: 16px;
+    margin: 7px 0px;
+    display: flex;
+}
+
+.erro span{
+    color: red;
+    font-size: 16px;
+    display: none;
 }

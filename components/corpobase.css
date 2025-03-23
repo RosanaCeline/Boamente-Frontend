@@ -139,6 +139,10 @@ body.active .side-bar ul li:hover {
     margin-top: 20px;
 }
 
+.empty-box {
+    width: 208px;
+}
+
 .search-box {
     background-color: #F2F2F2;
     height: 50px;
@@ -148,6 +152,7 @@ body.active .side-bar ul li:hover {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0px 1px 4px #777777;
+    margin: auto;
 }
 
 .search-txt {
@@ -159,7 +164,7 @@ body.active .side-bar ul li:hover {
     font-size: 16px;
     line-height: 40px;
     transition: .2s;
-    width: 400px;
+    width: 600px;
 }
 
 .search-btn {
@@ -206,6 +211,7 @@ body.active .side-bar ul li:hover {
     top: 50%;
     left: 5px;
     transform: translateY(-50%);
+    transition: left .5s;
 }
 
 .dark-mode-btn.active {
