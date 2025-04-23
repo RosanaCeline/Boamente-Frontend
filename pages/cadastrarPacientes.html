@@ -12,6 +12,10 @@
 <body>
     <nav>
         <div class="side-bar">
+            <div class="boamente-logo">
+                <img src="../assets/img/logo-boamente-upscale.png" alt="Logo Boamente">
+            </div>
+
             <ul class="side-bar-top">
                 <li>
                     <a href="#">
@@ -61,15 +65,8 @@
                 </li>
                 <li>
                     <a href="#">
-                        <div class="icone"><img src="../assets/icons/icon-Config.png" alt="Icone Configuração"></div>
-                        <span class="titulo">Configurações</span>
-                    </a>
-                    
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="icone"><img src="../assets/icons/icon-Sair.png" alt="Icone Sair"></div>
-                        <span class="titulo">Sair</span>
+                        <div class="icone"><img src="../assets/icons/icon-Info.png" alt="Icone Menu Instalação"></div>
+                        <span class="titulo">Menu Instalação</span>
                     </a>
                 </li>
             </ul>
@@ -83,8 +80,15 @@
                 </li>
                 <li>
                     <a href="#">
-                        <div class="icone"><img src="../assets/icons/icon-Info.png" alt="Icone Menu Instalação"></div>
-                        <span class="titulo">Menu Instalação</span>
+                        <div class="icone"><img src="../assets/icons/icon-Config.png" alt="Icone Configuração"></div>
+                        <span class="titulo">Configurações</span>
+                    </a>
+                    
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="icone"><img src="../assets/icons/icon-Sair.png" alt="Icone Sair"></div>
+                        <span class="titulo">Sair</span>
                     </a>
                 </li>
             </ul>
@@ -117,20 +121,28 @@
                     
                     <form action="" method="post">
                         <div class="form-group">
-                            <label for="nomePaciente">Nome Completo <span style="color: red;">*</span></label>
+                            <label for="nomePaciente">Nome Completo: <span style="color: red;">*</span></label>
                             <input type="text" name="nome" id="nomePaciente" placeholder="Digite o nome completo do paciente" required>
                         </div>
                         
-                        
                         <div class="form-group">
-                            <label for="emailPaciente">E-mail <span style="color: red;">*</span></label>
+                            <label for="nascimentoPaciente">Data de Nascimento: <span style="color: red;">*</span></label>
+                            <input type="text" name="telefone" id="nascimentoPaciente" placeholder="Digite a data de nascimento do paciente" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="emailPaciente">E-mail: <span style="color: red;">*</span></label>
                             <input type="text" name="email" id="emailPaciente" placeholder="Digite o e-mail do paciente" required>
                         </div>
-                        
-                        
+
                         <div class="form-group">
-                            <label for="telefonePaciente">Telefone <span style="color: red;">*</span></label>
-                            <input type="text" name="telefone" id="telefonePaciente" placeholder="Digite o telefone do paciente" required>
+                            <label for="sexoPaciente">Sexo: <span style="color: red;">*</span></label>
+                            <input type="text" name="sexo" id="sexoPaciente" placeholder="Digite o sexo do paciente" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefonePaciente">Telefone: </label>
+                            <input type="text" name="telefone" id="telefonePaciente" placeholder="Digite o telefone do paciente">
                         </div>
 
                         <span id="legenda">As instruções para a instalação do teclado virtual serão enviadas para o e-mail do paciente.</span>
