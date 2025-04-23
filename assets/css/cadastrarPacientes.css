@@ -253,7 +253,8 @@ body.active .side-bar ul li:hover {
     align-items: center;
 }
 
-.form-group input {
+.form-group input,
+.form-group select {
     justify-self: end;
 }
 
@@ -261,11 +262,12 @@ body.active .side-bar ul li:hover {
     justify-self: start;
 }
 
-.container input {
+.container input,
+.container select {
     outline: none;
     border: none;
     width: 500px;
-    height: 35px;
+    height: 40px;
     border-radius: 5px;
     padding: 10px 20px;
     font-size: 1em;
