@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boamente - Cadastrar Pacientes</title>
+    <link rel="stylesheet" href="../assets/css/cadastrarPacientes.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="side-bar">
+            <div class="boamente-logo">
+                <img src="../assets/img/logo-boamente-upscale.png" alt="Logo Boamente">
+            </div>
+
+            <ul class="side-bar-top">
+                <li>
+                    <a href="#">
+                        <div class="icone"><img src="../assets/icons/icon-Profile.png" alt="Icone Profile"></div>
+                        <span class="titulo">Olá, Fulano!</span>
+                    </a>
+                </li>
+                <div class="bar-container"><div class="bar-nav"></div></div>
+                <li>
+                    <a href="#">
+                        <div class="icone"><img src="../assets/icons/icon-Home.png" alt="Icone Home"></div>
+                        <span class="titulo">Página Inicial</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="icone"><img src="../assets/icons/icon-Dashboard.png" alt="Icone Dashboards"></div>
+                        <span class="titulo">Dashboards</span>
+                    </a>
+                </li>
+                <div class="bar-container"><div class="bar-nav"></div></div>
+                <li>
+                    <a href="#">
+                        <div class="icone"><img src="../assets/icons/icon-Registro.png" alt="Icone Registro de Pacientes"></div>
+                        <span class="titulo">Registros de Sessões</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="icone"><img src="../assets/icons/icon-Lista.png" alt="Icone Lista de Pacientes"></div>
+                        <span class="titulo">Lista de Pacientes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="icone"><img src="../assets/icons/icon-Teclado.png" alt="Icone Teclado Virtual"></div>
+                        <span class="titulo">Teclado Virtual</span>
+                    </a>
+                </li>
+                <div class="bar-container"><div class="bar-nav"></div></div>
+                <li>
+                    <a href="#">
+                        <div class="icone"><img src="../assets/icons/icon-Cadastro.png" alt="Icone Cadastro de Pacientes"></div>
+                        <span class="titulo">Cadastrar Paciente</span>
+                    </a>
+                    
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="icone"><img src="../assets/icons/icon-Info.png" alt="Icone Menu Instalação"></div>
+                        <span class="titulo">Menu Instalação</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="side-bar-bottom">
+                <li>
+                    <a href="#">
+                        <div class="icone"><img src="../assets/icons/icon-Suporte.png" alt="Icone Suporte"></div>
+                        <span class="titulo">Suporte</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="icone"><img src="../assets/icons/icon-Config.png" alt="Icone Configuração"></div>
+                        <span class="titulo">Configurações</span>
+                    </a>
+                    
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="icone"><img src="../assets/icons/icon-Sair.png" alt="Icone Sair"></div>
+                        <span class="titulo">Sair</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="main-container">
+            <div class="header-container">
+                <div class="empty-box"></div>
+                <div class="search-box">
+                    <input class="search-txt" type="text" name="" placeholder="Pesquisar paciente">
+                    <a class="search-btn" href="#">
+                        <img src="../assets/icons/icon-Lupa-light-mode.png" alt="Lupa" height="20" width="20">
+                    </a>
+                </div>
+                <div class="notifications-btn">
+                    <a href="#">
+                        <img src="../assets/icons/Icon-Notific.png" alt="Notificações">
+                    </a>
+                </div>
+                <div class="dark-mode-btn"></div>
+            </div>
+
+            <div class="content-container">
+                <h1>Cadastrar Pacientes</h1>
+
+                <div class="container">
+                    <h3>Preencha com os dados dos seus pacientes:</h3>
+                    
+                    <form action="" method="post">
+                        <div class="form-group">
+                            <label for="nomePaciente">Nome Completo: <span style="color: red;">*</span></label>
+                            <input type="text" name="nome" id="nomePaciente" placeholder="Digite o nome completo do paciente" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="nascimentoPaciente">Data de Nascimento: <span style="color: red;">*</span></label>
+                            <input type="text" name="telefone" id="nascimentoPaciente" placeholder="Digite a data de nascimento do paciente" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="emailPaciente">E-mail: <span style="color: red;">*</span></label>
+                            <input type="text" name="email" id="emailPaciente" placeholder="Digite o e-mail do paciente" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sexoPaciente">Sexo: <span style="color: red;">*</span></label>
+                            <select name="" id="" required>
+                                <option value="" disabled selected>Selecione uma opção</option>
+                                <option value="F">Feminino</option>
+                                <option value="M">Masculino</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefonePaciente">Telefone: </label>
+                            <input type="text" name="telefone" id="telefonePaciente" placeholder="Digite o telefone do paciente">
+                        </div>
+
+                        <span id="legenda">As instruções para a instalação do teclado virtual serão enviadas para o e-mail do paciente.</span>
+
+                        <button>Cadastrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/darkMode.js"></script>
+</body>
+</html>

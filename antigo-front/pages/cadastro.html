@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boamente - Cadastro</title>
+    <link rel="stylesheet" href="../assets/css/cadastro.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="cadastro">
+        <div id="logo-boamente">
+            <img src="../assets/img/logo-boamente-upscale-Ctitulo.png" alt="Logo do Boamente">
+        </div>
+        <div id="form-cadastro">
+            <div id="title">
+                <h1>Cadastre-se</h1>
+                <span>Bem-vindo ao Boamente!</span>
+            </div>
+            <form action="" method="post">
+                <label for="nome">Nome Completo:</label>
+                <input type="text" name="nomeCompleto" id="nome" placeholder="Digite seu nome completo" required>
+                <label for="email">E-mail:</label>
+                <input type="text" name="email" id="email" placeholder="Digite seu e-mail" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="endereço de e-mail" required>
+                <label for="telefone">Telefone:</label>
+                <input type="text" name="telefone" id="telefone" placeholder="Digite seu telefone" required>
+                <label for="crp-crm">Número do CRP/CRM:</label>
+                <input type="text" name="crp-crm" id="crp-crm" placeholder="Digite seu número do CRP/CRM" required>
+                <label for="uf">UF:</label>
+                <input type="text" name="uf" id="uf" placeholder="Digite sua UF" required>
+
+                <button class="button" onclick="window.location.href='login.html'">Cadastrar-se</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
