@@ -1,44 +1,52 @@
 import React from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import PrivateRoute from './PrivateRoute';
+import { Routes, Route} from 'react-router-dom';
+// import PrivateRoute from './PrivateRoute';
 
-import Header from '../components/layout/Header/Header';
-import Footer from '../components/layout/Footer/Footer';
+import PrivateLayout from '../components/layout/PrivateLayout/PrivateLayout';
+import PublicLayout from '../components/layout/PublicLayout/PublicLayout';
 
+// Pages Public
 import Home from '../pages/Home/Home';
 import Recursos from '../pages/Resources/Resources';
 import Contato from '../pages/Contact/Contact';
 import Login from '../pages/Login/Login';
 import Cadastro from '../pages/Register/Register';
 import RedefinirSenha from '../pages/ResetPassword/ResetPasswordEmail';
+
+// Pages protected
 import NovaSenha from '../pages/ResetPassword/ResetPasswordNew';
+import CadastroPaciente from '../pages/Register/RegisterPatient';
 
 export default function AppRoutes() {
-  const { pathname } = useLocation();
-
-  // hidden Header and Footer on these routes
-  const hideLayoutRoutes = ['/login', '/cadastro', '/redefinirsenha'];
-  const showLayout = !hideLayoutRoutes.includes(pathname);
 
   return (
-    <>
-      {showLayout && <Header />}
-      
-      <Routes>
-        {/* public */}
-        <Route path="/" element={<Home />} />
-        <Route path="/recursos" element={<Recursos />} />
-        <Route path="/contato" element={<Contato />} />
+    <Routes>
+      {/* routes authentication */}
+      <Route>
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/redefinirsenha" element={<RedefinirSenha />} />
+        <Route path="/redefinirnovasenha" element={<NovaSenha />} />
+      </Route>
 
-        {/* protected */}
-        <Route path="/redefinirnovasenha" element={<PrivateRoute><NovaSenha /></PrivateRoute>} />
-        <Route path="/dashboard" element={<PrivateRoute><h1>Dashboard</h1></PrivateRoute>} />
-      </Routes>
+      {/* public routes w/ header and footer */}
+      <Route element={<PublicLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/recursos" element={<Recursos />} />
+        <Route path="/contato" element={<Contato />} />
+        
+      </Route>
 
-      {showLayout && <Footer />}
-    </>
+      {/* protected routes w/ sidebar */}
+      <Route element={<PrivateLayout />}>
+        <Route path="/dashboard" element={<h1>Dashboard</h1>} />
+        <Route path="/cadastrarpaciente" element={<CadastroPaciente />} />
+      </Route>
+
+      {/* futute */}
+      {/* <Route element={<PrivateRoute><PrivateLayout /></PrivateRoute>}>
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Route> */}
+    </Routes>
   );
 }

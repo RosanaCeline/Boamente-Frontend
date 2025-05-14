@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import { useState } from 'react';
-import logo from '../../../assets/images/homepage/logo-boamente-upscale.png';
+import logo from '../../../../assets/images/homepage/logo-boamente-upscale.png';
 
 export default function Header() {
     const [menuVisible, setMenuVisible] = useState(false);
