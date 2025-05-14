@@ -1,0 +1,17 @@
+footer {
+    height: var(--footer-height);
+    width: 100%;
+    background-color: var(--cor-grey);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 50px;
+
+    font-size: 18px;
+    color: var(--cor-font-light);
+
+}
+
+#logos img {
+    height: 45px;
+}

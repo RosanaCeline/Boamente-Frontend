@@ -1,0 +1,228 @@
+header {
+    background-color: var(--cor-dark-blue);
+    color: var(--cor-font-light);
+    width: 100%;
+    height: var(--header-height);
+    padding: 0px 50px;
+    
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    z-index: 10000;
+
+    box-shadow: 0 0.2em 1em #000000;
+}
+
+.boamente {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 2%;
+    padding: 0.5em
+}
+.boamente img {
+    max-width: 7%;
+    width: auto;
+    height: 10%;
+}
+.boamente span {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.navegation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.navegation ul {
+    list-style-type: none;
+
+    display: none;
+    margin-top: 50px;
+    width: 300px;
+    position: absolute;
+    right: 0px;
+
+    gap: 20px;
+    background-color: var(--cor-dark-blue);
+}
+.navegation ul li {
+    padding: 20px 20px;
+}
+.navegation a {
+    color: #F8F9FA;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    width: 155px;
+}
+
+
+.button {
+    background-color: transparent;
+    border: 0px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #F8F9FA;
+}
+.button:hover {
+    background-color: #417D6D;
+    color: #F8F9FA;
+    transition: all 0.2s ease-in-out;
+}
+.btn-recursos {
+    background-color: #FFD95A;
+    color: #000000;
+    border: 0px;
+    height: 40px;
+    padding: 0px 25px;
+    font-size: 16px;
+    font-weight: 600;
+        
+    border-radius: 50px;
+    cursor: pointer;
+}
+.buttonNav {
+    width: 50%;;
+}
+
+#topLine,
+#bottomLine,
+#middleLine {
+	transform-box: fill-box;
+	transform-origin: center;
+}
+
+
+:root {
+    --cor-font-light: #efefef;
+}
+
+/* MOBILE - até 480px */
+@media (max-width: 480px) {
+    .boamente span {
+        font-size: 22px;
+    }
+
+    .btnLogin {
+        width: 300px;
+        font-size: 20px;
+    }
+
+    .btnCadastro {
+        width: 300px;
+        font-size: 20px;
+    }
+
+    .button {
+        font-size: 14px;
+    }
+
+    .topLine,
+    .middleLine,
+    .bottomLine {
+        stroke-width: 3px;
+    }
+}
+
+/* TABLET PEQUENO - 481px a 768px */
+@media (min-width: 481px) and (max-width: 768px) {
+    .boamente span {
+        font-size: 26px;
+    }
+
+    .btnLogin,
+    .btnCadastro {
+        width: 280px;
+        font-size: 18px;
+    }
+}
+
+/* TABLET MÉDIO - 769px a 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .boamente span {
+        font-size: 28px;
+    }
+
+    .btnLogin,
+    .btnCadastro {
+        font-size: 18px;
+        width: 250px;
+    }
+}
+
+/* NOTEBOOK PEQUENO - 1025px a 1200px */
+@media (min-width: 1025px) and (max-width: 1200px) {
+    .boamente span {
+        font-size: 30px;
+    }
+}
+
+/* DESKTOP - acima de 1201px */
+@media (min-width: 1201px) {
+    .buttonNav {
+        display: none;
+    }
+
+    .navegation ul,
+    .navegation ul li {
+        flex-direction: row;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0;
+        background-color: transparent;
+        width: auto;
+        position: static;
+    }
+
+
+    .navegation ul li {
+        gap: 15px;
+        padding: 0px;
+    }
+
+    .navegation a {
+        text-decoration: none;
+        font-size: 18px;
+        gap: 15px;
+        color: var(--cor-font-light);
+        font-weight: 500;
+        display: flex;
+        padding: 0px 5px;
+    }
+
+    .navegation a:hover {
+        text-shadow: 0px 1px 1px #ffff;
+    }
+
+    .button {
+        background-color: #ffd95a;
+        color: #000000;
+        border: none;
+        height: 40px;
+        padding: 0 25px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 50px;
+        cursor: pointer;
+    }
+
+    .btnLogin {
+        font-size: 18px;
+        width: 125px;
+    }
+
+    .btnCadastro {
+        background-color: transparent;
+        border: 3px solid #efefef;
+        color: #efefef;
+    }
+
+    .btnCadastro:hover {
+        background-color: #efefef;
+        color: #000000;
+    }
+}

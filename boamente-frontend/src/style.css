@@ -1,0 +1,25 @@
+:root {
+    --cor-light-blue: #1B768E;
+    --cor-dark-blue: #012538;
+    --cor-font-light: #F8F9FA;
+    --cor-button-background: #FFD95A;
+    --cor-button-font: #333333;
+    --cor-grey: #4D555B;
+
+    --black: #00000;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+h1 {
+    font-weight: bold;
+}
+ul {
+    list-style: none;
+    display: none;
+}
