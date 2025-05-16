@@ -1,0 +1,100 @@
+:root {
+    --cor-light-blue: #1B768E;
+    --cor-dark-blue: #012538;
+    --cor-font-light: #F8F9FA;
+    --cor-button-background: #FFD95A;
+    --cor-button-font: #333333;
+    --cor-grey: #4D555B;
+    --black: #00000;
+}
+* {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    
+}
+h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+h3 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.pesquisadores,
+.alunos {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    background-color: #D1D3D5;
+    min-height: 100vh;
+}
+.pesquisador:hover,
+.aluno:hover {
+    box-shadow: 1em #333333;
+    transition: all 0.2s ease-in-out;
+}
+.pesquisadores {
+    padding-top: 8%;
+}
+.alunos {
+    background-color: #D1D3D5;
+    height: calc(100vh - var(--footer-height));
+    padding-top: 1%;
+}
+
+.listagem {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 75%;
+
+    text-align: center;
+    border-radius: 1em;
+    gap: 1.4%;
+    padding-top: 2%;
+}
+
+.alunos .listagem {
+    padding: 0;
+}
+
+.card {
+    display: flex;
+    flex: 1 1 30%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+
+    background-color: #EFEFEF;
+    border-radius: 1em;
+    padding: 2em;
+    gap: 1em;
+}
+
+.btnRecursos {
+    cursor: pointer;
+    background-color: #FFD95A;
+    color: #000000;
+    font-size: 1em;
+    font-weight: 600;
+    border: 0;
+    border-radius: 1.5em;
+
+    height: 2.5rem;
+    padding: 0 5%;
+}
+.btnRecursos:hover {
+    background-color: #417D6D;
+    color: #F8F9FA;
+    transition: all 0.2s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}

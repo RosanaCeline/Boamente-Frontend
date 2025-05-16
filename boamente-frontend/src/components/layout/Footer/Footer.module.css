@@ -1,17 +1,12 @@
 footer {
-    height: var(--footer-height);
-    width: 100%;
-    background-color: var(--cor-grey);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 50px;
 
-    font-size: 18px;
+    width: 100%;
+    padding: 0.5% 3% 0.5% 3%;
+    background-color: var(--cor-grey);
     color: var(--cor-font-light);
-
-}
-
-#logos img {
-    height: 45px;
+    
+    font-size: 1.3em;
 }

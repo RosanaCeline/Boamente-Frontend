@@ -17,15 +17,16 @@ export default function Header() {
                 <span>BOAMENTE</span>
             </div>
             <nav className={styles.navegation}>
-                <ul style={{ display: menuVisible ? 'block' : 'none' }}>
+                <ul>
+                {/* style={{ display: menuVisible ? 'block' : 'none' }} */}
                     <li><Link to="/">Visão Geral</Link></li>
                     <li><Link to="/recursos">Recursos</Link></li>
                     <li><Link to="/contato">Contato</Link></li>
                     <li>
-                    <button className={`button ${styles.btnLogin}`} onClick={() => window.location.href = '/login'}>Entrar</button>
+                    <button className={styles.btnLogin} onClick={() => window.location.href = '/login'}>Entrar</button>
                     </li>
                     <li>
-                    <button className={`button ${styles.btnCadastro}`} onClick={() => window.location.href = '/cadastro'}>Cadastre-se</button>
+                    <button className={styles.btnCadastro} onClick={() => window.location.href = '/cadastro'}>Cadastre-se</button>
                     </li>
                 </ul>
                 <svg className={`${styles.buttonNav} Header__toggle-svg`} viewBox="0 0 60 40" onClick={toggleMenu}>
