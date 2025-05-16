@@ -1,0 +1,119 @@
+:root {
+    --cor-blue-dark: #012538;
+    --cor-amarela: #FFD95A;
+    --cor-hover: #417D6D;
+    --cor-texto-link: #004F73;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.auth {
+    display: flex;
+    height: 100vh;
+    background-color: var(--cor-blue-dark);
+}
+
+.authLogo {
+    background-color: var(--cor-blue-dark);
+    flex: 2.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: contain;
+}
+.authLogo img {
+    max-width: 60%;
+}
+
+.authForm {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    background-color: #FFFFFF;
+    padding: 4vh 5vw;
+    
+}
+.authFormTitles {
+    text-align: center;
+    max-width: 60%;
+}
+.authForm h1 {
+    margin-bottom: 10%;
+}
+
+
+.authForm form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.2em;
+    width: 100%;
+    max-width: 50%;
+}
+
+.authForm label {
+    margin-top: 3%;
+}
+
+.authForm input {
+    padding: 3%;
+    border: none;
+    font-size: 1em;
+    background-color: #f2f2f2;
+    box-shadow: 0 .2em .3em #777777;
+}
+
+.authForm input:focus {
+    outline: none;
+    box-shadow: 0 .2em .3em #000000;
+}
+
+.button {
+    background-color: var(--cor-amarela);
+    border: 0;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    height: 2.5em;
+    width: 10em;
+    border-radius: 1.6em;
+    align-self: center;
+}
+
+.button:hover {
+    background-color: var(--cor-hover);
+    color: #F8F9FA;
+    transition: all 0.2s ease-in-out;
+}
+
+.link {
+    color: var(--cor-texto-link);
+    text-decoration: none;
+    align-self: flex-end;
+    gap: 1em;
+}
+
+/* Responsivo */
+@media screen and (max-width: 950px) {
+    .authLogo {
+        display: none;
+    }
+
+    .authContainer {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .authForm {
+        width: 90%;
+        border-radius: 2em;
+    }
+}
