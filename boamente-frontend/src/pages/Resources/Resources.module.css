@@ -93,3 +93,94 @@ h3 {
     color: #F8F9FA;
     transition: all 0.2s ease-in-out;
 }
+
+
+/* Responsiveness */
+
+@media (max-width: 1024px) {
+    .artigos {
+        padding-top: 20%;
+    }
+    .materiais {
+        padding-bottom: 2%;
+    }
+    h1 {
+        font-size: 2em;
+    }
+    h3 {
+        font-size: 1.5em;
+    }
+    span {
+        font-size: 1.5em;
+    }
+    .listagem {
+        flex-direction: column;
+        width: 85%;
+        gap: 1.5rem;
+        padding: 5% 0;
+    }
+    .recursos {
+        max-width: 90%;
+        padding: 6% 5%;
+        gap: 2em;
+    }
+    .btnRecursos {
+        font-size: 2em;
+        padding: 0 4%;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h3 {
+        font-size: 1.3em;
+    }
+
+    .listagem {
+        width: 90%;
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+
+    .recursos {
+        max-width: 90%;
+        padding: 6% 4%;
+        gap: 1.5em;
+    }
+
+    .btnRecursos {
+        font-size: 1.5em;
+        height: 3rem;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .artigos, .materiais {
+        padding-top: 30%;
+    }
+    h1 {
+        font-size: 1.5em;
+    }
+    .listagem {
+        width: 100%;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .recursos {
+        max-width: 90%;
+        padding: 8% 3%;
+        gap: 1.2em;
+    }
+
+    .btnRecursos {
+        width: 90%;
+        font-size: 1.2em;
+        height: 3.2rem;
+        padding: 0 3%;
+    }
+}

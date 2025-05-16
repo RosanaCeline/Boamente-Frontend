@@ -16,9 +16,15 @@ export default function Header() {
                 <img src={logo} alt="Logo Boamente" />
                 <span>BOAMENTE</span>
             </div>
-            <nav className={styles.navegation}>
+            <svg className={styles.buttonNav} viewBox="0 0 60 40" onClick={toggleMenu}>
+                <g stroke="#fff" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                    <path className={`${styles.line} ${menuVisible ? styles.topActive : ''}`} d="M10,10 L50,10 Z" />
+                    <path className={`${styles.line} ${menuVisible ? styles.middleActive : ''}`} d="M10,20 L50,20 Z" />
+                    <path className={`${styles.line} ${menuVisible ? styles.bottomActive : ''}`} d="M10,30 L50,30 Z" />
+                </g>
+            </svg>
+            <nav className={`${styles.navegation} ${menuVisible ? styles.active : ''}`}>
                 <ul>
-                {/* style={{ display: menuVisible ? 'block' : 'none' }} */}
                     <li><Link to="/">Visão Geral</Link></li>
                     <li><Link to="/recursos">Recursos</Link></li>
                     <li><Link to="/contato">Contato</Link></li>
@@ -29,13 +35,6 @@ export default function Header() {
                     <button className={styles.btnCadastro} onClick={() => window.location.href = '/cadastro'}>Cadastre-se</button>
                     </li>
                 </ul>
-                <svg className={`${styles.buttonNav} Header__toggle-svg`} viewBox="0 0 60 40" onClick={toggleMenu}>
-                    <g stroke="#fff" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-                    <path id={styles.topLine} d="M10,10 L50,10 Z"></path>
-                    <path id={styles.middleLine} d="M10,20 L50,20 Z"></path>
-                    <path id={styles.bottomLine} d="M10,30 L50,30 Z"></path>
-                    </g>
-                </svg>
             </nav>
         </header>
     );

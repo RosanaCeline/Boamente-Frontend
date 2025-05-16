@@ -10,7 +10,7 @@ export default function Footer () {
                 <img src={logoUFDPar} alt="Logo da UFDPar" />
                 <img src={logoIFCE} alt="Logo do IFCE" />
             </div>
-            <div>
+            <div id={styles.devs}>
                 <span>Desenvolvido por Laís Carvalho e Rosana Celine</span>
             </div>
             <div>

@@ -36,18 +36,21 @@ header {
     justify-content: center;
     min-width: 40%;
     max-height: var(--header-height);
+    position: relative;
 }
 .navegation ul {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: nowrap;
     flex-direction: row;
-    position: absolute;
-    margin-right: 3%;
+    position: relative;
+    margin-right: 8%;
     gap: 8%;
+    list-style: none;
 }
 .navegation li {
-    display: flex;
+    width: auto;
     color: #F8F9FA;
     text-decoration: none;
     font-size: 1.2em;
@@ -82,36 +85,100 @@ button {
 
 .buttonNav {
     display: none;
+    
 }
 #topLine,
 #bottomLine,
 #middleLine {
-	display: none;
-} 
+    transform-box: fill-box;
+    transform-origin: center;
+}
 
-/* DESKTOP - acima de 1201px */
-@media (max-width: 1201px) {
-    .buttonNav {
-        width: 50%;
+/* Responsiveness */
+
+@media (max-width: 1500px) {
+    .navegation {
+        padding-right: 20%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .navegation {
         display: none;
     }
-    #topLine,
-    #bottomLine,
-    #middleLine {
-        transform-box: fill-box;
+    .buttonNav {
+        display: block;
+        position: absolute;
+        cursor: pointer;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 8%;
+        right: 2em;
+        z-index: 11000;
+    }
+    .line {
+        transition: all 0.3s ease;
         transform-origin: center;
-    } 
+    }
+    .topActive {
+        transform: translateY(10px) rotate(45deg);
+    }
+    .middleActive {
+        opacity: 0;
+    }
+    .bottomActive {
+        transform: translateY(-10px) rotate(-45deg);
+    }
 
-    /* .navegation a:hover {
-        text-shadow: 0px 1px 1px #ffff;
+    .navegation.active {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    background-color: var(--cor-dark-blue);
+    padding: 2rem 1.5rem;
+    box-shadow: -1em 0 1em rgba(0, 0, 0, 0.4);
+    z-index: 10500;
+  }
+  .navegation.active ul {
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+  }
+  .navegation.active li,
+  .navegation.active button {
+    width: 100%;
+  }
+}
+@media (max-width: 670px) {
+    .navegation.active {
+        padding: 2rem 1.5rem;
     }
-    .button:hover {
-        background-color: #417D6D;
-        color: #F8F9FA;
-        transition: all 0.2s ease-in-out;
+    .navegation.active ul {
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 90%;
     }
-    .btnCadastro:hover {
-        background-color: #efefef;
-        color: #000000;
-    } */
+    .navegation.active li,
+    .navegation.active button {
+        width: 100%;
+    }
+}
+@media (max-width: 480px) {
+    header {
+        height: 10vh;
+    }
+    .boamente img {
+        min-width: 15%;
+        height: auto; 
+        margin: 5%;
+    }
+    .boamente span {
+        font-size: 1.5em;
+    }
+    .buttonNav {
+        margin-right: 5%;
+    }
 }

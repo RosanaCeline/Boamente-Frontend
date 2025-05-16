@@ -101,19 +101,45 @@
     gap: 1em;
 }
 
-/* Responsivo */
-@media screen and (max-width: 950px) {
+/* Responsiveness */
+@media screen and (max-width: 1300px) {
+    .authForm form {
+        max-width: 80%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
     .authLogo {
         display: none;
     }
-
-    .authContainer {
-        justify-content: center;
-        align-items: center;
-    }
-
     .authForm {
-        width: 90%;
-        border-radius: 2em;
+        display: flex;
+        margin: 10%;
+        border-radius: 3em;
+        padding: 5% 0;
     }
+    h1 {
+        font-size: 4em;
+    }
+    label {
+        font-size: 2.5em;
+    }
+    input {
+        font-size: 3em;
+    }
+    .link {
+        font-size: 1.8em;
+    }
+    .button {
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 670px) {
+    .authForm {
+        margin: 5%;
+        padding: 10% 0;
+    }
+
+    
 }

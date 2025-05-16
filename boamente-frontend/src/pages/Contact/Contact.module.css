@@ -92,9 +92,61 @@ h3 {
     transition: all 0.2s ease-in-out;
 }
 
+/* Responsiveness */
+
+@media (max-width: 1024px) {
+    .pesquisadores, .alunos {
+        padding-top: 10%;
+    }
+    h1 {
+        font-size: 6em;
+    }
+    .listagem {
+        flex-direction: row;
+        gap: 1.5rem;
+    }
+
+}
+
 @media (max-width: 768px) {
-  .card {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
+    .pesquisadores, .alunos {
+        padding-top: 18%;
+    }
+    .listagem {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 1.5rem;
+        padding: 5% 5% 0 0;
+    }
+
+    .card {
+        flex: 1 1 100%;
+        max-width: 90%;
+    }
+
+    .btnRecursos {
+        font-size: 0.95em;
+        height: 3rem;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .pesquisadores, .alunos {
+        padding-top: 30%;
+    }
+    h1, h3 {
+        text-align: center;
+    }
+
+    .card {
+        padding: 1.5em;
+        gap: 1em;
+    }
+
+    .btnRecursos {
+        font-size: 0.9em;
+        height: 3.2rem;
+    }
 }

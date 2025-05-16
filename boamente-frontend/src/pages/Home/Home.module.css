@@ -73,3 +73,84 @@
     font-size: 1.3em;
     text-align: justify;
 }
+
+
+/* Responsiveness */
+
+@media (max-width: 1024px) {
+  #boxApresentacao {
+    width: 60%;
+    height: 40%;
+  }
+  #boxApresentacao h1 {
+    font-size: 2.6em;
+  }
+  #boxApresentacao span {
+    font-size: 1.5em;
+  }
+
+  .buttonVisualize {
+    font-size: 1.4em;
+  }
+
+  .homeAbout {
+    padding: 10%;
+    margin-top: 3%;
+  }
+
+  .homeAbout p {
+    width: 80%;
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 768px) {
+  #boxApresentacao {
+    width: 60%;
+    height: 40%;
+  }
+
+  #boxApresentacao h1 {
+    font-size: 2.2em;
+  }
+
+  #boxApresentacao span {
+    font-size: 1.2em;
+  }
+
+  .buttonVisualize {
+    font-size: 1em;
+  }
+
+  .homeAbout h1 {
+    font-size: 1.7em;
+  }
+
+  .homeAbout p {
+    width: 80%;
+    font-size: 1.1em;
+  }
+}
+
+
+@media (max-width: 480px) {
+  #boxApresentacao {
+    width: 100%;
+    height: 45%;
+  }
+
+  .buttonVisualize {
+    font-size: 1.2em;
+    width: 120%;
+    height: 2.5em;
+  }
+
+  .homeAbout h1 {
+    font-size: 1.5em;
+    text-align: center;
+  }
+  .homeAbout p {
+    width: 80%;
+    font-size: 1em;
+  }
+}
