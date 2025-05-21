@@ -10,7 +10,7 @@ export default function Register() {
       id: 'nome',
       label: 'Nome Completo:',
       type: 'text',
-      name: 'nomeCompleto',
+      name: 'fullName',
       placeholder: 'Digite seu nome completo',
       required: true,
     },
@@ -28,7 +28,7 @@ export default function Register() {
       id: 'telefone',
       label: 'Telefone:',
       type: 'text',
-      name: 'telefone',
+      name: 'phoneNumber',
       placeholder: 'Digite seu telefone',
       required: true,
     },
@@ -36,7 +36,7 @@ export default function Register() {
       id: 'crp-crm',
       label: 'Número do CRP/CRM:',
       type: 'text',
-      name: 'crp-crm',
+      name: 'crpCrm',
       placeholder: 'Digite seu número do CRP/CRM',
       required: true,
     },
@@ -50,16 +50,39 @@ export default function Register() {
     },
   ];
 
+  const handleSubmit = async (formData) => {
+    try {
+      const response = await fetch('http://localhost:8080/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          phoneNumber: formData.phoneNumber,
+          crpCrm: formData.crpCrm,
+          uf: formData.uf,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Erro no cadastro");
+
+      const data = await response.json();
+      console.log("Usuário cadastrado com sucesso:", data);
+      navigate("/login");
+    } catch (error) {
+      console.error('Erro ao conectar com o backend:', error);
+    }
+  };
+
   return (
     <AuthLayout
       title="Cadastre-se"
       subtitle="Bem-vindo ao Boamente!"
       fields={fields}
       buttonText="Cadastrar-se"
-      onSubmit={(e) => {
-        // lógica de cadastro aqui (ex: chamada API)
-        navigate('/login');
-      }}
+      onSubmit={handleSubmit}
     />
   );
 }

@@ -8,7 +8,13 @@ export default function AuthLayout({ title, subtitle, fields, links, onSubmit,bu
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (onSubmit) onSubmit(e);
+
+    const formData = {};
+    fields.forEach(({ name }) => {
+      formData[name] = e.target[name].value;
+    });
+
+    if (onSubmit) onSubmit(formData);
     if (redirectOnSubmit) navigate(redirectOnSubmit);
   };
 
