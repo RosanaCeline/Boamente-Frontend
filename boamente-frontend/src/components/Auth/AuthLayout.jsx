@@ -1,20 +1,67 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import styles from './AuthLayout.module.css';
 import logoBoamente from '../../assets/images/homepage/logo-boamente-upscale-Ctitulo.png';
 
-export default function AuthLayout({ title, subtitle, fields, links, onSubmit,buttonText, redirectOnSubmit}) {
+export default function AuthLayout({ title, subtitle, fields, links, onSubmit, buttonText, redirectOnSubmit }) {
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // Define o schema dinamicamente com base nos campos recebidos
+  const validationSchema = yup.object().shape(
+    fields.reduce((acc, field) => {
+      switch (field.name) {
+        case 'fullName':
+          acc[field.name] = yup
+            .string()
+            .required('Nome é obrigatório.')
+            .min(6, 'Nome deve ter no mínimo 6 caracteres.')
+            .max(100, 'Nome deve ter no máximo 100 caracteres.');
+          break;
+        case 'email':
+          acc[field.name] = yup
+            .string()
+            .required('E-mail é obrigatório.')
+            .email('E-mail inválido.');
+          break;
+        case 'phoneNumber':
+          acc[field.name] = yup
+            .string()
+            .required('Telefone é obrigatório.')
+            .max(20, 'Telefone deve ter no máximo 20 caracteres.');
+          break;
+        case 'crpCrm':
+          acc[field.name] = yup
+            .string()
+            .required('CRP/CRM é obrigatório.')
+            .max(10, 'CRP/CRM deve ter no máximo 10 caracteres.');
+          break;
+        case 'uf':
+          acc[field.name] = yup
+            .string()
+            .required('UF é obrigatória.')
+            .matches(/^[A-Z]{2}$/, 'UF deve conter duas letras maiúsculas.');
+          break;
+        default:
+          acc[field.name] = yup.string().required(`${field.label} é obrigatório.`);
+      }
+      return acc;
+    }, {})
+  );
 
-    const formData = {};
-    fields.forEach(({ name }) => {
-      formData[name] = e.target[name].value;
-    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+    mode: 'onSubmit',
+  });
 
-    if (onSubmit) onSubmit(formData);
+  const internalSubmit = (data) => {
+    if (onSubmit) onSubmit(data);
     if (redirectOnSubmit) navigate(redirectOnSubmit);
   };
 
@@ -27,23 +74,24 @@ export default function AuthLayout({ title, subtitle, fields, links, onSubmit,bu
       <section className={styles.authForm}>
         <div className={styles.authFormTitles}>
           <h1>{title}</h1>
-          {subtitle && <span>{subtitle}</span>} {/* Renderiza se haver o subtitle */}
+          {subtitle && <span>{subtitle}</span>}
         </div>
 
-        <form onSubmit={handleSubmit}>
-          {fields.map(({ id, label, type, name, placeholder, pattern, title, required }) => (
-            <React.Fragment key={id}>
+        <form onSubmit={handleSubmit(internalSubmit)} noValidate>
+          {fields.map(({ id, label, type, name, placeholder }) => (
+            <div className="inputWrapper" key={id}>
               <label htmlFor={id}>{label}</label>
               <input
-                type={type}
                 id={id}
-                name={name}
+                type={type}
                 placeholder={placeholder}
-                pattern={pattern}
-                title={title}
-                required={required}
+                {...register(name)}
+                className={errors[name] ? styles.inputError : ''}
               />
-            </React.Fragment>
+              {errors[name] && (
+                <span className={styles.error}>{errors[name].message}</span>
+              )}
+            </div>
           ))}
 
           {links &&

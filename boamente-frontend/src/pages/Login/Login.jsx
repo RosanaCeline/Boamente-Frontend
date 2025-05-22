@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthLayout from '../../components/Auth/AuthLayout';
+import { ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -29,7 +31,6 @@ export default function Login() {
     { to: '/redefinirsenha', text: 'Esqueci a senha', key: 'reset' },
   ];
 
-  // Ainda verificando
   const handleSubmit = async (formData) => {
     try {
       const response = await fetch('http://localhost:8080/auth/login', {
@@ -60,12 +61,19 @@ export default function Login() {
       
     } catch (error) {
       console.error('Erro ao conectar com o backend:', error);
+      toast.error(
+              <>
+                Erro inesperado! <br />
+                Tente novamente mais tarde.
+              </>
+            );
     }
   };
 
   return (
     <AuthLayout
       title="Login"
+      subtitle="Bem-vindo de volta!"
       fields={fields}
       links={links}
       buttonText="Entrar"

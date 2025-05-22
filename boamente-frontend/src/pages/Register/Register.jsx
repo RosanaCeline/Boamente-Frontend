@@ -1,6 +1,8 @@
 import React from 'react';
-import AuthLayout from '../../components/Auth/AuthLayout';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { AuthService } from '../../services/authService';
+import AuthLayout from '../../components/Auth/AuthLayout';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -12,7 +14,6 @@ export default function Register() {
       type: 'text',
       name: 'fullName',
       placeholder: 'Digite seu nome completo',
-      required: true,
     },
     {
       id: 'email',
@@ -20,9 +21,6 @@ export default function Register() {
       type: 'email',
       name: 'email',
       placeholder: 'Digite seu e-mail',
-      pattern: '[a-z0-9._%+\\-]+@[a-z0-9.\\-]+\\.[a-z]{2,}$',
-      title: 'Endereço de e-mail válido',
-      required: true,
     },
     {
       id: 'telefone',
@@ -30,7 +28,6 @@ export default function Register() {
       type: 'text',
       name: 'phoneNumber',
       placeholder: 'Digite seu telefone',
-      required: true,
     },
     {
       id: 'crp-crm',
@@ -38,7 +35,6 @@ export default function Register() {
       type: 'text',
       name: 'crpCrm',
       placeholder: 'Digite seu número do CRP/CRM',
-      required: true,
     },
     {
       id: 'uf',
@@ -46,41 +42,109 @@ export default function Register() {
       type: 'text',
       name: 'uf',
       placeholder: 'Digite sua UF',
-      required: true,
     },
   ];
 
+  const links = [
+    { to: '/login', text: 'Já tem conta? Faça login', key: 'login' },
+  ];
+
   const handleSubmit = async (formData) => {
+    let toastId;
+
     try {
-      const response = await fetch('http://localhost:8080/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          email: formData.email,
-          phoneNumber: formData.phoneNumber,
-          crpCrm: formData.crpCrm,
-          uf: formData.uf,
-        }),
+      toast.dismiss();
+
+      toastId = toast.loading("Processando cadastro...");
+
+      const response = await AuthService.register({
+        fullName: formData.fullName,
+        email: formData.email,
+        phoneNumber: formData.phoneNumber,
+        crpCrm: formData.crpCrm,
+        uf: formData.uf,
       });
 
-      if (!response.ok) throw new Error("Erro no cadastro");
+      toast.update(toastId, {
+        render: (
+          <>
+            Cadastro realizado com sucesso! <br />
+            Redirecionando para login...
+          </>
+        ),
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+        onClose: () => navigate('/login'),
+      });
 
-      const data = await response.json();
-      console.log("Usuário cadastrado com sucesso:", data);
-      navigate("/login");
     } catch (error) {
-      console.error('Erro ao conectar com o backend:', error);
+      let errorMessage = 'Erro inesperado. Tente novamente.';
+      
+      if (error.message.includes('Network Error')) {
+        errorMessage = 'Sem conexão com o servidor. Verifique sua internet.';
+      } else if (error.status === 400) {
+        const mensagem = error.backendMessage.toLowerCase();
+        errorMessage = 'Dados inválidos: ' + (
+          mensagem.includes('e-mail')
+            ? 'E-mail já cadastrado'
+            : 'Verifique todos os campos'
+        );
+      } else if (error.status === 401) {
+        errorMessage = 'Não autorizado. Faça login novamente.';
+      } else if (error.status === 403) {
+        errorMessage = 'Acesso negado. Verifique suas permissões.';
+      } else if (error.status === 404) {
+        errorMessage = 'Serviço não encontrado.';
+      } else if (error.status === 409) {
+        errorMessage = 'Conflito: Usuário já existe.';
+      } else if (error.status === 500) {
+        errorMessage = 'Erro interno no servidor. Tente mais tarde.';
+      } else if (error.message.toLowerCase().includes('timeout')) {
+        errorMessage = 'Tempo de conexão esgotado. Tente novamente.';
+      } else {
+        errorMessage = 'Erro desconhecido. Tente novamente.';
+      }
+
+      toast.update(toastId, {
+        render: (
+          <>
+            {errorMessage} <br />
+            {!error.message.includes('Network Error') && (
+              <small>Código: {error.status || 'ERRO'}</small>
+            )}
+          </>
+        ),
+        type: 'error',
+        isLoading: false,
+        autoClose: 5000,
+      });
     }
   };
 
   return (
     <AuthLayout
       title="Cadastre-se"
-      subtitle="Bem-vindo ao Boamente!"
+      subtitle={
+        <>
+          <p style={{ fontWeight: '700'}}>
+            Bem-vindo ao Boamente!
+          </p>
+          <div style={{
+            padding: '1rem', 
+            textAlign: 'center',
+            fontWeight: '500',
+            lineHeight: '1.4',
+            padding: '0.5rem',
+          }}>
+            Seus dados serão analisados. 
+            Quando validados, você receberá um e-mail com as 
+            instruções de acesso.
+          </div>
+        </>
+      }
       fields={fields}
+      links={links}
       buttonText="Cadastrar-se"
       onSubmit={handleSubmit}
     />

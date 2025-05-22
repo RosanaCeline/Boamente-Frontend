@@ -36,7 +36,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2em;
+    gap: 1rem;
     background-color: #FFFFFF;
     padding: 4vh 5vw;
     
@@ -98,7 +98,32 @@
     color: var(--cor-texto-link);
     text-decoration: none;
     align-self: flex-end;
-    gap: 1em;
+    margin-top: 0.5em;
+}
+
+.inputWrapper {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+.error {
+  position: absolute;
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+  white-space: nowrap;
 }
 
 /* Responsiveness */
