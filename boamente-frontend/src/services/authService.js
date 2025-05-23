@@ -2,15 +2,21 @@
  * Serviço de autenticação - Gerencia chamadas à API de autenticação
  */
 export const AuthService = {
-  async register(userData) {
-    const response = await fetch('http://localhost:8080/auth/register', {
+  async apiRequest(endpoint, method = "POST", body = null) {
+    const config = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(userData),
-    });
+    };
 
+    if (body) {
+      config.body = JSON.stringify(body)
+    }
+
+    const response = await fetch(`http://localhost:8080${endpoint}`, config);
+
+    console.log(response)
     if (!response.ok) {
       let errorData = {};
       try {
@@ -23,11 +29,13 @@ export const AuthService = {
 
       error.status = response.status;
       error.backendMessage = errorData.message;
+
       throw error;
     }
 
+    
     return await response.json();
   },
-
-  // Outros métodos podem ser adicionados aqui (login, logout, etc)
+  
+  // Outros métodos podem ser adicionados aqui
 };

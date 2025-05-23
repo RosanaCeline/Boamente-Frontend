@@ -57,13 +57,15 @@ export default function Register() {
 
       toastId = toast.loading("Processando cadastro...");
 
-      const response = await AuthService.register({
+      const userData = ({
         fullName: formData.fullName,
         email: formData.email,
         phoneNumber: formData.phoneNumber,
         crpCrm: formData.crpCrm,
         uf: formData.uf,
-      });
+      })
+
+      const response = await AuthService.apiRequest('/auth/register', 'POST', userData);
 
       toast.update(toastId, {
         render: (
@@ -84,18 +86,17 @@ export default function Register() {
       if (error.message.includes('Network Error')) {
         errorMessage = 'Sem conexão com o servidor. Verifique sua internet.';
       } else if (error.status === 400) {
-        const mensagem = error.backendMessage.toLowerCase();
         errorMessage = 'Dados inválidos: ' + (
-          mensagem.includes('e-mail')
-            ? 'E-mail já cadastrado'
-            : 'Verifique todos os campos'
+          error.message.includes('email') 
+            ? 'E-mail já cadastrado' 
+            : error.message.includes('crpCrm') || error.message.includes('CRP/CRM')
+              ? 'CRP/CRM já cadastrado'
+              : 'Verifique todos os campos'
         );
       } else if (error.status === 401) {
-        errorMessage = 'Não autorizado. Faça login novamente.';
+        errorMessage = 'Não autorizado.';
       } else if (error.status === 403) {
         errorMessage = 'Acesso negado. Verifique suas permissões.';
-      } else if (error.status === 404) {
-        errorMessage = 'Serviço não encontrado.';
       } else if (error.status === 409) {
         errorMessage = 'Conflito: Usuário já existe.';
       } else if (error.status === 500) {
@@ -109,10 +110,7 @@ export default function Register() {
       toast.update(toastId, {
         render: (
           <>
-            {errorMessage} <br />
-            {!error.message.includes('Network Error') && (
-              <small>Código: {error.status || 'ERRO'}</small>
-            )}
+            {errorMessage}
           </>
         ),
         type: 'error',

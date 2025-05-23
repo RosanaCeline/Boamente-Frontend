@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import styles from './AuthLayout.module.css';
 import logoBoamente from '../../assets/images/homepage/logo-boamente-upscale-Ctitulo.png';
+import { AuthService } from '../../services/authService';
 
 export default function AuthLayout({ title, subtitle, fields, links, onSubmit, buttonText, redirectOnSubmit }) {
   const navigate = useNavigate();
@@ -44,6 +45,11 @@ export default function AuthLayout({ title, subtitle, fields, links, onSubmit, b
             .required('UF é obrigatória.')
             .matches(/^[A-Z]{2}$/, 'UF deve conter duas letras maiúsculas.');
           break;
+        case 'password':
+          acc[field.name] = yup
+            .string()
+            .required('Senha é obrigatória.')
+          break;
         default:
           acc[field.name] = yup.string().required(`${field.label} é obrigatório.`);
       }
@@ -54,6 +60,7 @@ export default function AuthLayout({ title, subtitle, fields, links, onSubmit, b
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(validationSchema),

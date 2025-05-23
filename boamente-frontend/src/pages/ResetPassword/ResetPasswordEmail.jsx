@@ -8,7 +8,7 @@ export default function ResetPassword() {
       label: 'E-mail:',
       type: 'text',
       name: 'email',
-      placeholder: 'Digite seu e-mail ou código de acesso',
+      placeholder: 'Digite seu e-mail',
       required: true,
     },
   ];

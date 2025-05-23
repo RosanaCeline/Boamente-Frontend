@@ -1,8 +1,10 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import AuthLayout from '../../components/Auth/AuthLayout';
-import { ToastContainer, toast} from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthService } from '../../services/authService';
+import * as yup from 'yup';
+import AuthLayout from '../../components/Auth/AuthLayout';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ export default function Login() {
       label: 'E-mail:',
       type: 'text',
       name: 'email',
-      placeholder: 'Digite seu e-mail ou código de acesso',
+      placeholder: 'Digite seu e-mail',
       required: true,
     },
     {
@@ -33,40 +35,45 @@ export default function Login() {
 
   const handleSubmit = async (formData) => {
     try {
-      const response = await fetch('http://localhost:8080/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
+      const userData = ({
+        email: formData.email,
+        password: formData.password,
+      })
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Erro no login");
-      }
-
-      const data = await response.json();
+      const response = await AuthService.apiRequest('/auth/login', 'POST', userData);
       
-      // Armazena o token (se seu backend retornar um)
-      if (data.token) {
-        localStorage.setItem('authToken', data.token);
+      // Armazena o token
+      if (response.token) {
+        localStorage.setItem('authToken', response.token);
       }
 
-      console.log("Login realizado com sucesso:", data);
+      console.log("Login realizado com sucesso:", response);
       navigate('/dashboard'); // Redireciona para a página após login
       
     } catch (error) {
-      console.error('Erro ao conectar com o backend:', error);
-      toast.error(
-              <>
-                Erro inesperado! <br />
-                Tente novamente mais tarde.
-              </>
-            );
+      let errorMessage = "Erro inesperado. Tente novamente.";
+
+       if (error.message.includes('Network Error')) {
+        errorMessage = 'Sem conexão com o servidor. Verifique sua internet.';
+      } else if (error.status === 400) {
+        const mensagem = error.backendMessage.toLowerCase();
+        errorMessage = 'Dados inválidos: Verifique todos os campos';
+      } else if (error.status === 401 && error.backendMessage === 'Senha incorreta.') {
+        errorMessage = 'Senha Incorreta.';
+      } else if (error.status === 403) {
+        errorMessage = 'Acesso negado. Verifique suas permissões.';
+      } else if (error.status === 404 && error.backendMessage == 'Usuário não encontrado.') {
+        errorMessage = 'Nenhum usuário encontrado com este e-mail.';
+      } else if (error.status === 500) {
+        errorMessage = 'Erro interno no servidor. Tente mais tarde.';
+      } else if (error.message.toLowerCase().includes('timeout')) {
+        errorMessage = 'Tempo de conexão esgotado. Tente novamente.';
+      }
+
+      toast.error(errorMessage, {
+        isLoading: false,
+        autoClose: 5000,
+      });
     }
   };
 
