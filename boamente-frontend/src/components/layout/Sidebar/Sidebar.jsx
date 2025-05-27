@@ -1,102 +1,86 @@
-import React from "react";
+import { motion } from "framer-motion";
 import styles from "./Sidebar.module.css";
+import { useState, useEffect } from "react";
+import {
+  User,
+  Home,
+  LayoutDashboard,
+  FileText,
+  Users,
+  Keyboard,
+  UserPlus,
+  Settings,
+  LogOut,
+  Headphones,
+  Wrench
+} from "lucide-react";
 
-import iconProfile from "../../../assets/icons/sidebar/icon-Profile.png";
-import iconHome from "../../../assets/icons/sidebar/icon-Home.png";
-import iconDashboard from "../../../assets/icons/sidebar/icon-Dashboard.png";
-import iconRegistro from "../../../assets/icons/sidebar/icon-Registro.png";
-import iconLista from "../../../assets/icons/sidebar/icon-Lista.png";
-import iconTeclado from "../../../assets/icons/sidebar/icon-Teclado.png";
-import iconCadastro from "../../../assets/icons/sidebar/icon-Cadastro.png";
-import iconConfig from "../../../assets/icons/sidebar/icon-Config.png";
-import iconSair from "../../../assets/icons/sidebar/icon-Sair.png";
-import iconSuporte from "../../../assets/icons/sidebar/icon-Suporte.png";
-import iconInfo from "../../../assets/icons/sidebar/icon-Info.png";
-
-const menuTop = [
-  { 
-    label: "Olá, Fulano!", 
-    icon: iconProfile 
-  },{ 
-    separator: true 
-  },{ 
-    label: "Página Inicial", 
-    icon: iconHome, 
-    href: "/home" 
-  },{ 
-    label: "Dashboards", 
-    icon: iconDashboard, 
-    href: "/dashboards" 
-  },{ 
-    separator: true 
-  },{
-    label: "Registros de Sessões", 
-    icon: iconRegistro, 
-    href: "/registros" 
-  },{ 
-    label: "Lista de Pacientes", 
-    icon: iconLista, 
-    href: "/pacientes" 
-  },{ 
-    label: "Teclado Virtual", 
-    icon: iconTeclado, 
-    href: "/teclado" 
-  },{ 
-    separator: true 
-  },{ 
-    label: "Cadastrar Paciente", 
-    icon: iconCadastro, 
-    href: "/cadastrarpaciente" 
-  }
+const iconSize = 25;
+const menuItems = [
+  { icon: <Home size={iconSize} />, label: "Página Inicial" },
+  { icon: <LayoutDashboard size={iconSize} />, label: "Dashboards" },
+  { divider: true },
+  { icon: <FileText size={iconSize} />, label: "Registro de Sessões" },
+  { icon: <Users size={iconSize} />, label: "Lista de Pacientes" },
+  { icon: <Keyboard size={iconSize} />, label: "Teclado Virtual" },
+  { divider: true },
+  { icon: <UserPlus size={iconSize} />, label: "Cadastrar Paciente" },
+  { icon: <Settings size={iconSize} />, label: "Configurações" },
+  { icon: <LogOut size={iconSize} />, label: "Sair" },
+  { divider: true },
+  { icon: <Headphones size={iconSize} />, label: "Suporte" },
+  { icon: <Wrench size={iconSize} />, label: "Menu Instalação" },
 ];
 
-const menuBottom = [
- { 
-    label: "Configurações", 
-    icon: iconConfig, 
-    href: "/config" 
-  },{ 
-    label: "Sair", 
-    icon: iconSair, 
-    href: "/logout" 
-  },{ 
-    separator: true 
-  },{ 
-    label: "Suporte", 
-    icon: iconSuporte, 
-    href: "/suporte" 
-  },{ 
-    label: "Menu Instalação", 
-    icon: iconInfo, 
-    href: "/instalacao" 
-  }
-];
+export default function Sidebar({ onWidthChange }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-export default function Sidebar() {
-  const renderItems = (list) =>
-    list.map((item, index) => {
-      if (item.separator) {
-        return (
-          <div key={`sep-${index}`} className={styles.barContainer}><div className={styles.barNav}></div></div>
-        );
-      }
+  // Atualiza o tamanho da janela ao redimensionar
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-      return (
-        <li key={index}>
-          <a href={item.href || "#"} {...item.attrs}>
-            <div className={styles.icon}><img src={item.icon} alt={`Ícone ${item.label}`} /></div>
-            <span className={styles.title}>{item.label}</span>
-          </a>
-        </li>
-      );
-    });
+  const widthVw = isHovered ? 15 : 4;
+  // Calcula em pixels com base no tamanho atualizado da janela
+  const widthPx = (windowWidth * widthVw) / 100;
+
+  // Sempre que o hover ou largura mudar, avisa o parent
+  useEffect(() => {
+    if (onWidthChange) {
+      onWidthChange(widthPx);
+    }
+  }, [widthPx, onWidthChange]);
 
   return (
-    <nav>
-      <div className={styles.sidebar}>
-        <ul className={styles.sidebarTop}>{renderItems(menuTop)}</ul>
-        <ul className={styles.sidebarBottom}>{renderItems(menuBottom)}</ul>
+    <motion.aside
+      className={styles.sidebar}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      animate={{ width: `${widthVw}vw` }}
+      transition={{ duration: 0.4 }}
+    >
+      <div className={styles.userSection}>
+        <User size={iconSize + 5} />
+        {isHovered && <span>Olá, Fulano!</span>}
       </div>
-    </nav>
+
+      <div className={styles.menu}>
+        {menuItems.map((item, idx) =>
+          item.divider ? (
+            <div key={idx} className={styles.divider} />
+          ) : (
+            <div key={idx} className={styles.menuItem}>
+              {item.icon}
+              {isHovered && <span>{item.label}</span>}
+            </div>
+          )
+        )}
+      </div>
+    </motion.aside>
   );
 }

@@ -1,15 +1,28 @@
-import React from 'react';
-import style from './HeaderInternal.module.css';
-import notificationIcon from '../../../../assets/icons/layout/Icon-Notific.png';
+import React from "react";
+import { Bell } from "lucide-react";
+import { motion } from "framer-motion";
+import styles from "./HeaderInternal.module.css";
+import ThemeToggle from "../../../ThemeToggle/ThemeToggle";
 
-export default function HeaderInternal() {
+
+export default function HeaderInternal({ pageTitle, sidebarWidth }) {
   return (
-    <header>
-      <h1 className={style.title}>Header Interno</h1>
-      <section className={style.button}>
-          <a href="#"><img src={notificationIcon} alt="Notificações" /></a>
-          <div class="dark-mode-btn"></div>
+    <motion.header
+      className={styles.header}
+      animate={{ marginLeft: sidebarWidth }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+      style={{ width: "100%" }}
+    >
+      <h1 className={styles.title} style={{ maxWidth: `calc(100% - 150px)` }}>
+        {pageTitle}
+      </h1>
+
+      <section className={styles.actions}>
+        <button aria-label="Notificações" className={styles.iconButton}>
+          <Bell size={24} />
+        </button>
+        <ThemeToggle />
       </section>
-    </header>
+    </motion.header>
   );
 }

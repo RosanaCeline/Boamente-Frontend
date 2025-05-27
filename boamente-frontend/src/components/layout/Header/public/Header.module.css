@@ -1,6 +1,6 @@
-header {
-    background-color: var(--cor-dark-blue);
-    color: var(--cor-font-light);
+.header {
+    background-color: var(--dark-blue);
+    color: var(--light);
     width: 100%;
     height: var(--header-height);
     padding: 0.2% 2.5%;

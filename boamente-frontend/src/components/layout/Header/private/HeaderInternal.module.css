@@ -1,4 +1,49 @@
-h1 {
-    font-size: 2em;
-    align-items: center;
+.header {
+  background-color: var(--light);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5rem;
+  color: var(--font-blue);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3.5rem;
+  box-sizing: border-box;
+  border-bottom-left-radius: 5rem;
+  z-index: 1000;
+}
+
+.title {
+  font-size: 2.3rem;
+  font-weight: 600;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actions {
+  position: fixed;
+  right: 10rem;
+  top: 0;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  z-index: 1100;
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.iconButton:hover,
+.iconButton:focus {
+  background-color: rgba(0, 0, 0, 0.05);
+  outline: none;
 }

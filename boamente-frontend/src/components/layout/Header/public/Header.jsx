@@ -11,7 +11,7 @@ export default function Header() {
     };
 
     return (
-        <header>
+        <header className={styles.header}>
             <div className={styles.boamente}>
                 <img src={logo} alt="Logo Boamente" />
                 <span>BOAMENTE</span>

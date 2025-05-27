@@ -129,7 +129,6 @@ export default function Register() {
             Bem-vindo ao Boamente!
           </p>
           <div style={{
-            padding: '1rem', 
             textAlign: 'center',
             fontWeight: '500',
             lineHeight: '1.4',

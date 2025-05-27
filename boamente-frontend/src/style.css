@@ -1,13 +1,26 @@
 :root {
-    --cor-light-blue: #1B768E;
-    --cor-dark-blue: #012538;
-    --cor-font-light: #F8F9FA;
-    --cor-button-background: #FFD95A;
-    --cor-button-font: #333333;
-    --cor-grey: #4D555B;
+    --font-blue: #012538;
+    --label: #F2F2F2;
+    --btn-background: #FFD95A;
+    --btn-font: #333333;
+    --grey: #4D555B;
+    --black: #000000;
 
-    --black: #00000;
+    --blue: #1B768E;
+    --light: #F8F9FA;
 }
+body.themeDark {
+    --font-blue: #012538;
+    --label: #F2F2F2;
+    --btn-background: #FFD95A;
+    --btn-font: #333333;
+    --grey: #4D555B;
+    --black: #000000;
+
+    --blue: #012538;
+    --light: #D1D3D5;
+}
+
 
 * {
     box-sizing: border-box;

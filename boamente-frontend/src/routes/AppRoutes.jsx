@@ -1,27 +1,36 @@
 import React from 'react';
-import { Routes, Route} from 'react-router-dom';
-// import PrivateRoute from './PrivateRoute';
+import { Routes, Route } from 'react-router-dom';
 
 import PrivateLayout from '../components/layout/PrivateLayout/PrivateLayout';
 import PublicLayout from '../components/layout/PublicLayout/PublicLayout';
 
-// Pages Public
+// Pages
 import Home from '../pages/Home/Home';
 import Recursos from '../pages/Resources/Resources';
 import Contato from '../pages/Contact/Contact';
 import Login from '../pages/Login/Login';
 import Cadastro from '../pages/Register/Register';
 import RedefinirSenha from '../pages/ResetPassword/ResetPasswordEmail';
-
-// Pages protected
 import NovaSenha from '../pages/ResetPassword/ResetPasswordNew';
 import CadastroPaciente from '../pages/Register/RegisterPatient';
 
-export default function AppRoutes() {
+// Rotas públicas
+const publicRoutes = [
+  { path: '/', element: <Home />, title: 'Página Inicial' },
+  { path: '/recursos', element: <Recursos />, title: 'Recursos' },
+  { path: '/contato', element: <Contato />, title: 'Contato' },
+];
 
+// Rotas protegidas
+const privateRoutes = [
+  { path: '/dashboard', element: <h1>Dashboard</h1>, title: 'Dashboard' },
+  { path: '/cadastrarpaciente', element: <CadastroPaciente />, title: 'Cadastrar Pacientes' },
+];
+
+export default function AppRoutes() {
   return (
     <Routes>
-      {/* routes authentication */}
+      {/* Autenticação */}
       <Route>
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
@@ -29,24 +38,19 @@ export default function AppRoutes() {
         <Route path="/redefinirnovasenha" element={<NovaSenha />} />
       </Route>
 
-      {/* public routes w/ header and footer */}
+      {/* Públicas com layout */}
       <Route element={<PublicLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/recursos" element={<Recursos />} />
-        <Route path="/contato" element={<Contato />} />
-        
+        {publicRoutes.map(({ path, element }) => (
+          <Route key={path} path={path} element={element} />
+        ))}
       </Route>
 
-      {/* protected routes w/ sidebar */}
-      <Route element={<PrivateLayout />}>
-        <Route path="/dashboard" element={<h1>Dashboard</h1>} />
-        <Route path="/cadastrarpaciente" element={<CadastroPaciente />} />
+      {/* Protegidas com layout e título */}
+      <Route element={<PrivateLayout routes={privateRoutes} />}>
+        {privateRoutes.map(({ path, element }) => (
+          <Route key={path} path={path} element={element} />
+        ))}
       </Route>
-
-      {/* futute */}
-      {/* <Route element={<PrivateRoute><PrivateLayout /></PrivateRoute>}>
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Route> */}
     </Routes>
   );
 }
