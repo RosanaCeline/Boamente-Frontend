@@ -36,15 +36,35 @@
   cursor: pointer;
   transition: background 0.3s;
   white-space: nowrap;
+  text-decoration: none;
+}
+/*  */
+.menuItem svg {
+  color: var(--light); 
+  transition: color 0.3s;
 }
 
 .menuItem:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+.menuItem:hover svg {
+  color: white;
+}
+
+.menuItem.active,
+.menuItem.active svg {
+  color: white; 
+}
+/*  */
 .menuItem span {
   font-size: 1.2rem;
   overflow: hidden;
+  text-decoration: none;
+}
+
+.menuItem a {
+  text-decoration: none;
 }
 
 .divider {

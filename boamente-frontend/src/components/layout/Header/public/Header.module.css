@@ -1,5 +1,5 @@
 .header {
-    background-color: var(--dark-blue);
+    background-color: var(--font-blue);
     color: var(--light);
     width: 100%;
     height: var(--header-height);
