@@ -1,4 +1,5 @@
 import React, { useState} from 'react';
+import '../../../style.css'
 import { useLocation, Outlet } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import HeaderInternal from '../Header/private/HeaderInternal';

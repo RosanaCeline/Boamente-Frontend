@@ -1,60 +1,50 @@
 import React from "react";
 import style from "./GenericForm.module.css";
+import ButtonSubmit from "../ButtonSubmit/ButtonSubmit";
+import LabelInput from "../LabelInput/LabelInput";
 
-export default function GenericForm ({ title, sections = [], footerMessage, buttonLabel = "Enviar", onSubmit }) {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-    onSubmit(data);
-  };
+export default function GenericForm ({ sections = [], footerMessage, buttonLabel = "Enviar", onSubmit, register, errors}) {
 
-  return (
-    <section className={style.formGeneric}>
-        <h1 className={style.titlePage}>{title}</h1>
-        <form onSubmit={handleSubmit} className={style.formStructure}>
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+        onSubmit(data);
+    };
+    return (
+        <section className={style.formGeneric}>
+        <form onSubmit={handleSubmit} className={style.formStructure} noValidate>
             {sections.map((section, index) => (
-                <div key={index} className={style.formSection}>
-                    {section.subtitle && (<h2 className={style.subtitle}>{section.subtitle}</h2>)}
-                    <div className={style.formGrid}>
-                        {section.fields.map((field) => (
+            <div key={index} className={style.formSection}>
+                {section.subtitle && (<h2 className={style.subtitle}>{section.subtitle}</h2>)}
+                <div className={style.formGrid}>
+                    {section.fields.map((field) => (
                         <article key={field.id} className={style.fieldGeneral}>
-                            <label htmlFor={field.id} className={style.labelNameAsking}>{field.label} {field.required && <span className={style.required}>*</span>}</label>
-                            {field.type === "select" ? (
-                                <select
-                                    id={field.id}
-                                    name={field.name}
-                                    required={field.required}
-                                     className={style.formInputSelect}
-                                >
-                                <option value="">Selecione uma opção</option>
-                                    {field.options?.map((option) => (
-                                        <option key={option.value} value={option.value}>
-                                        {option.label}
-                                        </option>
-                                    ))}
-                                </select>
-
-                            ) : (
-                                <input
-                                    id={field.id}
-                                    name={field.name}
-                                    type={field.type}
-                                    placeholder={field.placeholder}
-                                    required={field.required}
-                                    className={style.formInputField}
-                                />
+                            <label htmlFor={field.id} className={style.labelNameAsking}>
+                                {field.label} {field.required && <span className={style.required}>*</span>}
+                            </label>
+                            <LabelInput
+                                id={field.id}
+                                name={field.name}
+                                type={field.type}
+                                placeholder={field.placeholder}
+                                required={field.required}
+                                register={register}
+                                options={field.options} 
+                            />
+                            {errors && errors[field.name] && (
+                                <p className={style.error}>{errors[field.name].message || 'Campo obrigatório'}</p>
                             )}
                         </article>
-                        ))}
-                    </div>
+                    ))}
                 </div>
+            </div>
             ))}
 
-            {footerMessage && (<p className={style.footerMessage}>{footerMessage}</p>)}
+            {footerMessage && <p className={style.footerMessage}>{footerMessage}</p>}
 
-            <button type="submit" className={style.buttonSubmit}>{buttonLabel}</button>
+            <ButtonSubmit type="submit">{buttonLabel}</ButtonSubmit>
         </form>
-    </section>
-  );
+        </section>
+    );
 };

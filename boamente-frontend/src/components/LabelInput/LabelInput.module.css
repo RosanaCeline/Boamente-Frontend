@@ -1,0 +1,28 @@
+.formInput,
+.formInputSelect {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: var(--form-background);
+  color: var(--black);
+  box-shadow:
+    0 2px 5px rgba(150, 150, 150, 0.4),
+    0 6px 8px rgba(150, 150, 150, 0.6);
+  transition: box-shadow 0.3s ease;
+}
+
+.formInput:focus,
+.formInputSelect:focus {
+  outline: none;
+  background-color: var(--light);
+}
+
+
+.formInput::placeholder,
+.formInputSelect option:first-child {
+  color: var(--grey);
+}

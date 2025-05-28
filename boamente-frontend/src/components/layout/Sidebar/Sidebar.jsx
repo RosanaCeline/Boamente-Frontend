@@ -57,30 +57,26 @@ export default function Sidebar({ onWidthChange }) {
   }, [widthPx, onWidthChange]);
 
   return (
-    <motion.aside
-      className={styles.sidebar}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      animate={{ width: `${widthVw}vw` }}
-      transition={{ duration: 0.4 }}
-    >
-      <div className={styles.userSection}>
-        <User size={iconSize + 5} />
-        {isHovered && <span>Olá, Fulano!</span>}
-      </div>
+    <div className={styles.sidebarWrapper}  onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+      <motion.aside className={styles.sidebar}  animate={{ width: `${widthVw}vw` }} transition={{ duration: 0.4 }}>
+        <div className={styles.userSection}>
+          <User size={iconSize + 5} />
+          {isHovered && <span>Olá, Fulano!</span>}
+        </div>
 
-      <div className={styles.menu}>
-        {menuItems.map((item, idx) =>
-          item.divider ? (
-            <div key={idx} className={styles.divider} />
-          ) : (
-            <div key={idx} className={styles.menuItem}>
-              {item.icon}
-              {isHovered && <span>{item.label}</span>}
-            </div>
-          )
-        )}
-      </div>
-    </motion.aside>
+        <div className={styles.menu}>
+          {menuItems.map((item, idx) =>
+            item.divider ? (
+              <div key={idx} className={styles.divider} />
+            ) : (
+              <div key={idx} className={styles.menuItem}>
+                {item.icon}
+                {isHovered && <span>{item.label}</span>}
+              </div>
+            )
+          )}
+        </div>
+      </motion.aside>
+    </div>
   );
 }

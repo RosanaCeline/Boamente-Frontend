@@ -6,6 +6,8 @@ import * as yup from 'yup';
 import styles from './AuthLayout.module.css';
 import logoBoamente from '../../assets/images/homepage/logo-boamente-upscale-Ctitulo.png';
 import { AuthService } from '../../services/authService';
+import ButtonSubmit from '../ButtonSubmit/ButtonSubmit';
+import LabelInput from '../LabelInput/LabelInput';
 
 export default function AuthLayout({ title, subtitle, fields, links, onSubmit, buttonText, redirectOnSubmit }) {
   const navigate = useNavigate();
@@ -86,19 +88,15 @@ export default function AuthLayout({ title, subtitle, fields, links, onSubmit, b
 
         <form onSubmit={handleSubmit(internalSubmit)} noValidate>
           {fields.map(({ id, label, type, name, placeholder }) => (
-            <div className="inputWrapper" key={id}>
-              <label htmlFor={id}>{label}</label>
-              <input
-                id={id}
-                type={type}
-                placeholder={placeholder}
-                {...register(name)}
-                className={errors[name] ? styles.inputError : ''}
-              />
-              {errors[name] && (
-                <span className={styles.error}>{errors[name].message}</span>
-              )}
-            </div>
+            <LabelInput
+              key={id}
+              id={id}
+              label={label}
+              type={type}
+              name={name}
+              placeholder={placeholder}
+              register={register}
+            />
           ))}
 
           {links &&
@@ -108,9 +106,7 @@ export default function AuthLayout({ title, subtitle, fields, links, onSubmit, b
               </Link>
             ))}
 
-          <button type="submit" className={styles.button}>
-            {buttonText}
-          </button>
+          <ButtonSubmit type="submit">{buttonText}</ButtonSubmit>
         </form>
       </section>
     </main>

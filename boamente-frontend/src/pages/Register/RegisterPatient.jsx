@@ -1,13 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import GenericForm from '../../components/Forms/GenericForm'; 
 
 export default function RegisterPatient() {
   const navigate = useNavigate();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const sections = [
     {
-      subtitle: "Informações do Paciente",
+      subtitle: "Preencha com as informações do paciente",
       fields: [
         {
           id: 'nomePaciente',
@@ -67,11 +74,12 @@ export default function RegisterPatient() {
 
   return (
     <GenericForm
-        title="Cadastro de Paciente"
-        sections={sections}
-        buttonLabel="Cadastrar"
-        footerMessage="As instruções para a instalação do teclado virtual serão enviadas para o e-mail do paciente."
-        onSubmit={handleRegister}
+      sections={sections}
+      buttonLabel="Cadastrar"
+      footerMessage="As instruções para a instalação do teclado virtual serão enviadas para o e-mail do paciente."
+      onSubmit={handleSubmit(handleRegister)}
+      register={register}
+      errors={errors}
     />
   );
 }

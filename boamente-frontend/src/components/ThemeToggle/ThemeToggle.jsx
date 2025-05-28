@@ -35,8 +35,8 @@ export default function ThemeToggle() {
       title="Alternar tema claro/escuro"
     >
       <div className={`${styles.toggleThumb} ${theme === "dark" ? styles.dark : ""}`} />
-      <Sun className={styles.toggleIcon} />
       <Moon className={styles.toggleIcon} />
+      <Sun className={styles.toggleIcon} />
     </button>
   );
 }

@@ -2,6 +2,8 @@
     --font-blue: #012538;
     --label: #F2F2F2;
     --btn-background: #FFD95A;
+    --btn-background-hover: #012538;
+    --form-background: #FFFFFF;
     --btn-font: #333333;
     --grey: #4D555B;
     --black: #000000;
@@ -13,6 +15,7 @@ body.themeDark {
     --font-blue: #012538;
     --label: #F2F2F2;
     --btn-background: #FFD95A;
+    --form-background: #EFEFEF;
     --btn-font: #333333;
     --grey: #4D555B;
     --black: #000000;
