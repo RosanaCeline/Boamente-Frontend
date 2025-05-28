@@ -14,7 +14,7 @@ export default function AppRoutes() {
       ))}
 
       {/* Públicas com layout */}
-      <Route element={<PublicLayout />}>
+      <Route path="/" element={<PublicLayout />}>
         {publicRoutes.map(({ path, element }) => (
           <Route key={path} path={path} element={element} />
         ))}
