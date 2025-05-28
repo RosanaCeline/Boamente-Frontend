@@ -1,13 +1,25 @@
 import React from 'react';
 import AuthLayout from '../../components/Auth/AuthLayout';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { AuthHandlers } from '../../services/authHandlers';
 
 export default function ResetPasswordNew() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const token = queryParams.get('token');
+
+  const handleResetConfirmPasswordSubmit = async (formData) => {
+        await AuthHandlers.resetConfirmPassword(token, formData, navigate);
+    };
+
   const fields = [
     {
       id: 'nova-senha',
       label: 'Nova senha:',
       type: 'password',
-      name: 'novaSenha',
+      name: 'newPassword',
       placeholder: 'Digite sua nova senha',
       required: true
     },
@@ -15,7 +27,7 @@ export default function ResetPasswordNew() {
       id: 'nova-senha2',
       label: 'Digite novamente a senha:',
       type: 'password',
-      name: 'novaSenha2',
+      name: 'confirmPassword',
       placeholder: 'Digite novamente sua senha',
       required: true
     }
@@ -38,7 +50,7 @@ export default function ResetPasswordNew() {
         </>
       }
       fields={fields}
-      onSubmit={handleSubmit}
+      onSubmit={handleResetConfirmPasswordSubmit}
       buttonText="Redefinir senha"
       redirectOnSubmit="/login"
     />

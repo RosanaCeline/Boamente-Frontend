@@ -21,8 +21,26 @@
   background-color: var(--light);
 }
 
-
 .formInput::placeholder,
 .formInputSelect option:first-child {
   color: var(--grey);
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--black);
+  font-size: 1rem;
+}
+
+.inputGroup {
+  position: relative;
+}
+
+.errorMessage {
+  position: absolute;
+  bottom: -1.3rem;
+  left: 0;
+  color: red;
+  font-size: 0.875rem;
 }

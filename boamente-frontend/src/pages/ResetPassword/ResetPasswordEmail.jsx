@@ -1,7 +1,15 @@
 import React from 'react';
 import AuthLayout from '../../components/Auth/AuthLayout';
+import { useNavigate } from 'react-router-dom';
+import { AuthHandlers } from '../../services/authHandlers';
 
 export default function ResetPassword() {
+  const navigate = useNavigate();
+
+  const handleResetPasswordSubmit = async (formData) => {
+        await AuthHandlers.resetPassword(formData, navigate);
+    };
+
   const fields = [
     {
       id: 'email',
@@ -25,9 +33,7 @@ export default function ResetPassword() {
       }
       fields={fields}
       buttonText="Redefinir senha"
-      onSubmit={(e) => {
-        // lógica para enviar e-mail de redefinição
-      }}
+      onSubmit={handleResetPasswordSubmit}
     />
   );
 }
