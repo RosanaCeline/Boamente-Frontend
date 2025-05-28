@@ -1,36 +1,11 @@
 import { motion } from "framer-motion";
 import styles from "./Sidebar.module.css";
 import { useState, useEffect } from "react";
-import {
-  User,
-  Home,
-  LayoutDashboard,
-  FileText,
-  Users,
-  Keyboard,
-  UserPlus,
-  Settings,
-  LogOut,
-  Headphones,
-  Wrench
-} from "lucide-react";
+import { User } from "lucide-react"; 
+import { NavLink } from "react-router-dom"; 
+import { privateRoutes } from '../../../routes/listRoutes'
 
 const iconSize = 25;
-const menuItems = [
-  { icon: <Home size={iconSize} />, label: "Página Inicial" },
-  { icon: <LayoutDashboard size={iconSize} />, label: "Dashboards" },
-  { divider: true },
-  { icon: <FileText size={iconSize} />, label: "Registro de Sessões" },
-  { icon: <Users size={iconSize} />, label: "Lista de Pacientes" },
-  { icon: <Keyboard size={iconSize} />, label: "Teclado Virtual" },
-  { divider: true },
-  { icon: <UserPlus size={iconSize} />, label: "Cadastrar Paciente" },
-  { icon: <Settings size={iconSize} />, label: "Configurações" },
-  { icon: <LogOut size={iconSize} />, label: "Sair" },
-  { divider: true },
-  { icon: <Headphones size={iconSize} />, label: "Suporte" },
-  { icon: <Wrench size={iconSize} />, label: "Menu Instalação" },
-];
 
 export default function Sidebar({ onWidthChange }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -65,14 +40,20 @@ export default function Sidebar({ onWidthChange }) {
         </div>
 
         <div className={styles.menu}>
-          {menuItems.map((item, idx) =>
-            item.divider ? (
-              <div key={idx} className={styles.divider} />
+          {privateRoutes.map((route, idx) =>
+            route.divider ? (
+              <div key={`divider-${idx}`} className={styles.divider} />
             ) : (
-              <div key={idx} className={styles.menuItem}>
-                {item.icon}
-                {isHovered && <span>{item.label}</span>}
-              </div>
+              <NavLink
+                key={route.path}
+                to={route.path}
+                className={({ isActive }) =>
+                  `${styles.menuItem} ${isActive ? styles.active : ""}`
+                }
+              >
+                {route.icon}
+                {isHovered && <span>{route.title}</span>}
+              </NavLink>
             )
           )}
         </div>
