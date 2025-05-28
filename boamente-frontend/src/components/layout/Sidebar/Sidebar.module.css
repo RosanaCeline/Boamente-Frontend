@@ -1,3 +1,14 @@
+.sidebarWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: max-content; 
+  max-width: 20vw; 
+  z-index: 100;
+  pointer-events: none; 
+}
+
 .sidebar {
   background-color: var(--blue);
   color: var(--light);
@@ -7,6 +18,7 @@
   flex-direction: column;
   font-family: sans-serif;
   overflow: hidden;
+  pointer-events: all; 
 }
 
 .userSection {
@@ -73,23 +85,27 @@
   margin: 0.5rem 1rem;
 }
 
-.sidebarWrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 20vw; 
-  z-index: 100;
-  pointer-events: none; /* Evita capturar cliques, apenas hover */
-}
+@media (max-width: 1024px) {
+  .userSection {
+    margin-top: 4rem;
+    font-size: 1.2rem;
+  }
 
-.sidebar {
-  pointer-events: all; 
-  background-color: var(--blue);
-  color: var(--light);
-  height: 100vh;
-  padding: 2em 0;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  .sidebarMobileOpen {
+    transform: translateX(0);
+  }
+  .menu {
+    white-space: nowrap; 
+  }
+
+  .hamburgerButton {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 1200;
+    background: transparent;
+    border: none;
+    color: var(--black);
+    cursor: pointer;
+  }
 }

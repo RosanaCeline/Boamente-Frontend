@@ -13,10 +13,13 @@ export default function GenericForm ({ sections = [], footerMessage, buttonLabel
     };
     return (
         <section className={style.formGeneric}>
+        
         <form onSubmit={handleSubmit} className={style.formStructure} noValidate>
             {sections.map((section, index) => (
+            
             <div key={index} className={style.formSection}>
                 {section.subtitle && (<h2 className={style.subtitle}>{section.subtitle}</h2>)}
+                
                 <div className={style.formGrid}>
                     {section.fields.map((field) => (
                         <article key={field.id} className={style.fieldGeneral}>

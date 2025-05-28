@@ -41,32 +41,37 @@ h3 {
     min-height: 100vh;
     padding-top: 5%;
 }
+.artigos h1 {
+    margin: 2rem;
+    text-align: center;
+}
 .materiais {
     height: calc(100vh - var(--footer-height));
     padding-bottom: 3%;
+    align-items: stretch;
 }
-
+.materiais h1 {
+    text-align: center;
+    margin: 2rem;
+    margin-bottom: 3rem;
+}
 
 .listagem {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
     gap: 1.5rem;
-    width: 65%;
+    width: 70%;
+    align-items: stretch;
+    margin: 0 auto;
 }
-.materiais .listagem {
-    padding-top: 8%;
-    padding-bottom: 5%;
-}
-
 
 .recursos {
     display: flex;
-    flex: 1 1 65%;
-    max-width: 60%;
-    height: 100%;
+    flex: 1 1 0;
     flex-direction: column;
-    justify-content:space-evenly;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
 
@@ -75,6 +80,7 @@ h3 {
     
     padding: 4% 3%;
     gap: 3em;
+    box-sizing: border-box;
 }
 .btnRecursos {
     cursor: pointer;
@@ -99,14 +105,15 @@ h3 {
 
 @media (max-width: 1024px) {
     .artigos {
-        padding-top: 20%;
+        padding-top: 10%;
     }
     .materiais {
         padding-bottom: 2%;
     }
-    h1 {
-        font-size: 2em;
+    .artigos h1, .materiais h1 {
+        font-size: 3em;
     }
+    
     h3 {
         font-size: 1.5em;
     }
@@ -121,12 +128,12 @@ h3 {
     }
     .recursos {
         max-width: 90%;
-        padding: 6% 5%;
+        padding: 6%;
         gap: 2em;
     }
     .btnRecursos {
-        font-size: 2em;
-        padding: 0 4%;
+        font-size: 1.6em;
+        padding: 0 1.5rem;
     }
 }
 

@@ -37,6 +37,7 @@
     min-width: 40%;
     max-height: var(--header-height);
     position: relative;
+    margin-right: 2rem;
 }
 .navegation ul {
     display: flex;
@@ -115,6 +116,7 @@ button {
         width: 8%;
         right: 2em;
         z-index: 11000;
+        margin-right: 2rem;
     }
     .line {
         transition: all 0.3s ease;

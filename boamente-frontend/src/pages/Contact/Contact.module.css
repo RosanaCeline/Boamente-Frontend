@@ -44,8 +44,15 @@ h3 {
     padding-top: 1%;
 }
 
+.alunos h1, .pesquisadores h1 {
+    margin: 2rem;
+    text-align: center;
+    font-size: 3rem;
+}
+
 .listagem {
     display: flex;
+    flex-wrap: wrap; 
     flex-direction: row;
     justify-content: center;
     width: 75%;
@@ -54,6 +61,7 @@ h3 {
     border-radius: 1em;
     gap: 1.4%;
     padding-top: 2%;
+    margin: 0 auto;
 }
 
 .alunos .listagem {
@@ -67,11 +75,14 @@ h3 {
     align-items: center;
     justify-content: space-between;
     text-align: center;
+    box-sizing: border-box;
 
     background-color: #EFEFEF;
     border-radius: 1em;
-    padding: 2em;
+    padding: 2.2em;
+    margin: 0.3rem 0;
     gap: 1em;
+    box-sizing: border-box;
 }
 
 .btnRecursos {
@@ -95,15 +106,16 @@ h3 {
 /* Responsiveness */
 
 @media (max-width: 1024px) {
-    .pesquisadores, .alunos {
-        padding-top: 10%;
-    }
-    h1 {
-        font-size: 6em;
+    
+    .alunos h1, .pesquisadores h1 {
+        font-size: 3rem;
     }
     .listagem {
         flex-direction: row;
         gap: 1.5rem;
+    }
+    .alunos .listagem {
+        margin-bottom: 2rem;
     }
 
 }
@@ -136,8 +148,11 @@ h3 {
     .pesquisadores, .alunos {
         padding-top: 30%;
     }
-    h1, h3 {
+    .alunos h1 h3, .pesquisadores h1 h3{
         text-align: center;
+    }
+    .alunos h1, .pesquisadores h1 {
+        font-size: 2rem;
     }
 
     .card {

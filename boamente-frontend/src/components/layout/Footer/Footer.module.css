@@ -3,19 +3,29 @@ footer {
     justify-content: space-between;
     align-items: center;
 
-    width: 108%;
+    width: 100vw;
     padding: 0.5% 3% 0.5% 3%;
     background-color: var(--cor-grey);
     color: var(--cor-font-light);
     
     font-size: 1.3em;
+    box-sizing: border-box;
 }
 
 /* Responsiveness */
 
+@media (max-width: 1030px) {
+    footer {
+        font-size: 0.9em;  
+    }
+}
+
 @media (max-width: 825px) {
     footer {
         font-size: 1em;  
+    }
+    #devs {
+        display: none;
     }
 }
 

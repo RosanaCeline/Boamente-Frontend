@@ -36,7 +36,7 @@ export default function Contact() {
       </section>
 
       <section className={styles.alunos}>
-        <h1>Alunos Pesquisadoras</h1>
+        <h1>Alunos Pesquisadores</h1>
         <div className={styles.listagem}>
           <Pessoa
             foto={LaisImg}

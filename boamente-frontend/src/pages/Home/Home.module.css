@@ -23,11 +23,13 @@
 #boxApresentacao h1 {
     font-size: 4em;
     font-weight: bold;
+    text-align: center;
 }
 #boxApresentacao span {
     font-size: 2em;
     font-weight: 600;
     margin-top: 2%;
+    text-align: center;
 }
 #boxApresentacao a {
     text-decoration: none;

@@ -15,7 +15,7 @@
   min-height: 70vh;
   max-height: 90vh;
   overflow-y: auto;
-  width: 50vw;;
+  width: 50vw;
   margin: 7rem;
   padding: 3rem;
 }
@@ -66,4 +66,19 @@
   font-size: 0.9rem;     
   margin-top: 0.4rem;      
   line-height: 1.2;
+}
+
+@media screen and (max-width: 1024px) {
+  .formStructure {
+      width: 90vw;
+      padding: 2rem;
+      margin: 5rem;
+  }
+  .formSection {
+      padding: 0 2rem;
+  }
+  .subtitle {
+      font-size: 1.2rem;
+  }
+  
 }
