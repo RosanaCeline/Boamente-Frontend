@@ -9,6 +9,7 @@
     --black: #000000;
 
     --blue: #1B768E;
+    --blue-rgb: 27, 118, 142;
     --light: #F8F9FA;
 }
 body.themeDark {
@@ -21,6 +22,7 @@ body.themeDark {
     --black: #000000;
 
     --blue: #012538;
+    --blue-rgb: 1, 37, 56;
     --light: #D1D3D5;
 }
 

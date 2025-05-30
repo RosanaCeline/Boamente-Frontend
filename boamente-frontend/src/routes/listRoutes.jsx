@@ -17,6 +17,9 @@ import Cadastro from '../pages/Register/Register';
 import RedefinirSenha from '../pages/ResetPassword/ResetPasswordEmail';
 import NovaSenha from '../pages/ResetPassword/ResetPasswordNew';
 import CadastroPaciente from '../pages/Register/RegisterPatient';
+import DashboardGeneral from "../pages/Dashboard/General/DashboardGeneral";
+import PatientPanel from '../pages/Dashboard/Personal/PatientPanel';
+
 
 const iconSize = 25;
 
@@ -28,7 +31,8 @@ export const publicRoutes = [
 
 export const privateRoutes = [
     { divider: true },
-    { path: '/dashboard', element: <h1>Dashboard</h1>, title: 'Dashboard', layout: 'private', icon: <LayoutDashboard size={iconSize} /> },
+    { path: '/dashboardgeral', element: <DashboardGeneral />, title: 'Dashboard Geral', layout: 'private', icon: <LayoutDashboard size={iconSize} /> },
+    { path: '/paineldopaciente', element: <PatientPanel />, title: 'Painel Clínico do Paciente', layout: 'private', icon: <LayoutDashboard size={iconSize} /> },
     { path: '/cadastrarpaciente', element: <CadastroPaciente />, title: 'Cadastro de Pacientes', layout: 'private', icon: <UserPlus size={iconSize} /> },
     { divider: true },
 ];

@@ -1,0 +1,90 @@
+.sectionPersonal {
+    display: flex;
+    justify-content: space-evenly;
+    box-sizing: border-box;
+    
+    margin-top: 6rem;
+    gap: 2rem;
+    min-height: calc(100vh - 6rem - 2.5rem);
+}
+
+.patientInformation, .charts {
+    flex: 1 1 50%;
+    max-width: 50%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    align-items: center;
+    box-sizing: border-box;
+    padding: 3rem 5rem;
+}
+
+.patientInformation {
+  justify-content: center; 
+} 
+
+.lineChart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+
+    height: 40vh;
+    aspect-ratio: 2 / 1;
+
+    margin: auto;
+    padding: 1rem;
+}
+
+.spinnerWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.spinnerBackground {
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  background-color: var(--font-blue); 
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fixedImage {
+  width: 3.7rem;
+  height: 3.7rem;
+  object-fit: contain;
+  z-index: 2;
+}
+
+.spinner {
+  position: absolute;
+  width: 7rem;
+  height: 7rem;
+  border: 0.5rem solid var(--btn-background);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 1;
+}
+
+.spinnerText {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  color: var(--font-blue);
+  text-align: center;
+}
+
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
