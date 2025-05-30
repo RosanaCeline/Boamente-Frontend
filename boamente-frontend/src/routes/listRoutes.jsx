@@ -1,9 +1,9 @@
 import {
   LayoutDashboard,
-//   FileText, Registro de Sessões
-//   Users, Lista de Pacientes
-//   Keyboard, Teclado Virtual
   UserPlus,
+  Users,
+//   FileText, Registro de Sessões
+//   Keyboard, Teclado Virtual
 //   Settings, Configurações
 //   Headphones, Suporte
 //   Wrench, Menu Instalação
@@ -19,7 +19,7 @@ import NovaSenha from '../pages/ResetPassword/ResetPasswordNew';
 import CadastroPaciente from '../pages/Register/RegisterPatient';
 import DashboardGeneral from "../pages/Dashboard/General/DashboardGeneral";
 import PatientPanel from '../pages/Dashboard/Personal/PatientPanel';
-
+import ListPatient from '../pages/ListPatients/ListPatient';
 
 const iconSize = 25;
 
@@ -34,6 +34,7 @@ export const privateRoutes = [
     { path: '/dashboardgeral', element: <DashboardGeneral />, title: 'Dashboard Geral', layout: 'private', icon: <LayoutDashboard size={iconSize} /> },
     { path: '/paineldopaciente', element: <PatientPanel />, title: 'Painel Clínico do Paciente', layout: 'private', icon: <LayoutDashboard size={iconSize} /> },
     { path: '/cadastrarpaciente', element: <CadastroPaciente />, title: 'Cadastro de Pacientes', layout: 'private', icon: <UserPlus size={iconSize} /> },
+    { path: '/listarpacientes', element: <ListPatient />, title: 'Listagem de Pacientes', layout: 'private', icon: <Users size={iconSize} /> },
     { divider: true },
 ];
 
