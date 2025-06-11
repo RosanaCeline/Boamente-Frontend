@@ -35,7 +35,7 @@
 .formGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 1.5rem;
   box-sizing: border-box; 
 }
 .fieldGeneral {
@@ -46,7 +46,8 @@
 .labelNameAsking {
   font-weight: 500;
   color: var(--font-blue);
-  margin-bottom: 0.8rem;
+  margin-top: 1.5%;
+  margin-bottom: 0.2rem;
 }
 /* Astherisk  */
 .required {

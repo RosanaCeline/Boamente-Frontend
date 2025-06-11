@@ -32,8 +32,6 @@ export const AuthHandlers = {
                 onClose: () => navigate('/login'),
             });
 
-            return response;
-
         } catch (error) {
             let errorMessage = 'Erro inesperado. Tente novamente.';
             
@@ -82,17 +80,19 @@ export const AuthHandlers = {
             })
 
             const response = await AuthService.apiRequest('/auth/login', 'POST', userData);
-            
+
             // Armazena o token
             if (response.token) {
                 localStorage.setItem('authToken', response.token);
+            } else {
+            console.error("Token não recebido no login");
             }
 
             console.log("Login realizado com sucesso:", response);
-            navigate('/dashboard'); // Redireciona para a página após login
+            navigate('/dashboardgeral'); // Redireciona para a página após login
             
         } catch (error) {
-            let errorMessage = "Erro inesperado. Tente novamente.";
+            let errorMessage = "Erro inesperado. Tente novamente mais tarde.";
 
             if (error.message.includes('Network Error')) {
                 errorMessage = 'Sem conexão com o servidor. Verifique sua internet.';
@@ -119,22 +119,30 @@ export const AuthHandlers = {
     },
 
     resetPassword: async (formData, navigate) =>  {
+        let toastId;
         try {
             const userData = ({
                 email: formData.email
             })
 
-            toast.success(
-                "Se o e-mail estiver cadastrado, enviaremos instruções para redefinir a senha.",
-                {
-                    autoClose: 3000,
-                }
-            );
+            toast.dismiss();
+            toastId = toast.loading("Processando redefinição de senha...");
 
             const response = await AuthService.apiRequest('/auth/resetPassword', 'POST', userData);
-            
-            navigate('/login');
 
+            toast.update(toastId, {
+                render: (
+                    <>
+                        Pedido de redefinição realizado. <br />
+                        Se o e-mail estiver cadastrado, enviaremos instruções para redefinir a senha.
+                    </>
+                ),
+                type: "success",
+                isLoading: false,
+                autoClose: 3000,
+                onClose: () => navigate('/login'),
+            });
+            
             return { success: true, message: 'E-mail de recuperação enviado com sucesso.' };
         } catch (error) {
             let errorMessage = "Erro inesperado. Tente novamente.";
@@ -158,6 +166,7 @@ export const AuthHandlers = {
     },
 
     resetConfirmPassword: async (token, formData, navigate) =>  {
+        let toastId;
         try {
             const userData = ({
                 token: token,
@@ -165,16 +174,23 @@ export const AuthHandlers = {
                 confirmPassword: formData.confirmPassword
             })
 
+            toast.dismiss();
+            toastId = toast.loading("Processando redefinição de senha...");
+
             const response = await AuthService.apiRequest('/auth/confirmResetPassword', 'POST', userData);
 
-            toast.success(
-                "Senha redefinida com sucesso!",
-                {
-                    autoClose: 3000,
-                }
-            );
-            
             navigate('/login');
+
+            toast.update(toastId, {
+                render: (
+                    <>
+                        Senha redefinida com sucesso! <br />
+                    </>
+                ),
+                type: "success",
+                isLoading: false,
+                autoClose: 3000,
+            });
 
             return { success: true, message: 'E-mail de recuperação enviado com sucesso.' };
         } catch (error) {

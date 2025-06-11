@@ -2,40 +2,40 @@
  * Serviço de autenticação - Gerencia chamadas à API de autenticação
  */
 export const AuthService = {
-  async apiRequest(endpoint, method = "POST", body = null) {
+  async apiRequest(endpoint, method = "GET", data = null) {
+    const token = localStorage.getItem('authToken');
+
     const config = {
-      method: 'POST',
+      method,
       headers: {
         'Content-Type': 'application/json',
+        ...(token && { 'Authorization': `Bearer ${token}` }), // só adiciona se token existir
       },
     };
 
-    if (body) {
-      config.body = JSON.stringify(body)
+    if (data) {
+      config.body = JSON.stringify(data)
     }
 
-    const response = await fetch(`http://localhost:8080${endpoint}`, config);
+    try {
+      const response = await fetch(`http://localhost:8080${endpoint}`, config);
 
-    console.log(response)
-    if (!response.ok) {
-      let errorData = {};
-      try {
-        errorData = await response.json();
-      } catch (e) {
-        errorData.message = "Erro desconhecido do servidor.";
+      if (!response.ok) {
+        const errorData = await response.json();
+        const error = new Error(errorData.message || "Erro desconhecido");
+
+        error.status = response.status;
+        error.backendMessage = errorData.message;
+
+        throw error;
       }
 
-      const error = new Error(errorData.message || "Erro desconhecido");
-
-      error.status = response.status;
-      error.backendMessage = errorData.message;
-
+      return await response.json();
+    } catch (error) {
+      console.error('API request error:', error);
       throw error;
     }
-
-    
-    return await response.json();
   },
-  
+
   // Outros métodos podem ser adicionados aqui
 };

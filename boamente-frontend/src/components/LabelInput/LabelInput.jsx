@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './LabelInput.module.css';
 
-export default function LabelInput({ id, name, type, placeholder, required, register, options, label }) {
+export default function LabelInput({ id, name, type, placeholder, required, register, options, label, errors }) {
   if (type === "select") {
     return (
       <div className={style.inputGroup}>
@@ -20,6 +20,7 @@ export default function LabelInput({ id, name, type, placeholder, required, regi
             </option>
           ))}
         </select>
+        {errors[name] && <span className={style.errorMessage}>{errors[name]?.message}</span>}
       </div>
     );
   }
@@ -36,6 +37,7 @@ export default function LabelInput({ id, name, type, placeholder, required, regi
         className={style.formInput}
         {...(register ? register(name, { required }) : {})}
       />
+      {errors[name] && <span className={style.errorMessage}>{errors[name]?.message}</span>}
     </div>
   );
 }

@@ -5,7 +5,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import styles from './AuthLayout.module.css';
 import logoBoamente from '../../assets/images/homepage/logo-boamente-upscale-Ctitulo.png';
-import { AuthService } from '../../services/authService';
 import ButtonSubmit from '../ButtonSubmit/ButtonSubmit';
 import LabelInput from '../LabelInput/LabelInput';
 
@@ -58,7 +57,7 @@ export default function AuthLayout({ title, subtitle, fields, links, onSubmit, b
       return acc;
     }, {})
   );
-
+  
   const {
     register,
     handleSubmit,
@@ -96,6 +95,7 @@ export default function AuthLayout({ title, subtitle, fields, links, onSubmit, b
               name={name}
               placeholder={placeholder}
               register={register}
+              errors={errors}
             />
           ))}
 

@@ -1,14 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { RequestHandlers } from '../../services/requestHandlers';
 import GenericForm from '../../components/Forms/GenericForm'; 
 
 export default function RegisterPatient() {
   const navigate = useNavigate();
 
+  const handleRegisterPatientSubmit = async (formData) => {
+    await RequestHandlers.registerPatient(formData, navigate);
+  };
+
   const {
     register,
-    handleSubmit,
     formState: { errors },
   } = useForm();
 
@@ -20,15 +24,23 @@ export default function RegisterPatient() {
           id: 'nomePaciente',
           label: 'Nome Completo:',
           type: 'text',
-          name: 'nomePaciente',
+          name: 'fullName',
           placeholder: 'Digite o nome completo do paciente',
+          required: true,
+        },
+        {
+          id: 'cpfPaciente',
+          label: 'CPF:',
+          type: 'text',
+          name: 'cpf',
+          placeholder: 'Digite o cpf do paciente',
           required: true,
         },
         {
           id: 'emailPaciente',
           label: 'E-mail:',
           type: 'email',
-          name: 'emailPaciente',
+          name: 'email',
           placeholder: 'Digite seu e-mail',
           pattern: '[a-z0-9._%+\\-]+@[a-z0-9.\\-]+\\.[a-z]{2,}$',
           title: 'Endereço de e-mail válido',
@@ -38,7 +50,7 @@ export default function RegisterPatient() {
           id: 'telefone',
           label: 'Telefone:',
           type: 'text',
-          name: 'telefone',
+          name: 'phoneNumber',
           placeholder: 'Digite o telefone do paciente',
           required: false,
         },
@@ -46,7 +58,7 @@ export default function RegisterPatient() {
           id: 'sexo',
           label: 'Sexo:',
           type: 'select',
-          name: 'sexo',
+          name: 'gender',
           required: true,
           options: [
             { label: 'Feminino', value: 'F' },
@@ -57,8 +69,8 @@ export default function RegisterPatient() {
         {
           id: 'nascimentoPaciente',
           label: 'Data de Nascimento:',
-          type: 'text',
-          name: 'nascimentoPaciente',
+          type: 'date',
+          name: 'birthDate',
           placeholder: 'Digite a data de nascimento do paciente',
           required: true,
         },
@@ -66,18 +78,12 @@ export default function RegisterPatient() {
     },
   ];
 
-  const handleRegister = (formData) => {
-    console.log('Dados do paciente:', formData);
-    // lógica para envio da API aqui
-    navigate('/listagemdepacientes'); // redireciona após o cadastro
-  };
-
   return (
     <GenericForm
       sections={sections}
       buttonLabel="Cadastrar"
       footerMessage="As instruções para a instalação do teclado virtual serão enviadas para o e-mail do paciente."
-      onSubmit={handleSubmit(handleRegister)}
+      onSubmit={handleRegisterPatientSubmit}
       register={register}
       errors={errors}
     />

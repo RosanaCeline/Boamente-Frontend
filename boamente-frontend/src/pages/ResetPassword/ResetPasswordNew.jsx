@@ -11,8 +11,8 @@ export default function ResetPasswordNew() {
   const token = queryParams.get('token');
 
   const handleResetConfirmPasswordSubmit = async (formData) => {
-        await AuthHandlers.resetConfirmPassword(token, formData, navigate);
-    };
+    await AuthHandlers.resetConfirmPassword(token, formData, navigate);
+  };
 
   const fields = [
     {
@@ -33,12 +33,6 @@ export default function ResetPasswordNew() {
     }
   ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add validações
-    window.location.href = '/login';
-  };
-
   return (
     <AuthLayout
       title="Redefinição de senha"
@@ -52,7 +46,6 @@ export default function ResetPasswordNew() {
       fields={fields}
       onSubmit={handleResetConfirmPasswordSubmit}
       buttonText="Redefinir senha"
-      redirectOnSubmit="/login"
     />
   );
 }
