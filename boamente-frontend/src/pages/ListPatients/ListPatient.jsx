@@ -19,6 +19,10 @@ export default function ListPatient({ patients = mockPatients, onInspect, onArch
     navigate("/cadastrarpaciente"); 
   };
 
+  const handleInspect = (patientId) => {
+    navigate(`/paineldopaciente/${patientId}`);
+  };
+
   const filteredPatients = useMemo(() => {
     if (!search.trim()) return patients;
     const s = search.toLowerCase();
@@ -83,7 +87,7 @@ export default function ListPatient({ patients = mockPatients, onInspect, onArch
                   <td>
                     <button
                       className={style.actionBtn}
-                      onClick={() => onInspect?.(id)}
+                      onClick={() => handleInspect(id)}
                       aria-label={`Inspecionar paciente ${name}`}
                       title="Inspecionar"
                     >
