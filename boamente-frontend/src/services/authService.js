@@ -17,6 +17,8 @@ export const AuthService = {
       config.body = JSON.stringify(data)
     }
 
+    console.log(config)
+
     try {
       const response = await fetch(`http://localhost:8080${endpoint}`, config);
 

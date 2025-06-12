@@ -66,13 +66,21 @@
   min-width: 37.5rem; /* 600px */
 }
 
+.patientTable th {
+  color: var(--label);
+}
+
+.patientTable td {
+  color: var(--font-blue);
+}
+
 .patientTable th,
 .patientTable td {
   padding: 0.75rem 1rem;
   border-bottom: 0.0625rem solid var(--grey);
   text-align: left;
   font-size: 1rem;
-  color: var(--font-blue);
+  
 }
 
 .patientTable thead {
@@ -90,7 +98,7 @@
 }
 
 .statusActive {
-  color: var(--btn-background);
+  color: var(--green);
   font-weight: 600;
 }
 
