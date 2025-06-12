@@ -32,6 +32,10 @@ export default function ListPatient({ onInspect, onArchive }) {
     return "P" + id.toString().padStart(3, "0");
   };
 
+  const handleInspect = (patientId) => {
+    navigate(`/paineldopaciente/${patientId}`);
+  };
+
   const filteredPatients = useMemo(() => {
     if (!search.trim()) return patients;
     const s = search.toLowerCase();
@@ -109,7 +113,7 @@ export default function ListPatient({ onInspect, onArchive }) {
                   <td>
                     <button
                       className={style.actionBtn}
-                      onClick={() => onInspect?.(id)}
+                      onClick={() => handleInspect(id)}
                       aria-label={`Inspecionar paciente ${fullName}`}
                       title="Inspecionar"
                     >

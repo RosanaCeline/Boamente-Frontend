@@ -14,7 +14,7 @@ export default function PrivateLayout({ routes }) {
 
   return (
     <>
-      <Sidebar onWidthChange={setSidebarWidth}/>
+      <Sidebar onWidthChange={setSidebarWidth} userName="Adonias"/>
       <HeaderInternal pageTitle={pageTitle} sidebarWidth={sidebarWidth} />
       <main style={{ marginLeft: sidebarWidth, transition: "margin-left 0.4s ease-in-out" }}>
         <Outlet />

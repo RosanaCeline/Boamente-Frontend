@@ -8,7 +8,7 @@ import { FaBars } from 'react-icons/fa';
 
 const iconSize = 25;
 
-export default function Sidebar({ onWidthChange }) {
+export default function Sidebar({ onWidthChange, userName }) {
   const [isHovered, setIsHovered] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -68,25 +68,37 @@ export default function Sidebar({ onWidthChange }) {
           >
             <div className={styles.userSection}>
               <User size={iconSize + 5} />
-              {(isHovered || isMobile) && <span>Olá, Fulano!</span>}
+              {(isHovered || isMobile) && <span>Olá, {userName}!</span>}
             </div>
 
             <div className={styles.menu}>
               {privateRoutes.map((route, idx) =>
                 route.divider ? (
                   <div key={`divider-${idx}`} className={styles.divider} />
-                ) : (
-                  <NavLink
-                    key={route.path}
-                    to={route.path}
-                    className={({ isActive }) =>
-                      `${styles.menuItem} ${isActive ? styles.active : ""}`
-                    }
-                  >
-                    {route.icon}
-                    {(isHovered || isMobile) && <span>{route.title}</span>}
-                  </NavLink>
-                )
+                ) : route.visible !== false ? (
+                  route.path ? (
+                    <NavLink
+                      key={route.path}
+                      to={route.path}
+                      className={({ isActive }) =>
+                        `${styles.menuItem} ${isActive ? styles.active : ""}`
+                      }
+                    >
+                      {route.icon}
+                      {(isHovered || isMobile) && <span>{route.title}</span>}
+                    </NavLink>
+                  ) : route.action ? (
+                    <button
+                      key={`action-${idx}`}
+                      onClick={route.action}
+                      className={styles.menuItem}
+                      type="button"
+                    >
+                      {route.icon}
+                      {(isHovered || isMobile) && <span>{route.title}</span>}
+                    </button>
+                  ) : null
+                ) : null
               )}
             </div>
           </motion.aside>
