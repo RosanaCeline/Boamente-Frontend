@@ -1,0 +1,60 @@
+main {
+    padding-top: 5rem;
+    padding-bottom: 1rem;
+}
+
+.title  {
+    text-align: center;
+    font-size: 2.5rem;   
+}
+.message {
+font-size: 2rem;
+    margin-bottom: 1rem;
+}
+.subtitle {
+    font-size: 1.9rem;
+}
+.tutorial ol {
+    font-size: 1.3rem;
+    margin: 1rem;
+    list-style-position: inside;
+    padding-left: 0;
+}
+.tutorial li {
+    margin-bottom: 0.3rem;
+}
+
+.uuidContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+}
+.showNumberUUID {
+    justify-content: center;
+    font-size: 2rem;
+}
+.copyButton {
+    cursor: pointer;
+    padding: 10px;
+
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.btnDownload {
+    margin: 1.4rem 0;
+    font-size: 1.7rem;
+    cursor: pointer;
+    border: none;
+    background-color: var(--btn-background-hover);
+    color: var(--label);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.btnDownload:hover {
+    color: var(--font-blue);
+    background-color: var(--btn-background);
+    transform: translateY(-2px);
+}

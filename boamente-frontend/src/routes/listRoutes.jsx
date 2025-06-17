@@ -24,6 +24,8 @@ import PatientPanel from '../pages/Dashboard/Personal/PatientPanel';
 import ListPatient from '../pages/ListPatients/ListPatient';
 import ConfigurationPage from "../pages/ConfigurationPage/ConfigurationPage";
 import Support from "../pages/Support/Support";
+import KeyboardConsent from "../pages/KeyboardTerms/consent/KeyboardConsent";
+import KeyboardConsentAccept from "../pages/KeyboardTerms/accept/KeyboardConsentAccept";
 
 const iconSize = 25;
 
@@ -31,6 +33,8 @@ export const publicRoutes = [
     { path: '/', element: <HomePage />, title: 'Página Inicial', layout: 'public' },
     { path: '/recursos', element: <Recursos />, title: 'Recursos', layout: 'public' },
     { path: '/contato', element: <Contato />, title: 'Contato', layout: 'public' },
+    { path: '/instalacaoteclado', element: <KeyboardConsent />, title: 'Consentimento para Uso do Teclado', layout: 'public' },
+    { path: '/instalacaotecladoaceito', element: <KeyboardConsentAccept />, title: 'Instalação do Teclado', layout: 'public' },
 ];
 
 export const privateRoutes = [
