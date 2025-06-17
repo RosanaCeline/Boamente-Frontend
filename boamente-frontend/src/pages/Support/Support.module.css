@@ -1,0 +1,60 @@
+.boxSupport {
+    display: flex;
+    height: 70vh;
+    width: 65vw;
+    margin: 0 auto;
+    margin-top: 15vh;
+
+    flex-direction: column;
+    text-align: center;
+
+    background-color: --var(--form-background);
+    box-shadow: 0 1px 4px #777777;
+    border-radius: 25px;
+}
+h2 {
+    font-size: 2rem;
+    margin: 4rem 0 2.5rem 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    width: 40vw;
+    height: auto;
+    margin: 0 auto;
+    padding: 0.8rem;
+    gap: 1.2rem;
+    font-size: 1.3rem;
+}
+
+label {
+    display: flex;
+    margin-bottom: 1rem;
+}
+.required {
+    color: red;
+}
+
+.customInputs{
+    padding: 0.8rem 1rem; 
+    background-color: #f2f2f2;
+}
+.customInputTextarea {
+    height: 18vh;
+}
+
+.erro {
+    height: 1rem;
+    margin: 0.2rem;
+}
+.erro span{
+    color: red;
+    font-size: 0.8rem;
+    display: none;
+} 
+
+.legenda {
+    text-align: center;
+}
