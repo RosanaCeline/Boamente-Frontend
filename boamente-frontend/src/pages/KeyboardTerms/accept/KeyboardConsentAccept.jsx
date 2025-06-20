@@ -20,7 +20,7 @@ export default function KeyboardConsentAccept () {
     }
 
     return (
-        <main>
+        <main className={style.mainKeyboardAccept}>
             <h1 className={style.title}>Instalação do Teclado</h1>
             <h2 className={style.message}>Obrigado por aceitar os termos, {nome}!</h2>
 

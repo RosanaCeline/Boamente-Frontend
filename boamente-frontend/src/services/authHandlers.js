@@ -17,7 +17,7 @@ export const AuthHandlers = {
                 uf: formData.uf,
             };
 
-            const response = await AuthService.apiRequest('/auth/register', 'POST', userData);
+            await AuthService.apiRequest('/auth/register', 'POST', userData);
 
             toast.update(toastId, {
                 render: (
@@ -84,8 +84,9 @@ export const AuthHandlers = {
             // Armazena o token
             if (response.token) {
                 localStorage.setItem('authToken', response.token);
+                console.log(localStorage.getItem('authToken'))
             } else {
-            console.error("Token não recebido no login");
+                console.error("Token não recebido no login");
             }
 
             console.log("Login realizado com sucesso:", response);
@@ -97,13 +98,12 @@ export const AuthHandlers = {
             if (error.message.includes('Network Error')) {
                 errorMessage = 'Sem conexão com o servidor. Verifique sua internet.';
             } else if (error.status === 400) {
-                const mensagem = error.backendMessage.toLowerCase();
                 errorMessage = 'Dados inválidos: Verifique todos os campos';
             } else if (error.status === 401 && error.backendMessage === 'Senha incorreta.') {
                 errorMessage = 'Senha Incorreta.';
             } else if (error.status === 403) {
                 errorMessage = 'Acesso negado. Verifique suas permissões.';
-            } else if (error.status === 404 && error.backendMessage == 'Usuário não encontrado.') {
+            } else if (error.status === 404 && error.backendMessage === 'Usuário não encontrado.') {
                 errorMessage = 'Nenhum usuário encontrado com este e-mail.';
             } else if (error.status === 500) {
                 errorMessage = 'Erro interno no servidor. Tente mais tarde.';
@@ -128,7 +128,7 @@ export const AuthHandlers = {
             toast.dismiss();
             toastId = toast.loading("Processando redefinição de senha...");
 
-            const response = await AuthService.apiRequest('/auth/resetPassword', 'POST', userData);
+            await AuthService.apiRequest('/auth/resetPassword', 'POST', userData);
 
             toast.update(toastId, {
                 render: (
@@ -177,7 +177,7 @@ export const AuthHandlers = {
             toast.dismiss();
             toastId = toast.loading("Processando redefinição de senha...");
 
-            const response = await AuthService.apiRequest('/auth/confirmResetPassword', 'POST', userData);
+            await AuthService.apiRequest('/auth/confirmResetPassword', 'POST', userData);
 
             navigate('/login');
 

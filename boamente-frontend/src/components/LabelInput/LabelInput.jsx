@@ -28,7 +28,7 @@ export default function LabelInput({  id, name, type, placeholder, required, reg
         name={name}
         placeholder={placeholder}
         required={required}
-        className={`${style.formInput} ${className}`}
+        className={`${style.formInput} ${style.formTextarea} ${className}`}
         {...(register ? register(name, { required }) : {})}
       />
     );

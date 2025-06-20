@@ -53,6 +53,20 @@ export default function GenericForm ({ sections = [], footerMessage, buttonLabel
                 .required('Data de nascimento é obrigatória.')
                 .max(new Date(), 'Data de nascimento não pode ser no futuro.');
               break;
+            case 'subject':
+              acc[field.name] = yup
+              .string()
+              .required('Assunto é obrigatório.')
+              .min(10, 'Assunto deve ter no mínimo 6 caracteres.')
+              .max(50, 'Assunto deve ter no máximo 50 caracteres.');
+              break;
+            case 'description':
+              acc[field.name] = yup
+              .string()
+              .required('Descrição é obrigatória.')
+                .min(50, 'Descrição deve ter no mínimo 20 caracteres.')
+                .max(600, 'Descrição deve ter no máximo 600 caracteres.');
+              break;
             default:
               acc[field.name] = yup.string().required(`${field.label} é obrigatório.`);
           }

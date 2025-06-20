@@ -1,9 +1,12 @@
 /* All the page */
+body {
+  background-color: var(--light);
+}
+
 .formGeneric {
   display: flex;
   justify-content: center;
-  padding: 3rem 1rem;
-  background-color: var(--light);
+  padding: 2rem 1rem;
   height: 100vh;
 }
 
@@ -57,7 +60,7 @@
 
 .footerMessage {
     margin: 2rem 0;
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: var(--grey);
     text-align: center;
 }

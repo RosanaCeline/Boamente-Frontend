@@ -22,7 +22,7 @@ export default function KeyboardConsent() {
     }
 
     return (
-        <main>
+        <main className={style.mainKeyboardConsent}>
             <h1 className={style.title}>Consentimento para Uso do Teclado</h1>
             <h2 className={style.subtitle}>Olá, {nome}!</h2>
             <span className={style.instructions}>

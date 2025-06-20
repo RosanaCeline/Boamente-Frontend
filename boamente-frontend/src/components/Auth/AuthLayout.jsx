@@ -61,7 +61,6 @@ export default function AuthLayout({ title, subtitle, fields, links, onSubmit, b
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(validationSchema),

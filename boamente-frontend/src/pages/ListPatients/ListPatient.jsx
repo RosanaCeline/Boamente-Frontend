@@ -8,7 +8,7 @@ export default function ListPatient({ onInspect, onArchive }) {
   const [patients, setPatients] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error] = useState(null);
   const navigate = useNavigate(); 
   
   useEffect(() => {

@@ -10,7 +10,7 @@ const iconSize = 25;
 
 export default function Sidebar({ onWidthChange, userName }) {
   const [isHovered, setIsHovered] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth] = useState(window.innerWidth);
 
   // Controle para mobile toggle
   const [isMobile, setIsMobile] = useState(false);

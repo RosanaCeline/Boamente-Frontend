@@ -33,8 +33,11 @@ export const publicRoutes = [
     { path: '/', element: <HomePage />, title: 'Página Inicial', layout: 'public' },
     { path: '/recursos', element: <Recursos />, title: 'Recursos', layout: 'public' },
     { path: '/contato', element: <Contato />, title: 'Contato', layout: 'public' },
-    { path: '/instalacaoteclado', element: <KeyboardConsent />, title: 'Consentimento para Uso do Teclado', layout: 'public' },
-    { path: '/instalacaotecladoaceito', element: <KeyboardConsentAccept />, title: 'Instalação do Teclado', layout: 'public' },
+];
+
+export const protectedRoutes = [
+    { path: '/aceitar-termos', element: <KeyboardConsent />, title: 'Consentimento para Uso do Teclado', layout: 'public' },
+    { path: '/instalar-teclado', element: <KeyboardConsentAccept />, title: 'Instalação do Teclado', layout: 'public' },
 ];
 
 export const privateRoutes = [

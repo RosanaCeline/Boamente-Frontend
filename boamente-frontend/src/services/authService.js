@@ -17,8 +17,6 @@ export const AuthService = {
       config.body = JSON.stringify(data)
     }
 
-    console.log(config)
-
     try {
       const response = await fetch(`http://localhost:8080${endpoint}`, config);
 
@@ -40,4 +38,18 @@ export const AuthService = {
   },
 
   // Outros métodos podem ser adicionados aqui
+};
+
+export async function validateTokenBackend(token) {
+  try {
+    const response = await fetch('http://localhost:8080/validate-token/auth', {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    });
+    return response.ok;
+  } catch (error) {
+    console.error("Erro ao validar token no backend", error);
+    return false;
+  }
 };

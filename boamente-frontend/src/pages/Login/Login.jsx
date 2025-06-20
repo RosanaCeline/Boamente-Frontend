@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthService } from '../../services/authService';
 import { AuthHandlers } from '../../services/authHandlers';
 import AuthLayout from '../../components/Auth/AuthLayout';
 

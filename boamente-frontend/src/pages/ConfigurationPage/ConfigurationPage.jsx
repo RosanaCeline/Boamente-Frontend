@@ -1,5 +1,4 @@
 import  React from 'react';
-import style from "./ConfigurationPage.module.css";
 
 export default function ConfigurationPage () {
     return (
