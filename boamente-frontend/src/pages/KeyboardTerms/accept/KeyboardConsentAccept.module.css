@@ -1,6 +1,7 @@
 .mainKeyboardAccept {
-    padding-top: 5rem;
-    padding-bottom: 1rem;
+    padding-top: 10rem;
+    margin: 0 8rem;
+    padding-bottom: 4.2rem;
 }
 
 .title  {
@@ -8,8 +9,8 @@
     font-size: 2.5rem;   
 }
 .message {
-font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: 2rem;
+    margin: 1rem 0 1rem 0;
 }
 .subtitle {
     font-size: 1.9rem;
@@ -57,4 +58,91 @@ font-size: 2rem;
     color: var(--font-blue);
     background-color: var(--btn-background);
     transform: translateY(-2px);
+}
+
+@media (max-width: 1024px) {
+  .mainKeyboardAccept {
+    margin: 0 4rem;
+    padding-top: 8rem;
+    padding-bottom: 3.5rem;
+  }
+  .title {
+    font-size: 2.2rem;
+  }
+  .message {
+    font-size: 1.8rem;
+  }
+  .subtitle {
+    font-size: 1.7rem;
+  }
+  .tutorial ol {
+    font-size: 1.2rem;
+  }
+  .showNumberUUID {
+    font-size: 1.8rem;
+  }
+  .btnDownload {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainKeyboardAccept {
+    margin: 0 2rem;
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .message {
+    font-size: 1.6rem;
+  }
+  .subtitle {
+    font-size: 1.5rem;
+  }
+  .tutorial ol {
+    font-size: 1.1rem;
+  }
+  .uuidContainer {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .showNumberUUID {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+  .copyButton {
+    padding: 8px;
+  }
+  .btnDownload {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainKeyboardAccept {
+    margin: 0 1rem;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+  }
+  .title {
+    font-size: 1.8rem;
+  }
+  .message {
+    font-size: 1.4rem;
+  }
+  .subtitle {
+    font-size: 1.3rem;
+  }
+  .tutorial ol {
+    font-size: 1rem;
+  }
+  .showNumberUUID {
+    font-size: 1.4rem;
+  }
+  .btnDownload {
+    font-size: 1.3rem;
+    padding: 0.8rem 1.2rem;
+  }
 }
