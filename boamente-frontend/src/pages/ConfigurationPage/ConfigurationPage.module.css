@@ -1,0 +1,254 @@
+.container {
+  padding: 6rem 8rem;
+  max-width: 65vw;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.headerSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--font-blue);
+  margin: 0;
+  text-align: left;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--grey);
+  margin: 0;
+  text-align: left;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+.buttonGroup,
+.goToOtherPages {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.cancelButton,
+.saveButton {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  color: var(--btn-font);
+  min-width: 120px;
+  flex: 1;
+}
+
+.cancelButton {
+  background-color: var(--form-background);
+  border: 1px solid var(--grey);
+}
+
+.cancelButton:hover {
+  background-color: var(--grey);
+  color: var(--form-background);
+}
+
+.saveButton {
+  background-color: var(--btn-background);
+  color: var(--font-blue);
+}
+
+.saveButton:hover {
+  background-color: var(--btn-background-hover);
+  color: var(--label);
+  transform: translateY(-2px);
+}
+
+.buttonSubmit {
+  min-width: 220px;
+  flex: 1;
+}
+
+.confirmModal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.confirmModal p {
+  background: var(--form-background);
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: var(--font-blue);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.modalButtons button {
+  padding: 0.7rem 1.3rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  min-width: 120px;
+  transition: background-color 0.3s ease;
+}
+
+.modalButtons button:first-child {
+  background-color: var(--btn-background);
+  color: var(--font-blue);
+}
+
+.modalButtons button:first-child:hover {
+  background-color: var(--btn-background-hover);
+  color: var(--label);
+}
+
+.modalButtons button:last-child {
+  background-color: var(--grey);
+  color: var(--label);
+}
+
+.modalButtons button:last-child:hover {
+  background-color: #999;
+}
+
+/* Botões Inativar / Reativar */
+.inactivateButton,
+.reactivateButton {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  background-color: var(--btn-background);
+  color: var(--font-blue);
+  font-weight: 600;
+  margin-top: 2rem;
+  transition: background-color 0.3s ease;
+  min-width: 140px;
+}
+
+.inactivateButton:hover,
+.reactivateButton:hover {
+  background-color: var(--btn-background-hover);
+  color: var(--label);
+  transform: translateY(-2px);
+}
+
+/* Mensagem de conta inativa */
+.inactiveMessage {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: var(--grey);
+  font-style: italic;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .container {
+    padding: 4rem 3rem;
+  }
+  .title {
+    font-size: 1.8rem;
+  }
+  .subtitle {
+    font-size: 1.1rem;
+  }
+  .cancelButton,
+  .saveButton {
+    font-size: 0.95rem;
+    min-width: 110px;
+  }
+  .inactivateButton,
+  .reactivateButton {
+    min-width: 130px;
+  }
+  .modalButtons button {
+    min-width: 110px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 3rem 2rem;
+  }
+  .title {
+    font-size: 1.6rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
+  .buttonGroup,
+  .goToOtherPages {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .cancelButton,
+  .saveButton,
+  .buttonSubmit,
+  .inactivateButton,
+  .reactivateButton {
+    min-width: 100%;
+    flex: none;
+  }
+  .modalButtons {
+    flex-direction: column;
+  }
+  .modalButtons button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 2rem 1rem;
+  }
+  .title {
+    font-size: 1.4rem;
+  }
+  .subtitle {
+    font-size: 0.9rem;
+  }
+  .cancelButton,
+  .saveButton,
+  .buttonSubmit,
+  .inactivateButton,
+  .reactivateButton {
+    font-size: 0.85rem;
+    padding: 0.7rem 1.2rem;
+  }
+}
