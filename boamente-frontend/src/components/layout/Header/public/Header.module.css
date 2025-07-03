@@ -1,3 +1,7 @@
+:root {
+    --header-height: 90px;
+}
+
 .header {
     background-color: var(--font-blue);
     color: var(--light);
@@ -23,7 +27,7 @@
 .boamente img {
     max-width: 7%;
     width: auto;
-    height: 10%;
+    max-height: 500px;
 }
 .boamente span {
     font-size: 2.5em;
@@ -174,7 +178,7 @@ button {
     }
     .boamente img {
         min-width: 15%;
-        height: auto; 
+        max-height: 28px; 
         margin: 5%;
     }
     .boamente span {

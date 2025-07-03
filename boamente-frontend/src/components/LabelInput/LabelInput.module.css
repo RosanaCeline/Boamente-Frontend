@@ -71,6 +71,20 @@
     0 2px 5px rgba(150, 150, 150, 0.4);
 }
 
+input[readonly] {
+  background-color: var(--input-read);
+  cursor: default;
+  border: 1px solid #ccc;
+  color: #555;
+}
+
+input[readonly]:focus {
+  background-color: var(--input-read);
+    box-shadow:
+    0 2px 5px rgba(150, 150, 150, 0.4),
+    0 6px 8px rgba(150, 150, 150, 0.6);
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .formLabel {

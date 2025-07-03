@@ -50,9 +50,10 @@ export default function RegisterPatient() {
           id: 'telefone',
           label: 'Telefone:',
           type: 'text',
-          name: 'phoneNumber',
+          name: 'phoneNumberPatient',
           placeholder: 'Digite o telefone do paciente',
           required: false,
+          title: 'Digite um telefone válido, ex: (11) 91234-5678'
         },
         {
           id: 'sexo',

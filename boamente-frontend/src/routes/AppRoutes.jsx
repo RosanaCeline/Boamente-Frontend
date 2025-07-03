@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import PrivateLayout from '../components/layout/PrivateLayout/PrivateLayout';
 import PublicLayout from '../components/layout/PublicLayout/PublicLayout';
-import TokenProtectedRoute from '../routes/TokenProtectedRoute';
+import ProtectedRoute from '../routes/ProtectedRoute';
 import PrivateRoute from './PrivateRoute';
 
 import { publicRoutes, protectedRoutes, privateRoutes, authRoutes } from './listRoutes';
@@ -24,20 +24,14 @@ export default function AppRoutes() {
       </Route>
 
       {/* Rotas que precisam de token no query param (protegidas, mas com layout público) */}
-      <Route element={<PublicLayout routes={protectedRoutes} />}>
-        {protectedRoutes.map(({ path, element: Element }) => (
-          <Route
-            key={path}
-            path={path}
-            element={
-              <TokenProtectedRoute>
-                <Element />
-              </TokenProtectedRoute>
-            }
-          />
-        ))}
-      </Route>
-
+      <Route element={<PublicLayout />}>
+        <Route element={<ProtectedRoute routes={protectedRoutes} />}>
+          {protectedRoutes.map(({ path, element }) => (
+            <Route key={path} path={path} element={element} />
+          ))}
+        </Route>
+      </Route>*/
+    
       {/* Rotas privadas protegidas por token */}
       <Route element={<PrivateRoute />}>
         <Route element={<PrivateLayout routes={privateRoutes} />}>

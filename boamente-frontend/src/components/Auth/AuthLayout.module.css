@@ -60,7 +60,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 1.5em;
     width: 100%;
     max-width: 50%;
 }
@@ -86,7 +85,7 @@
     color: var(--cor-texto-link);
     text-decoration: none;
     align-self: flex-end;
-    margin-top: 0.5em;
+    margin: 0.5em 0 2em 0;
 }
 
 /* Responsiveness */
@@ -97,13 +96,16 @@
 }
 
 @media screen and (max-width: 1024px) {
+    .authForm {
+        justify-content: right;
+        gap: 0;
+    }
     .authLogo {
         display: none;
     }
     .authForm {
         display: flex;
         margin: 10%;
-        border-radius: 3em;
         padding: 5% 0;
         overflow-y: auto;   
         overflow-x: hidden; 
@@ -114,7 +116,6 @@
     }
     .authFormTitles h1 {
         margin: 1.5rem 0;
-        font-size: 3rem;
     }
     .authFormTitles span {
         font-size: 1.2rem;

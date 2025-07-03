@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import styles from './AuthLayout.module.css';
@@ -49,7 +49,7 @@ export default function AuthLayout({ title, subtitle, fields, links, onSubmit, b
         case 'password':
           acc[field.name] = yup
             .string()
-            .required('Senha é obrigatória.')
+            .required('Senha é obrigatória.');
           break;
         default:
           acc[field.name] = yup.string().required(`${field.label} é obrigatório.`);
@@ -57,10 +57,11 @@ export default function AuthLayout({ title, subtitle, fields, links, onSubmit, b
       return acc;
     }, {})
   );
-  
+
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(validationSchema),
@@ -71,6 +72,9 @@ export default function AuthLayout({ title, subtitle, fields, links, onSubmit, b
     if (onSubmit) onSubmit(data);
     if (redirectOnSubmit) navigate(redirectOnSubmit);
   };
+
+  // Lista dos campos que precisam de máscara, usar Controller para eles
+  const fieldsWithMask = ['phoneNumber', 'cpf', 'cep'];
 
   return (
     <main className={styles.auth}>
@@ -85,18 +89,47 @@ export default function AuthLayout({ title, subtitle, fields, links, onSubmit, b
         </div>
 
         <form onSubmit={handleSubmit(internalSubmit)} noValidate>
-          {fields.map(({ id, label, type, name, placeholder }) => (
-            <LabelInput
-              key={id}
-              id={id}
-              label={label}
-              type={type}
-              name={name}
-              placeholder={placeholder}
-              register={register}
-              errors={errors}
-            />
-          ))}
+          {fields.map(({ id, label, type, name, placeholder }) => {
+            if (fieldsWithMask.includes(name)) {
+              return (
+                <Controller
+                  key={id}
+                  name={name}
+                  control={control}
+                  render={({ field }) => (
+                    <LabelInput
+                      id={id}
+                      label={label}
+                      type={type}
+                      name={name}
+                      placeholder={placeholder}
+                      register={null} // não usar register direto
+                      errors={errors}
+                      options={{
+                        value: field.value || '',
+                        onChange: field.onChange,
+                        onBlur: field.onBlur,
+                      }}
+                    />
+                  )}
+                />
+              );
+            }
+
+            // Campos normais usam register
+            return (
+              <LabelInput
+                key={id}
+                id={id}
+                label={label}
+                type={type}
+                name={name}
+                placeholder={placeholder}
+                register={register}
+                errors={errors}
+              />
+            );
+          })}
 
           {links &&
             links.map(({ to, text, className, key }) => (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
-import { validateTokenBackend } from '../services/authService';
+import { validateAuthTokenBackend } from '../services/authService';
 
 export default function PrivateRoute() {
   const [isValid, setIsValid] = useState(null);
@@ -24,7 +24,7 @@ export default function PrivateRoute() {
           return;
         }
 
-        const backendValid = await validateTokenBackend(token);
+        const backendValid = await validateAuthTokenBackend(token);
         setIsValid(backendValid);
       } catch {
         setIsValid(false);

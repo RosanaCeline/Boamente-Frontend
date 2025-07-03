@@ -1,22 +1,62 @@
-import  React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import "../../../style.css";
 import { Copy } from 'lucide-react';
 import style from "./KeyboardConsentAccept.module.css";
 import ButtonSubmit from '../../../components/ButtonSubmit/ButtonSubmit';
-import apk from '../../../apk/teclado.jpeg';
+import apk from '../../../apk/app-release.apk';
+import { validateInstallationTokenBackend } from '../../../services/authService';
 
 export default function KeyboardConsentAccept () {
-    const nome = "Adonias";
-    const UUID = "123e4567-e89b-12d3-a456-426614174000"
+    const location = useLocation();
+    const [nome, setNome] = useState('');
+    const [uuid, setUuid] = useState('');
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        const token = queryParams.get('token');
+
+        if (!token) {
+            setError("Token não encontrado na URL.");
+            return;
+        }
+
+        async function validateToken() {
+            const result = await validateInstallationTokenBackend(token);
+
+            if (!result.valid) {
+                setError(result.message || "Token inválido ou expirado.");
+                // Redireciona se quiser: navigate('/');
+                return;
+            }
+
+            // Salva no localStorage para outras páginas, se necessário
+            localStorage.setItem('authToken', token);
+            localStorage.setItem('patientUuid', result.uuid);
+            localStorage.setItem('patientName', result.name);
+
+            setNome(result.name);
+            setUuid(result.uuid);
+        }
+
+        validateToken();
+    }, [location.search]);
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(UUID)
-                            .then(() => {
-                                alert("UUID copiado para a área de transferência!");
-                            })
-                            .catch((err) => {
-                                console.error('Erro ao copiar: ', err);
-                            });
+        if (!uuid) return;
+
+        navigator.clipboard.writeText(uuid)
+            .then(() => {
+                alert("UUID copiado para a área de transferência!");
+            })
+            .catch((err) => {
+                console.error('Erro ao copiar: ', err);
+            });
+    };
+
+    if (error) {
+        return <div className={style.errorMessage}>{error}</div>;
     }
 
     return (
@@ -34,21 +74,25 @@ export default function KeyboardConsentAccept () {
                     <li>Pronto! Seu teclado está configurado.</li>
                 </ol>
             </section>
+
             <section className={style.showUUID}>
                 <h3 className={style.subtitle}>Seu identificador único (UUID):</h3>
                 <div className={style.uuidContainer}>
-                    <span className={style.showNumberUUID}>{UUID}</span>
-                    <button onClick={handleCopy} className={style.copyButton}> <Copy size={20} /> </button>
+                    <span className={style.showNumberUUID}>{uuid}</span>
+                    <button onClick={handleCopy} className={style.copyButton}>
+                        <Copy size={20} />
+                    </button>
                 </div>
             </section>
+
             <section className={style.download}>
                 <h3 className={style.subtitle}>Baixar teclado:</h3>
-                 <a href={apk} download>
+                <a href={apk} download>
                     <button className={style.btnDownload}>Baixar APK do teclado</button>
                 </a>
             </section>
 
-            <ButtonSubmit type="button" > Continuar para Instalação </ButtonSubmit>
+            <ButtonSubmit type="button">Continuar para Instalação</ButtonSubmit>
         </main>
-    )
+    );
 }

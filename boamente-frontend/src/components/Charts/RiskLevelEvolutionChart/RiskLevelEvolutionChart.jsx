@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import {
   Chart as ChartJS,
   LineElement,
@@ -14,36 +14,48 @@ import styles from "./RiskLevelEvolutionChart.module.css";
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
 
-export default function RiskLevelEvolutionChart({ dataSetsByPeriod }) {
+export default function RiskLevelEvolutionChart({ dataSetsByPeriod, onPeriodChange }) {
   const [period, setPeriod] = useState("semana");
-  const chartRef = useRef();
 
-  // Monta os dados do gráfico baseado no período selecionado
+  const handlePeriodChange = (e) => {
+    const newPeriod = e.target.value;
+    setPeriod(newPeriod);
+    if (onPeriodChange) onPeriodChange(newPeriod);
+  };
+
+  // Verificação segura dos dados
+  const safeData = dataSetsByPeriod?.[period] || {
+    labels: [],
+    Positive: [],
+    Neutral: [],
+    Negative: []
+  };
+
   const data = {
-    labels: dataSetsByPeriod[period].labels,
+    labels: safeData.labels,
     datasets: [
       {
-        label: "Baixo",
-        data: dataSetsByPeriod[period].baixo,
-        borderColor: "#0A5C32", // verde escuro
+        label: "Positivo",
+        data: safeData.Positive || [],
+        borderColor: "#0A5C32",
         backgroundColor: "rgba(10, 92, 50, 0.1)",
         tension: 0.3,
         fill: true,
         pointRadius: 3,
       },
       {
-        label: "Moderado",
-        data: dataSetsByPeriod[period].moderado,
-        borderColor: "#FFD95A", // amarelo
+        label: "Neutro",
+        data: safeData.Neutral || [],
+        borderColor: "#FFD95A",
         backgroundColor: "rgba(255, 217, 90, 0.2)",
         tension: 0.3,
         fill: true,
         pointRadius: 3,
       },
       {
-        label: "Alto",
-        data: dataSetsByPeriod[period].alto,
-        borderColor: "#dc3545", // vermelho
+        label: "Negativo",
+        data: safeData.Negative || [],
+        borderColor: "#dc3545",
         backgroundColor: "rgba(220, 53, 69, 0.2)",
         tension: 0.3,
         fill: true,
@@ -78,11 +90,10 @@ export default function RiskLevelEvolutionChart({ dataSetsByPeriod }) {
 
   return (
     <section className={styles.chartSection}>
-
       <select
         className={styles.periodSelect}
         value={period}
-        onChange={(e) => setPeriod(e.target.value)}
+        onChange={handlePeriodChange}
         aria-label="Selecionar período"
       >
         <option value="semana">Última Semana</option>
@@ -92,7 +103,7 @@ export default function RiskLevelEvolutionChart({ dataSetsByPeriod }) {
       </select>
 
       <div className={styles.chartWrapper}>
-        <Line ref={chartRef} data={data} options={options} />
+        <Line data={data} options={options} />
       </div>
     </section>
   );

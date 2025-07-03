@@ -1,11 +1,14 @@
 .container {
-  padding: 6rem 8rem;
-  max-width: 65vw;
-  margin: 0 auto;
+  margin: 5rem 5rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
   margin-top: 3rem;
+}
+
+.configurationContainer {
+  background-color: var(--form-background);
+  padding: 1.5rem;
 }
 
 .headerSection {
@@ -14,6 +17,8 @@
   align-items: flex-start;
   gap: 0.3rem;
   margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--grey); /* Borda inferior cinza clara */
+  padding-bottom: 0.5rem; /* espaço entre o texto e a borda */
 }
 
 .title {
@@ -34,8 +39,49 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
   margin-top: 1rem;
+}
+
+
+.input[readonly] {
+  background-color: #f3f3f3;
+  border: none;
+  color: #666;
+  cursor: default;
+}
+
+.gridTwoColumns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+}
+
+.inputAndButtons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  justify-content: space-between;
+}
+
+.inputAndButtons > *:first-child {
+  flex-grow: 1;
+  min-width: 0; 
+  margin-right: 16px;
+}
+
+.saveButton,
+.cancelButton {
+  max-width: 100px;
+  padding: 6px 12px;
+  white-space: nowrap;
+  flex-shrink: 0; 
+}
+
+.editButton {
+  padding: 6px 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .buttonGroup,
@@ -89,7 +135,7 @@
 .confirmModal {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,24 +143,30 @@
   padding: 1rem;
 }
 
-.confirmModal p {
+.modalContent {
   background: var(--form-background);
-  padding: 1.5rem 2rem;
+  padding: 2rem;
   border-radius: 8px;
-  font-size: 1.2rem;
-  text-align: center;
-  color: var(--font-blue);
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
   max-width: 400px;
   width: 100%;
-  margin: 0 auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modalContent .headerModal {
+  font-size: 1.2rem;
+  color: var(--font-blue);
+  margin-bottom: 1rem;
 }
 
 .modalButtons {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   gap: 1rem;
-  margin-top: 1rem;
+  width: 100%;
 }
 
 .modalButtons button {
@@ -123,7 +175,7 @@
   border: none;
   cursor: pointer;
   font-weight: 600;
-  min-width: 120px;
+  width: 100%;
   transition: background-color 0.3s ease;
 }
 
@@ -144,6 +196,34 @@
 
 .modalButtons button:last-child:hover {
   background-color: #999;
+}
+
+
+/* Botões de Editar, Salvar e Cancelar */
+.editButton {
+  background-color: var(--btn-background);
+  border: 0;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  height: 2.5em;
+  min-width: 10em;
+  border-radius: 1.6em;
+  margin: auto;
+}
+
+.saveButton {
+  margin-right: 8px;
+}
+
+.errorMessage {
+  color: #e63946; /* Vermelho forte */
+  margin: 8px 0;
+}
+
+.successMessage {
+  color: #2a9d8f; /* Verde suave */
+  margin: 8px 0;
 }
 
 /* Botões Inativar / Reativar */
@@ -188,6 +268,9 @@
   .subtitle {
     font-size: 1.1rem;
   }
+  .form {
+    gap: 1.2rem;
+  }
   .cancelButton,
   .saveButton {
     font-size: 0.95rem;
@@ -200,11 +283,18 @@
   .modalButtons button {
     min-width: 110px;
   }
+  .inputAndButtons {
+    display: block;
+  }
 }
 
 @media (max-width: 768px) {
   .container {
     padding: 3rem 2rem;
+  }
+  .configurationContainer {
+    background-color: transparent;
+    padding: 0;
   }
   .title {
     font-size: 1.6rem;

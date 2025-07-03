@@ -8,7 +8,7 @@ export const RequestHandlers = {
                 fullName: formData.fullName,
                 cpf: formData.cpf.replace(/[.-]/g, ''),
                 email: formData.email,
-                phoneNumber: formData.phoneNumber,
+                phoneNumber: formData.phoneNumberPatient,
                 gender: formData.gender,
                 birthDate: formData.birthDate?.toISOString().split('T')[0],
             };
