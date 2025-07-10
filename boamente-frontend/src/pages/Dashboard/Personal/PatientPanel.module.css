@@ -1,6 +1,7 @@
+/* Geral */
 .sectionPersonal {
   display: flex;
-  flex-direction: column; /* <- muda de row para column */
+  flex-direction: column; 
   align-items: stretch;
   box-sizing: border-box;
   margin-top: 6rem;
@@ -8,31 +9,25 @@
   min-height: calc(100vh - 6rem - 2.5rem);
 }
 
-
-.cardsContainer {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 1rem;
-  max-width: 600px; /* ou um valor que faça sentido para a largura dos cards */
-}
-
-.sectionChartsTitle {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 2.5rem 0 1rem 0;
-  color: var(--font-blue);
-}
-
-/* Card do paciente agora é um header centralizado */
+/* Informações do paciente */
 .patientInformation {
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column; 
+  align-items: center;
   box-sizing: border-box;
   padding: 2rem 4rem;
+  gap: 2rem;
+}
+.cardsContainer {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  width: 100%;
+  max-width: 42rem;
 }
 
-/* Gráficos agora ficam em coluna abaixo do card */
+/* Gráficos */
 .charts {
   width: 100%;
   display: flex;
@@ -40,38 +35,41 @@
   align-items: center;
   box-sizing: border-box;
   padding: 2rem 4rem;
+  gap: 2rem;
 }
 
-.lineChart {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 40vh;
-  aspect-ratio: 2 / 1;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-
+/* Todos */
 .chartGroup {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
-  width: 100%;
+  gap: 3rem;
+  justify-content: center; 
+  width: 100vw;
+  box-sizing: border-box;
 }
-
-.riskControlsContainer {
+/* Cada um */
+.chartCard {
+  flex: 0 0 40%; 
+  aspect-ratio: 1 / 1;
+  background-color: var(--form-background);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
   display: flex;
-  align-items: center; /* centraliza verticalmente */
-  gap: 1.5rem; /* espaçamento entre os itens */
-  margin-top: 1rem;
-  flex-wrap: wrap; /* para responsividade, quebra linha se precisar */
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+/* Titulo do grafico */
+.chartTitle {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-
-/* Spinner (mantido como está) */
+/* Spinner  */
 .spinnerWrapper {
   display: flex;
   flex-direction: column;
@@ -80,7 +78,6 @@
   gap: 1rem;
   margin-top: 1rem;
 }
-
 .spinnerBackground {
   position: relative;
   width: 5rem;
@@ -91,14 +88,12 @@
   align-items: center;
   justify-content: center;
 }
-
 .fixedImage {
   width: 3.7rem;
   height: 3.7rem;
   object-fit: contain;
   z-index: 2;
 }
-
 .spinner {
   position: absolute;
   width: 7rem;
@@ -109,16 +104,28 @@
   animation: spin 1s linear infinite;
   z-index: 1;
 }
-
 .spinnerText {
   margin-top: 0.5rem;
   font-size: 1.2rem;
   color: var(--font-blue);
   text-align: center;
 }
-
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .cardsContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media (max-width: 768px) {
+  .chartCard, .lineChartCard {
+    flex: 0 0 100%; 
+    aspect-ratio: auto;
   }
 }

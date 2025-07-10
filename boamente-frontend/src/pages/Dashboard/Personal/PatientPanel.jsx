@@ -99,7 +99,7 @@ export default function PatientPanel() {
     </aside>
 
     <section className={styles.charts}>
-      <h2 className={styles.sectionChartsTitle}>Análise de Risco - Visão Geral dos Gráficos</h2>
+      <h2 className={styles.chartTitle}>Análise de Riscos</h2>
 
       {erro ? (
         <p>{erro}</p>
@@ -117,18 +117,25 @@ export default function PatientPanel() {
         </div>
       ) : (
         <>
-          <div className={styles.lineChart}>
-            <LineChart registros={registros} isExpandable={true} />
-          </div>
-
           <div className={styles.chartGroup}>
-            <RiskEvolutionChart
-              labels={evolucaoData.labels}
-              data={evolucaoData.data}
-            />
 
-            <div className={styles.riskControlsContainer}>
+            <div className={styles.chartCard}>
+              <h3 className={styles.chartTitle}>Evolução do Risco</h3>
+              <LineChart registros={registros} isExpandable={true} />
+            </div>
+
+            <div className={styles.chartCard}>
+              <h3 className={styles.chartTitle}>Evolução de Níveis de Ideação Suicida</h3>
+              <RiskEvolutionChart labels={evolucaoData.labels} data={evolucaoData.data} />
+            </div>
+
+            <div className={styles.chartCard}>
+              <h3 className={styles.chartTitle}>Média de Risco por Período</h3>
               <RiskAverageChart datasetsByPeriod={mediaPorPeriodo} />
+            </div>
+
+            <div className={styles.chartCard}>
+              <h3 className={styles.chartTitle}>Distribuição de Risco</h3>
               <RiskDistributionChart dataValues={distribuicaoData} />
             </div>
           </div>
@@ -137,5 +144,4 @@ export default function PatientPanel() {
     </section>
   </section>
 );
-
 }
