@@ -3,10 +3,10 @@
   top: 0;
   left: 0;
   height: 100vh;
-  width: max-content; 
-  max-width: 20vw; 
-  z-index: 100;
-  pointer-events: none; 
+  width: max-content;
+  max-width: 40vw;
+  z-index: 1200;
+  pointer-events: none;
 }
 
 .sidebar {
@@ -16,9 +16,9 @@
   padding: 2em 0;
   display: flex;
   flex-direction: column;
-  font-family: sans-serif;
   overflow: hidden;
-  pointer-events: all; 
+  pointer-events: all;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
 }
 
 .userSection {
@@ -50,18 +50,17 @@
   white-space: nowrap;
   text-decoration: none;
   color: var(--light);
-
   background: none;
   border: none;
-}
-/*  */
-.menuItem svg {
-  color: var(--light); 
-  transition: color 0.3s;
 }
 
 .menuItem:hover {
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menuItem svg {
+  color: var(--light);
+  transition: color 0.3s;
 }
 
 .menuItem:hover svg {
@@ -70,17 +69,12 @@
 
 .menuItem.active,
 .menuItem.active svg {
-  color: white; 
+  color: white;
 }
-/*  */
+
 .menuItem span {
   font-size: 1.2rem;
   overflow: hidden;
-  text-decoration: none;
-  color: var(--light);
-}
-
-.menuItem a {
   text-decoration: none;
   color: var(--light);
 }
@@ -97,18 +91,15 @@
     font-size: 1.2rem;
   }
 
-  .sidebarMobileOpen {
-    transform: translateX(0);
-  }
   .menu {
-    white-space: nowrap; 
+    white-space: nowrap;
   }
 
   .hamburgerButton {
     position: fixed;
     top: 2rem;
     left: 2rem;
-    z-index: 1200;
+    z-index: 1300;
     background: transparent;
     border: none;
     color: var(--black);

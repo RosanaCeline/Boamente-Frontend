@@ -1,17 +1,19 @@
 .header {
-  position: fixed;
   top: 0;
-  left: 0;
-  height: 5rem;
+  height: 7rem;
   color: var(--font-blue);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content:space-between;
   padding: 0 3.5rem;
+  margin-left: 7rem;
   box-sizing: border-box;
+  position: fixed;
   border-bottom-left-radius: 5rem;
-  z-index: 1050; 
+  z-index: 1100; 
   pointer-events: all;
+  gap: 60vw;
+  background-color: var(--form-background);
 }
 
 .title {
@@ -19,20 +21,13 @@
   font-weight: 600;
   user-select: none;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-left: 3rem;
 }
 
 .actions {
-  position: fixed;
-  right: 10rem;
-  top: 0;
-  height: 5rem;
   display: flex;
   align-items: center;
   gap: 3rem;
-  z-index: 1100;
+  margin-left: auto;
 }
 
 .iconButton {

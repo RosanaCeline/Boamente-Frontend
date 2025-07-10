@@ -23,7 +23,6 @@ export default function RiskLevelEvolutionChart({ dataSetsByPeriod, onPeriodChan
     if (onPeriodChange) onPeriodChange(newPeriod);
   };
 
-  // Verificação segura dos dados
   const safeData = dataSetsByPeriod?.[period] || {
     labels: [],
     Positive: [],
@@ -76,12 +75,14 @@ export default function RiskLevelEvolutionChart({ dataSetsByPeriod, onPeriodChan
         title: {
           display: true,
           text: "Quantidade de Pacientes",
+          font: { size: 18, },
         },
       },
       x: {
         title: {
           display: true,
           text: "Tempo",
+          font: { size: 18, },
         },
       },
     },

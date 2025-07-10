@@ -17,8 +17,8 @@ import {
   fetchSentimentByPeriod 
 } from "../../../services/dashboardService";
 import { formatSentimentDataByPeriod } from "../../../utils/chartUtils";
+import LogoBoamente from "../../../assets/images/homepage/logo-boamente-upscale.png";
 
-// Constantes para tradução e dados mockados
 const sentimentTranslationMap = {
   Neutral: "Neutro",
   Positive: "Positivo",
@@ -28,7 +28,6 @@ const sentimentTranslationMap = {
 const sexLabels = ['Masculino', 'Feminino', 'Não declarado'];
 
 const DashboardGeneral = () => {
-  // Estados (mantenha os existentes)
   const [dashboardData, setDashboardData] = useState({
     activePatients: null,
     ageData: { labels: [], values: [] },
@@ -39,7 +38,6 @@ const DashboardGeneral = () => {
     error: null
   });
 
-  // ✅ Adicione este novo estado para controlar o período
   const [selectedPeriod, setSelectedPeriod] = useState({
     type: 'WEEKLY', // Pode ser 'DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'
     startDate: new Date(new Date().setDate(new Date().getDate() - 7)), // 7 dias atrás
@@ -47,7 +45,6 @@ const DashboardGeneral = () => {
   });
 
   const handlePeriodChange = (frontendPeriod) => {
-    // Converte o período do frontend para o formato do backend
     const periodMap = {
       semana: 'WEEKLY',
       mes: 'MONTHLY',
@@ -61,7 +58,6 @@ const DashboardGeneral = () => {
     }));
   };
 
-  // Carrega todos os dados do dashboard
   useEffect(() => {
   const loadDashboardData = async () => {
     try {
@@ -76,7 +72,6 @@ const DashboardGeneral = () => {
         fetchPatientsByAgeGroup(),
         fetchPatientsByGender(),
         fetchPatientsByRiskLevel(),
-        // ✅ Modifique esta chamada para incluir os parâmetros de período
         fetchSentimentByPeriod(
           selectedPeriod.type,
           selectedPeriod.startDate,
@@ -112,9 +107,8 @@ const DashboardGeneral = () => {
     };
 
     loadDashboardData();
-  }, [selectedPeriod]); // ✅ Adicione selectedPeriod como dependência
+  }, [selectedPeriod]);  
 
-  // Dados para os cards
   const cardData = [
     { 
       title: 'Total de Pacientes Ativos', 
@@ -142,19 +136,26 @@ const DashboardGeneral = () => {
     },
   ];
 
-  // Se estiver carregando
-  if (dashboardData.loading) {
-    return <div className={styles.loading}>Carregando dashboard...</div>;
-  }
+  if (dashboardData.loading) 
+    return 
+      <div className={styles.spinnerWrapper}>
+        <div className={styles.spinnerBackground}>
+          <img
+            src={LogoBoamente}
+            alt="Logo do Boamente"
+            className={styles.fixedImage}
+          />
+          <div className={styles.spinner}></div>
+        </div>
+        <p className={styles.spinnerText}>Carregando dados do paciente...</p>
+      </div>
 
-  // Se ocorrer erro
   if (dashboardData.error) {
     return <div className={styles.error}>{dashboardData.error}</div>;
   }
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>Dashboard Geral - Indicadores</h2>
       
       {/* Cards */}
       <div className={styles.gridIndicators}>
@@ -169,6 +170,8 @@ const DashboardGeneral = () => {
           />
         ))}
       </div>
+
+      <h2 className={styles.heading}>Indicadores</h2>
 
       {/* Gráficos */}
       <div className={styles.gridCharts}>

@@ -34,23 +34,30 @@ export default function RiskLevelBarChart({ labels, dataValues }) {
         beginAtZero: true,
         title: {
           display: true,
-          text: "Quantidade"
+          text: "Quantidade",
+          font: { size: 18, },
         }
       },
       y: {
         title: {
           display: true,
-          text: "Nível de Risco"
+          text: "Nível de Risco",
+          font: { size: 18, },
         }
       }
     },
     plugins: {
-      legend: { display: false },
-      tooltip: {
-        callbacks: {
-          label: (context) => `${context.dataset.label}: ${context.raw} pacientes`
+      legend: {
+        display: true,   
+        position: 'top',    
+        align: 'start',   
+        font: { size: 18, },
+        labels: {
+          boxWidth: 15,   
+          padding: 15,
         }
       }
+
     }
   };
 
