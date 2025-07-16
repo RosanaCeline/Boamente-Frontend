@@ -46,6 +46,7 @@ export default function PieSexChart({ dataValues }) {
         labels: {
           usePointStyle: true,
           pointStyle: "circle",
+          font: { size: 18, },
         },
       },
     },

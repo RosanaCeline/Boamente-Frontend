@@ -1,18 +1,96 @@
+/* Geral */
 .container {
   margin: 0 auto;
-  padding-left: 6rem;
+  padding: 8rem 0 0 6rem;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  z-index: 800;
 }
 
+/* Spinner Carregamento */
+.spinnerWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.9);  
+  z-index: 9999;
+}
+.spinnerBackground {
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  background-color: var(--font-blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fixedImage {
+  width: 3.7rem;
+  height: 3.7rem;
+  object-fit: contain;
+  z-index: 2;
+}
+.spinner {
+  position: absolute;
+  width: 7rem;
+  height: 7rem;
+  border: 0.5rem solid var(--btn-background);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 1;
+}
+.spinnerText {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  color: var(--font-blue);
+  text-align: center;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Select Periodo */
+.customSelectWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 5rem 2rem auto;
+  gap: .6rem;
+}
+.customSelectWrapper select {
+  border: 1.5px solid var(--font-blue);
+  border-radius: 6px;
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  color: var(--font-blue);
+  background-color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Titulo */
 .heading {
-  margin-bottom: 2rem;
+  margin-top: 1.8rem;
+  margin-bottom: 2.5rem;
   font-size: 1.8rem;
   color: var(--font-blue);
   text-align: center;
 }
 
+/* Indicadores */
+/* Cards */
 .gridIndicators {
   display: flex;
   flex-wrap: wrap;
@@ -21,33 +99,43 @@
   margin-bottom: 2rem;
 }
 
+/* Graficos */
 .gridCharts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
-  gap: 1.5rem;
+  gap: 3rem;
   justify-content: center;
+  margin-right: 5rem;
 }
 
+/* Espaço dos graficos */
 .gridCharts section {
   background-color: var(--form-background);
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  aspect-ratio: 1 / 1;  
+  overflow: hidden;
 }
 
 /* Responsividade */
-
 @media (max-width: 1024px) {
   .gridCharts {
-    grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
   }
 }
-
-@media (max-width: 600px) {
+@media (max-width: 800px) {
+  .gridIndicators {
+    flex-direction: column;
+    margin-left: 5rem;
+  }
   .gridCharts {
     grid-template-columns: 1fr;
+  }
+  .gridCharts section {
+    align-items: center;
   }
 }

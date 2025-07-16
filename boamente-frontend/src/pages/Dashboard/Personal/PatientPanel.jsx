@@ -96,10 +96,8 @@ export default function PatientPanel() {
         </div>
       </aside>
 
-      <section className={styles.charts}>
-        <h2 className={styles.sectionChartsTitle}>
-          Análise de Risco - Visão Geral dos Gráficos
-        </h2>
+    <section className={styles.charts}>
+      <h2 className={styles.chartTitle}>Análise de Riscos</h2>
 
         {erro ? (
           <p>{erro}</p>
@@ -117,43 +115,31 @@ export default function PatientPanel() {
           </div>
         ) : (
           <>
-            <div className={styles.lineChart}>
-              <LineChart registros={registros} isExpandable={true} />
-            </div>
-
             <div className={styles.chartGroup}>
-              <RiskEvolutionChart
-                labels={["01/06", "05/06", "10/06", "15/06", "20/06", "25/06"]}
-                data={[1.3, 1.5, 2.1, 2.6, 2.8, 3.0]}
-              />
 
-              <div className={styles.riskControlsContainer}>
-                <RiskAverageChart
-                  datasetsByPeriod={{
-                    mes: {
-                      labels: ["Abr", "Mai", "Jun"],
-                      data: [1.8, 2.0, 2.4],
-                      color: "#007bff",
-                    },
-                    semana: {
-                      labels: ["Semana 1", "Semana 2", "Semana 3", "Semana 4"],
-                      data: [1.6, 2.1, 2.3, 2.8],
-                      color: "#6f42c1",
-                    },
-                    dia: {
-                      labels: ["26/06", "27/06", "28/06", "29/06"],
-                      data: [2.1, 2.5, 2.6, 3.0],
-                      color: "#20c997",
-                    },
-                  }}
-                />
-
-                <RiskDistributionChart dataValues={[25, 40, 35]} />
+            <div className={styles.chartCard}>
+              <h3 className={styles.chartTitle}>Evolução do Risco</h3>
+                <LineChart registros={registros} isExpandable={true} />
               </div>
+
+            <div className={styles.chartCard}>
+              <h3 className={styles.chartTitle}>Evolução de Níveis de Ideação Suicida</h3>
+              <RiskEvolutionChart labels={evolucaoData.labels} data={evolucaoData.data} />
             </div>
-          </>
-        )}
-      </section>
+
+            <div className={styles.chartCard}>
+              <h3 className={styles.chartTitle}>Média de Risco por Período</h3>
+              <RiskAverageChart datasetsByPeriod={mediaPorPeriodo} />
+            </div>
+
+            <div className={styles.chartCard}>
+              <h3 className={styles.chartTitle}>Distribuição de Risco</h3>
+              <RiskDistributionChart dataValues={distribuicaoData} />
+            </div>
+          </div>
+        </>
+      )}
     </section>
-  );
+  </section>
+);
 }

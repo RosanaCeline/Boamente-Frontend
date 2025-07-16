@@ -21,6 +21,7 @@ export default function GroupedBarSexRiskChart({ labels, datasetsData }) {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false, 
     plugins: {
       legend: {
         position: "top",
@@ -36,6 +37,7 @@ export default function GroupedBarSexRiskChart({ labels, datasetsData }) {
         title: {
           display: true,
           text: "Sexo",
+          font: { size: 18, },
         },
       },
       y: {
@@ -43,6 +45,7 @@ export default function GroupedBarSexRiskChart({ labels, datasetsData }) {
         title: {
           display: true,
           text: "Quantidade de Pacientes",
+          font: { size: 18, },
         },
         stacked: false,
       },

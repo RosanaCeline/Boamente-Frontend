@@ -1,50 +1,38 @@
 import { motion } from "framer-motion";
 import styles from "./Sidebar.module.css";
 import { useState, useEffect } from "react";
-import { User } from "lucide-react"; 
-import { NavLink } from "react-router-dom"; 
-import { privateRoutes } from '../../../routes/listRoutes'
+import { User } from "lucide-react";
+import { NavLink } from "react-router-dom";
+import { privateRoutes } from '../../../routes/listRoutes';
 import { FaBars } from 'react-icons/fa';
 
 const iconSize = 25;
 
-export default function Sidebar({ onWidthChange, userName }) {
+export default function Sidebar({ userName }) {
   const [isHovered, setIsHovered] = useState(false);
-  const [windowWidth] = useState(window.innerWidth);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+  const [open, setOpen] = useState(!isMobile); // aberto no desktop, fechado no mobile
 
-  // Controle para mobile toggle
-  const [isMobile, setIsMobile] = useState(false);
-  const [open, setOpen] = useState(true); // aberto desktop, fechado mobile inicialmente
-
-  // Atualiza estado mobile e open ao redimensionar
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth < 1024;
       setIsMobile(mobile);
       setOpen(!mobile);
+      setIsHovered(false);
     };
-    handleResize();
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Se mobile e sidebar fechado, largura zero para o motion animar
-  const widthVw = isMobile ? (open ? Math.min(40, 15) : 0) : isHovered ? 15 : 4; 
-  // 40vw max largura no mobile, else seu controle original
-  // calcula pixels para callback parent (não altera)
-  const widthPx = (windowWidth * widthVw) / 100;
+  const toggleSidebar = () => setOpen(prev => !prev);
 
-  // Callback para parent
-  useEffect(() => {
-    if (onWidthChange) {
-      onWidthChange(widthPx);
-    }
-  }, [widthPx, onWidthChange]);
-
-  const toggleSidebar = () => setOpen((prev) => !prev);
+  // Largura da sidebar: no mobile toggle entre 0 e 40vw, no desktop hover entre 4vw e 15vw
+  const widthVw = isMobile ? (open ? 40 : 0) : isHovered ? 15 : 4;
 
   return (
     <>
+      {/* Hamburger só aparece no mobile */}
       {isMobile && (
         <button
           className={styles.hamburgerButton}
@@ -55,14 +43,16 @@ export default function Sidebar({ onWidthChange, userName }) {
         </button>
       )}
 
-       {(open || !isMobile) && (
+      {/* Sidebar aparece se aberto ou desktop */}
+      {(open || !isMobile) && (
         <div
           className={styles.sidebarWrapper}
-          onMouseEnter={() => setIsHovered(true)}  
-          onMouseLeave={() => setIsHovered(false)} 
+          onMouseEnter={() => !isMobile && setIsHovered(true)}
+          onMouseLeave={() => !isMobile && setIsHovered(false)}
+          onClick={() => isMobile && toggleSidebar()} // clicar fecha no mobile também (opcional)
         >
           <motion.aside
-            className={`${styles.sidebar} ${isMobile ? styles.sidebarMobileOpen : ""}`}
+            className={styles.sidebar}
             animate={{ width: `${widthVw}vw` }}
             transition={{ duration: 0.4 }}
           >

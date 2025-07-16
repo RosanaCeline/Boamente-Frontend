@@ -14,7 +14,6 @@ import styles from "./GroupedBarAgeRiskChart.module.css";
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 export default function GroupedBarAgeRiskChart({ labels, datasetsData }) {
-  // datasetsData deve ser um array de objetos: { label, data, backgroundColor }
   const data = {
     labels,
     datasets: datasetsData,
@@ -22,6 +21,7 @@ export default function GroupedBarAgeRiskChart({ labels, datasetsData }) {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false, // permite flexibilidade no container
     plugins: {
       legend: {
         position: "top",
@@ -36,6 +36,7 @@ export default function GroupedBarAgeRiskChart({ labels, datasetsData }) {
         title: {
           display: true,
           text: "Faixa Etária",
+          font: { size: 18, },
         },
         stacked: false,
       },
@@ -44,6 +45,7 @@ export default function GroupedBarAgeRiskChart({ labels, datasetsData }) {
         title: {
           display: true,
           text: "Quantidade de Pacientes",
+          font: { size: 18, },
         },
         stacked: false,
       },

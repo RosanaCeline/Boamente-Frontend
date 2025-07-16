@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../../../style.css';
 import { useLocation, Outlet } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
@@ -7,8 +7,6 @@ import { jwtDecode } from 'jwt-decode';
 
 export default function PrivateLayout({ routes }) {
   const location = useLocation();
-  const [sidebarWidth, setSidebarWidth] = useState(window.innerWidth * 0.04);
-
   const currentRoute = routes.find(route => route.path === location.pathname);
   const pageTitle = currentRoute ? currentRoute.title : '';
 
@@ -19,7 +17,7 @@ export default function PrivateLayout({ routes }) {
     try {
       const decoded = jwtDecode(token);
       if (decoded.name) {
-        firstName = decoded.name.split(' ')[0];  // Pega só o primeiro nome
+        firstName = decoded.name.split(' ')[0];
       }
     } catch (error) {
       console.error('Erro ao decodificar o token:', error);
@@ -28,9 +26,9 @@ export default function PrivateLayout({ routes }) {
 
   return (
     <>
-      <Sidebar onWidthChange={setSidebarWidth} userName={firstName} />
-      <HeaderInternal pageTitle={pageTitle} sidebarWidth={sidebarWidth} />
-      <main style={{ marginLeft: sidebarWidth, transition: "margin-left 0.4s ease-in-out" }}>
+      <Sidebar userName={firstName} />
+      <HeaderInternal pageTitle={pageTitle} />
+      <main style={{ paddingLeft: 72 }}>  
         <Outlet />
       </main>
     </>

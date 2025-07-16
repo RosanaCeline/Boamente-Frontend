@@ -2,11 +2,7 @@ import {
   LayoutDashboard,
   UserPlus,
   Users,
-//   FileText, Registro de Sessões
-//   Keyboard, Teclado Virtual
   Settings, 
-//   Headphones, Suporte
-//   Wrench, Menu Instalação
   Headphones,        
   LogOut            
 } from "lucide-react";

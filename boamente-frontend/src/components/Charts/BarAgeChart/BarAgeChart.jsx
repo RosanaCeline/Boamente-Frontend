@@ -39,14 +39,16 @@ export default function BarAgeChart({ labels, dataValues, isExpandable = true })
       x: {
         title: {
           display: true,
-          text: 'Faixa Etária'
+          text: 'Faixa Etária',
+          font: { size: 18, },
         }
       },
       y: {
         beginAtZero: true,
         title: {
           display: true,
-          text: 'Quantidade'
+          text: 'Quantidade',
+          font: { size: 18, },
         }
       }
     },

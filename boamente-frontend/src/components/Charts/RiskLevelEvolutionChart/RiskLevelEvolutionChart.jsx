@@ -77,12 +77,14 @@ export default function RiskLevelEvolutionChart({ dataSetsByPeriod, selectedPeri
         title: {
           display: true,
           text: "Quantidade de Pacientes",
+          font: { size: 18, },
         },
       },
       x: {
         title: {
           display: true,
           text: "Tempo",
+          font: { size: 18, },
         },
       },
     },

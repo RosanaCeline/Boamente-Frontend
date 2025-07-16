@@ -15,7 +15,6 @@ import styles from "./AverageRiskLevelChart.module.css";
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
 
 export default function AverageRiskLevelChart({ weeklyData }) {
-  // Função para calcular a média ponderada
   const calcularMedia = (dado) => {
     const total = dado.baixo + dado.moderado + dado.alto;
     if (total === 0) return 0;
@@ -32,7 +31,7 @@ export default function AverageRiskLevelChart({ weeklyData }) {
       {
         label: "Média do nível (1=Baixo, 3=Alto)",
         data: medias,
-        borderColor: "var(--btn-background)", // vermelho (ajustar conforme style.css)
+        borderColor: "var(--btn-background)", // vermelho
         backgroundColor: "rgba(220, 53, 69, 0.3)",
         fill: true,
         tension: 0.3,
@@ -60,12 +59,14 @@ export default function AverageRiskLevelChart({ weeklyData }) {
         title: {
           display: true,
           text: "Nível médio",
+          font: { size: 18, },
         },
       },
       x: {
         title: {
           display: true,
           text: "Período (Semanas)",
+          font: { size: 18, },
         },
       },
     },

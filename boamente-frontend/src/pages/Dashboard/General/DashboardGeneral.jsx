@@ -19,8 +19,8 @@ import {
   fetchSentimentByPeriod
 } from "../../../services/dashboardService";
 import { formatSentimentDataByPeriod } from "../../../utils/chartUtils";
+import LogoBoamente from "../../../assets/images/homepage/logo-boamente-upscale.png";
 
-// Tradução para sentimentos
 const sentimentTranslationMap = {
   Neutral: "Neutro",
   Positive: "Positivo",
@@ -36,7 +36,6 @@ const periodMap = {
 };
 
 const DashboardGeneral = () => {
-  // Estados para dados gerais
   const [dashboardData, setDashboardData] = useState({
     activePatients: null,
     insightData: null,
@@ -216,7 +215,6 @@ const DashboardGeneral = () => {
     loadDashboardData();
   }, [selectedPeriod]);
 
-  // Dados para os cards
   const cardData = [
     { 
       title: 'Total de Pacientes Ativos', 
@@ -254,9 +252,19 @@ const DashboardGeneral = () => {
     }
   ];
 
-  if (dashboardData.loading) {
-    return <div className={styles.loading}>Carregando dashboard...</div>;
-  }
+  if (dashboardData.loading) 
+    return 
+      <div className={styles.spinnerWrapper}>
+        <div className={styles.spinnerBackground}>
+          <img
+            src={LogoBoamente}
+            alt="Logo do Boamente"
+            className={styles.fixedImage}
+          />
+          <div className={styles.spinner}></div>
+        </div>
+        <p className={styles.spinnerText}>Carregando dados do paciente...</p>
+      </div>
 
   if (dashboardData.error) {
     return <div className={styles.error}>{dashboardData.error}</div>;
@@ -264,7 +272,6 @@ const DashboardGeneral = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>Dashboard Geral - Indicadores</h2>
       
       <div className={styles.gridIndicators}>
         {cardData.map((item, index) => (
@@ -279,6 +286,8 @@ const DashboardGeneral = () => {
           />
         ))}
       </div>
+
+      <h2 className={styles.heading}>Indicadores</h2>
 
       <div className={styles.gridCharts}>
         <section>
