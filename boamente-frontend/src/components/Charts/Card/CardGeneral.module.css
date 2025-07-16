@@ -22,6 +22,8 @@
   margin: 0 0 0.5rem 0;
   font-size: 1.5em;
   color: var(--font-blue);
+  display: flex;
+  align-items: center;
 }
 
 .value {
@@ -38,4 +40,13 @@
   font-size: 0.9em;
   color: var(--grey);  
   margin-top: 0.4rem; 
+}
+
+.infoIconWrapper {
+  margin-left: 6px;
+  cursor: help;
+  font-size: 0.9em;
+  color: #888;
+  display: flex;
+  align-items: center;
 }

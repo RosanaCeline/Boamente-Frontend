@@ -4,6 +4,11 @@ const API_BASE = 'http://localhost:8080/api/dashboard';
 async function fetchData(endpoint, errorMessage, params = {}) {
   try {
     const token = localStorage.getItem("authToken");
+
+    if (!token) {
+      throw new Error("Token de autenticação não encontrado");
+    }
+
     const url = new URL(`${API_BASE}/${endpoint}`);
     
     // Adiciona parâmetros de query se existirem
@@ -28,8 +33,6 @@ async function fetchData(endpoint, errorMessage, params = {}) {
     const data = await response.json();
     console.log(`[API RESPONSE] ${endpoint}:`, data);
     return data;
-
-    return await response.json();
   } catch (error) {
     console.error(error);
     return endpoint.includes('active-patients') ? null : [];
@@ -40,14 +43,31 @@ async function fetchData(endpoint, errorMessage, params = {}) {
 export const fetchActivePatients = () => 
   fetchData('active-patients', 'Erro ao buscar pacientes ativos');
 
+export const fetchInsight = () => 
+  fetchData('insight', 'Erro ao buscar insight dos pacientes');
+
+export const fetchNewHighRiskCases = () =>
+  fetchData('new-high-risk', 'Erro ao buscar novos casos de risco entre os pacientes');
+
+export const fetchWorsenedPatients = () =>
+  fetchData('worsened', 'Erro ao buscar pacientes com piora no nivel de risco');
+
 export const fetchPatientsByAgeGroup = () => 
-  fetchData('by-age-group', 'Erro ao buscar pacientes por faixa etária');
+  fetchData('age-distribution', 'Erro ao buscar pacientes por faixa etária');
 
 export const fetchPatientsByGender = () => 
-  fetchData('count-gender', 'Erro ao buscar pacientes por sexo');
+  fetchData('sex-distribution', 'Erro ao buscar pacientes por sexo');
+
+export const fetchRiskEvolutionOverTime = (periodType) => {
+  return fetchData('risk-evolution', 'Erro ao buscar evolução do nível de risco', { periodType });
+};
+
+
+
+
 
 export const fetchPatientsByRiskLevel = () => 
-  fetchData('risk-level', 'Erro ao buscar pacientes por nível de risco');
+  fetchData('risk-distribution', 'Erro ao buscar pacientes por nível de risco');
 
 // Atualize esta função específica
 export const fetchSentimentByPeriod = (periodType, startDate, endDate) => {
@@ -61,3 +81,15 @@ export const fetchSentimentByPeriod = (periodType, startDate, endDate) => {
     }
   );
 };
+
+// Dashboards Individuais
+
+export const fetchPatientInfo = async (patientId) => {
+  return fetchData(`patient/${patientId}/info`, 'Erro ao buscar informações do paciente');
+};
+
+export const fetchPatientInsight = (patientId) => 
+  fetchData(`patient/${patientId}/insight`, 'Erro ao buscar insight individual do paciente');
+
+export const fetchPatientLastNegativeClassification = (patientId) => 
+  fetchData(`patient/${patientId}/latest-negative`, 'Erro ao buscar última classificação negativa do paciente');

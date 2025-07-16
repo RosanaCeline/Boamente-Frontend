@@ -12,29 +12,27 @@ export default function PatientInfoCard({ patient }) {
         <img src={boamenteLogo} alt="Logo Boamente" className={styles.profileImage} />
       </div>
 
-      <h2 className={styles.name}>{patient.nomePaciente}</h2>
+      <h2 className={styles.name}>{patient.fullName}</h2>
 
       <div className={styles.infoGrid}>
         <div className={styles.infoBlock}>
           <span className={styles.label}>E-mail</span>
-          <p className={styles.value}>{patient.emailPaciente}</p>
+          <p className={styles.value}>{patient.email}</p>
         </div>
         <div className={styles.infoBlock}>
           <span className={styles.label}>Telefone</span>
-          <p className={styles.value}>{patient.telefone || "Não informado"}</p>
+          <p className={styles.value}>{patient.phoneNumber || "Não informado"}</p>
         </div>
         <div className={styles.infoBlock}>
           <span className={styles.label}>Sexo</span>
-          <p className={styles.value}>
-            {patient.sexo === "F" ? "Feminino" :
-             patient.sexo === "M" ? "Masculino" : "Prefiro não declarar"}
-          </p>
+          <p className={styles.value}>{patient.gender}</p>
         </div>
         <div className={styles.infoBlock}>
           <span className={styles.label}>Nascimento</span>
-          <p className={styles.value}>{patient.nascimentoPaciente}</p>
+          <p className={styles.value}>{patient.birthDate}</p>
         </div>
       </div>
     </div>
   );
 }
+

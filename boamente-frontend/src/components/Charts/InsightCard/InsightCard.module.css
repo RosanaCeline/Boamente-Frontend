@@ -10,9 +10,20 @@
   margin: 0 0 8px;
   font-size: 1rem;
   font-weight: 600;
+  display: flex;
+  align-items: center;
 }
 
 .card p {
   font-size: 0.95rem;
   color: #333;
+}
+
+.infoIconWrapper {
+  margin-left: 6px;
+  cursor: help;
+  font-size: 0.9em;
+  color: #888;
+  display: flex;
+  align-items: center;
 }

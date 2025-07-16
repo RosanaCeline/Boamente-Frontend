@@ -1,5 +1,6 @@
 .chartSection {
-  max-width: 900px;
+  max-width: 100%; /* ou algo maior, como 1200px */
+  width: 100%;
   margin: 2rem auto;
   font-family: Arial, sans-serif;
   color: var(--font-blue);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../../../style.css"
+import "../../../style.css";
 import styles from "./DashboardGeneral.module.css"; 
 import CardGeneral from "../../../components/Charts/Card/CardGeneral";
 import BarAgeChart from "../../../components/Charts/BarAgeChart/BarAgeChart";
@@ -7,30 +7,41 @@ import PieSexChart from "../../../components/Charts/PieSexChart/PieSexChart";
 import RiskLevelBarChart from "../../../components/Charts/RiskLevelBarChart/RiskLevelBarChart";
 import RiskLevelEvolutionChart from "../../../components/Charts/RiskLevelEvolutionChart/RiskLevelEvolutionChart";
 import AverageRiskLevelChart from "../../../components/Charts/AverageRiskLevelChart/AverageRiskLevelChart";
-import GroupedBarAgeRiskChart from "../../../components/Charts/GroupedBarAgeRiskChart/GroupedBarAgeRiskChart";
-import GroupedBarSexRiskChart from "../../../components/Charts/GroupedBarSexRiskChart/GroupedBarSexRiskChart"
-import { 
+import {
   fetchActivePatients, 
+  fetchInsight,
+  fetchNewHighRiskCases,
+  fetchWorsenedPatients,
   fetchPatientsByAgeGroup, 
-  fetchPatientsByGender, 
+  fetchPatientsByGender,
+  fetchRiskEvolutionOverTime,
   fetchPatientsByRiskLevel, 
-  fetchSentimentByPeriod 
+  fetchSentimentByPeriod
 } from "../../../services/dashboardService";
 import { formatSentimentDataByPeriod } from "../../../utils/chartUtils";
 
-// Constantes para tradução e dados mockados
+// Tradução para sentimentos
 const sentimentTranslationMap = {
   Neutral: "Neutro",
   Positive: "Positivo",
   Negative: "Negativo"
 };
 
-const sexLabels = ['Masculino', 'Feminino', 'Não declarado'];
+// Mapeamento frontend -> backend para períodos
+const periodMap = {
+  semana: "WEEKLY",
+  mes: "MONTHLY",
+  trimestre: "QUARTERLY",
+  ano: "YEARLY"
+};
 
 const DashboardGeneral = () => {
-  // Estados (mantenha os existentes)
+  // Estados para dados gerais
   const [dashboardData, setDashboardData] = useState({
     activePatients: null,
+    insightData: null,
+    newHighRiskCount: null,
+    worsenedRisk: null,
     ageData: { labels: [], values: [] },
     genderData: [0, 0, 0],
     riskLevelData: [],
@@ -39,63 +50,154 @@ const DashboardGeneral = () => {
     error: null
   });
 
-  // ✅ Adicione este novo estado para controlar o período
-  const [selectedPeriod, setSelectedPeriod] = useState({
-    type: 'WEEKLY', // Pode ser 'DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'
-    startDate: new Date(new Date().setDate(new Date().getDate() - 7)), // 7 dias atrás
-    endDate: new Date() // hoje
-  });
+  // Estado para evolução de risco por período - usar somente este!
+  const [riskDataByPeriod, setRiskDataByPeriod] = useState({});
 
-  const handlePeriodChange = (frontendPeriod) => {
-    // Converte o período do frontend para o formato do backend
-    const periodMap = {
-      semana: 'WEEKLY',
-      mes: 'MONTHLY',
-      trimestre: 'QUARTERLY',
-      ano: 'YEARLY'
-    };
-    
-    setSelectedPeriod(prev => ({
-      ...prev,
-      type: periodMap[frontendPeriod] || 'WEEKLY'
-    }));
+  // Estado para o período selecionado - valor backend em caixa alta
+  const [selectedPeriod, setSelectedPeriod] = useState("WEEKLY");
+
+  // Função que o gráfico vai chamar para alterar o período
+  const handlePeriodChange = (newPeriod) => {
+    setSelectedPeriod(newPeriod);
   };
 
-  // Carrega todos os dados do dashboard
+  function rotateArray(arr, count) {
+    return [...arr.slice(count), ...arr.slice(0, count)];
+  };
+
+  // Função para converter o dado bruto da API para o formato esperado pelo gráfico
+  function formatDataForRiskEvolution(rawData, period) {
+    let labels = [], Positive = [], Neutral = [], Negative = [];
+
+    if (period === 'WEEKLY') {
+      // Label vem como 'segunda-feira', 'terça-feira', etc.
+      const dayMap = {
+        'segunda-feira': 'Seg',
+        'terça-feira': 'Ter',
+        'quarta-feira': 'Qua',
+        'quinta-feira': 'Qui',
+        'sexta-feira': 'Sex',
+        'sábado': 'Sáb',
+        'domingo': 'Dom',
+      };
+
+      labels = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
+      const dataMap = {};
+
+      for (const item of rawData) {
+        const dayLabel = dayMap[item.label?.toLowerCase()] || item.label;
+        dataMap[dayLabel] = {
+          low: item.lowRiskCount,
+          medium: item.mediumRiskCount,
+          high: item.highRiskCount
+        };
+      }
+
+      for (const label of labels) {
+        Positive.push(dataMap[label]?.low || 0);
+        Neutral.push(dataMap[label]?.medium || 0);
+        Negative.push(dataMap[label]?.high || 0);
+      }
+
+    } else if (period === 'MONTHLY') {
+      // Labels já vêm como 'Semana 1', 'Semana 2', etc.
+      labels = ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'];
+      const dataMap = {};
+
+      for (const item of rawData) {
+        dataMap[item.label] = {
+          low: item.lowRiskCount,
+          medium: item.mediumRiskCount,
+          high: item.highRiskCount
+        };
+      }
+
+      for (const label of labels) {
+        Positive.push(dataMap[label]?.low || 0);
+        Neutral.push(dataMap[label]?.medium || 0);
+        Negative.push(dataMap[label]?.high || 0);
+      }
+
+    } else if (period === 'QUARTERLY' || period === 'YEARLY') {
+      labels = period === 'YEARLY'
+        ? ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+        : ['Jan', 'Fev', 'Mar']; // trimestre fixo
+
+      const dataMap = {};
+      for (const item of rawData) {
+        const label = item.label;
+        dataMap[label] = {
+          low: item.lowRiskCount,
+          medium: item.mediumRiskCount,
+          high: item.highRiskCount
+        };
+      }
+
+      for (const label of labels) {
+        Positive.push(dataMap[label]?.low || 0);
+        Neutral.push(dataMap[label]?.medium || 0);
+        Negative.push(dataMap[label]?.high || 0);
+      }
+    }
+
+    return { labels, Positive, Neutral, Negative };
+  }
+
+  // Carrega os dados gerais e os dados de evolução para o período atual
   useEffect(() => {
-  const loadDashboardData = async () => {
-    try {
-      const [
-        activePatients, 
-        ageData, 
-        genderData, 
-        riskLevelData, 
-        sentimentData
-      ] = await Promise.all([
-        fetchActivePatients(),
-        fetchPatientsByAgeGroup(),
-        fetchPatientsByGender(),
-        fetchPatientsByRiskLevel(),
-        // ✅ Modifique esta chamada para incluir os parâmetros de período
-        fetchSentimentByPeriod(
-          selectedPeriod.type,
-          selectedPeriod.startDate,
-          selectedPeriod.endDate
-        )
-      ]);
+    const loadDashboardData = async () => {
+      setDashboardData(prev => ({ ...prev, loading: true }));
+      try {
+        // Para simplificar, carrega só o período selecionado
+        const [
+          activePatients,
+          insightData,
+          newHighRiskCount,
+          worsenedRisk,
+          ageData, 
+          genderData, 
+          riskLevelData, 
+          sentimentData,
+          riskEvolutionRaw
+        ] = await Promise.all([
+          fetchActivePatients(),
+          fetchInsight(),
+          fetchNewHighRiskCases(),
+          fetchWorsenedPatients(),
+          fetchPatientsByAgeGroup(),
+          fetchPatientsByGender(),
+          fetchPatientsByRiskLevel(),
+          fetchSentimentByPeriod(selectedPeriod, new Date(), new Date()),
+          fetchRiskEvolutionOverTime(selectedPeriod)
+        ]);
 
-        const sentimentDataFormatted = formatSentimentDataByPeriod(sentimentData);
+        // Converte os dados brutos para o formato do gráfico
+        const formattedRiskEvolution = formatDataForRiskEvolution(riskEvolutionRaw || [], selectedPeriod);
 
-        console.log("Dados brutos (API):", sentimentData);
-        console.log("Dados formatados para gráfico:", sentimentDataFormatted);
+        console.log("Raw do DashboardGeneral:", riskEvolutionRaw );
+        console.log("Formatted do DashboardGeneral:", formattedRiskEvolution);
 
+        // Atualiza o estado com os dados formatados
+        setRiskDataByPeriod(prev => ({
+          ...prev,
+          [selectedPeriod]: formattedRiskEvolution
+        }));
+
+        // Atualiza demais dados do dashboard
         setDashboardData({
           activePatients,
+          insightData,
+          newHighRiskCount,
+          worsenedRisk,
           ageData: {
             labels: ageData.map(d => d.ageGroup),
             values: ageData.map(d => d.quantity)
           },
-          genderData: genderData.map(item => item.count),
+          genderData: [
+            genderData.find(g => g.gender === 'M')?.total || 0,
+            genderData.find(g => g.gender === 'F')?.total || 0,
+            genderData.find(g => !['M', 'F'].includes(g.gender))?.total || 0
+          ],
           riskLevelData,
           sentimentDataByPeriod: formatSentimentDataByPeriod(sentimentData),
           loading: false,
@@ -112,42 +214,50 @@ const DashboardGeneral = () => {
     };
 
     loadDashboardData();
-  }, [selectedPeriod]); // ✅ Adicione selectedPeriod como dependência
+  }, [selectedPeriod]);
 
   // Dados para os cards
   const cardData = [
     { 
       title: 'Total de Pacientes Ativos', 
       value: dashboardData.activePatients !== null 
-        ? `${dashboardData.activePatients} pacientes` 
+        ? `${dashboardData.activePatients} ${dashboardData.activePatients === 1 ? 'paciente' : 'pacientes'}` 
         : 'Carregando...', 
-      loading: dashboardData.activePatients === null 
+      loading: dashboardData.activePatients === null,
+      info: 'Número total de pacientes ativos cadastrados na plataforma'
     },
     { 
       title: 'Insight Automático', 
-      value: '+15% de risco alto', 
+      value: dashboardData.insightData?.insight || 'Carregando...', 
       highlight: true, 
-      small: 'em relação à última semana' 
+      small: dashboardData.insightData?.context || '',
+      info: 'Resumo automático gerado com base na tendência de classificações negativas'
     },
     { 
       title: 'Novos Casos de Risco Elevado', 
-      value: '8', 
-      small: 'no último mês' 
+      value: dashboardData.newHighRiskCount !== null
+        ? `${dashboardData.newHighRiskCount} ${dashboardData.newHighRiskCount === 1 ? 'paciente' : 'pacientes'}`
+        : 'Carregando...',
+      small: 'no último mês',
+      info: 'Pacientes que passaram a ter maioria das classificações como negativas no último mês'
     },
-    { 
-      title: 'Piora no Nível de Risco', 
-      value: '5 pacientes', 
-      highlight: true, 
-      small: '= 3,8% do total' 
-    },
+    {
+      title: 'Piora no Nível de Risco',
+      value: dashboardData.worsenedRisk !== null
+        ? `${dashboardData.worsenedRisk.quantidade} ${dashboardData.worsenedRisk.quantidade === 1 ? 'paciente' : 'pacientes'}`
+        : 'Carregando...',
+      highlight: true,
+      small: dashboardData.worsenedRisk !== null
+        ? `= ${dashboardData.worsenedRisk.percentual}% do total`
+        : '',
+      info: 'Pacientes cuja média de risco nas últimas semanas aumentou em relação ao mês anterior'
+    }
   ];
 
-  // Se estiver carregando
   if (dashboardData.loading) {
     return <div className={styles.loading}>Carregando dashboard...</div>;
   }
 
-  // Se ocorrer erro
   if (dashboardData.error) {
     return <div className={styles.error}>{dashboardData.error}</div>;
   }
@@ -156,7 +266,6 @@ const DashboardGeneral = () => {
     <div className={styles.container}>
       <h2 className={styles.heading}>Dashboard Geral - Indicadores</h2>
       
-      {/* Cards */}
       <div className={styles.gridIndicators}>
         {cardData.map((item, index) => (
           <CardGeneral
@@ -165,12 +274,12 @@ const DashboardGeneral = () => {
             value={item.value}
             highlight={item.highlight}
             small={item.small}
+            info={item.info}
             loading={item.loading}
           />
         ))}
       </div>
 
-      {/* Gráficos */}
       <div className={styles.gridCharts}>
         <section>
           <h2 className={styles.heading}>Distribuição de Pacientes por Faixa Etária</h2>
@@ -186,16 +295,17 @@ const DashboardGeneral = () => {
         </section>
 
         <section>
-          <h2 className={styles.heading}>Evolução de Níveis de Risco ao Longo do Tempo</h2>
-          {dashboardData.sentimentDataByPeriod ? (
-            <RiskLevelEvolutionChart 
-              dataSetsByPeriod={dashboardData.sentimentDataByPeriod} 
+          {riskDataByPeriod[selectedPeriod]?.labels?.length > 0 ? (
+            <RiskLevelEvolutionChart
+              dataSetsByPeriod={riskDataByPeriod[selectedPeriod]} // Já está no formato { labels, Positive, Neutral, Negative }
+              selectedPeriod={selectedPeriod}
+              onPeriodChange={handlePeriodChange}
             />
           ) : (
             <div className={styles.loading}>Carregando dados de evolução...</div>
           )}
         </section>
-        
+                
         <section>
           <h2 className={styles.heading}>Média Geral do Nível de Risco</h2>
           <AverageRiskLevelChart 

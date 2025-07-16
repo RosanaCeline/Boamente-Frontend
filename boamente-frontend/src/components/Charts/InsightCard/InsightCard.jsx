@@ -1,11 +1,33 @@
 import React from "react";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 import styles from "./InsightCard.module.css";
 
-export default function InsightCard({ title, value }) {
+import { ReactComponent as InfoIcon } from "../../../assets/icons/Info.svg";
+
+export default function InsightCard({ title, value, info }) {
+  const tooltipId = `tooltip-${title.replace(/\s+/g, '-')}`;
+
   return (
     <div className={styles.card}>
-      <h3>{title}</h3>
-      <p>{value}</p>
+      <div className={styles.header}>
+        <h3 className={styles.title}>
+          {title}
+          {info && (
+            <>
+              <span
+                data-tooltip-id={tooltipId}
+                data-tooltip-content={info}
+                className={styles.infoIconWrapper}
+              >
+                <InfoIcon />
+              </span>
+              <Tooltip id={tooltipId} place="top" />
+            </>
+          )}
+        </h3>
+      </div>
+      <p className={styles.value}>{value}</p>
     </div>
   );
 }
