@@ -1,130 +1,78 @@
-/* Geral */
+/* Layout Principal */
 .sectionPersonal {
   display: flex;
-  flex-direction: column; 
-  align-items: stretch;
+  flex-wrap: wrap;
   box-sizing: border-box;
   margin-top: 6rem;
-  gap: 2rem;
   min-height: calc(100vh - 6rem - 2.5rem);
+  align-items: stretch;
 }
 
-/* Informações do paciente */
+/* Coluna da Esquerda - Informações do Paciente */
 .patientInformation {
-  width: 100%;
-  display: flex;
-  flex-direction: column; 
-  align-items: center;
-  box-sizing: border-box;
-  padding: 2rem 4rem;
-  gap: 2rem;
-}
-.cardsContainer {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  width: 100%;
-  max-width: 42rem;
-}
-
-/* Gráficos */
-.charts {
-  width: 100%;
+  flex: 0 0 700px; /* Largura fixa */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 2rem 4rem;
+  padding: 0 2rem 2rem 2rem;
+  gap: 2rem;
+  height: 100%;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
 }
 
-/* Todos */
+/* Coluna da Direita - Gráficos */
+.charts {
+  flex: 1; /* Ocupa o espaço restante */
+  min-width: 400px; /* Largura mínima */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0 2rem 2rem 2rem;
+}
+
+/* Container dos Gráficos - Agora em coluna única */
 .chartGroup {
   display: flex;
-  flex-wrap: wrap;
-  gap: 3rem;
-  justify-content: center; 
-  width: 100vw;
-  box-sizing: border-box;
+  flex-direction: column;
+  gap: 2rem;
+  height: 100%;
+  justify-content: space-between;
 }
-/* Cada um */
+
+/* Cada card de gráfico */
 .chartCard {
-  flex: 0 0 40%; 
+  width: 100%;
   background-color: var(--form-background);
   padding: 1.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  overflow: hidden;
-}
-/* Titulo do grafico */
-.chartTitle {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-/* Spinner  */
-.spinnerWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-.spinnerBackground {
-  position: relative;
-  width: 5rem;
-  height: 5rem;
-  background-color: var(--font-blue);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.fixedImage {
-  width: 3.7rem;
-  height: 3.7rem;
-  object-fit: contain;
-  z-index: 2;
-}
-.spinner {
-  position: absolute;
-  width: 7rem;
-  height: 7rem;
-  border: 0.5rem solid var(--btn-background);
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  z-index: 1;
-}
-.spinnerText {
-  margin-top: 0.5rem;
-  font-size: 1.2rem;
-  color: var(--font-blue);
-  text-align: center;
-}
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 /* Responsividade */
+@media (max-width: 992px) {
+  .sectionPersonal {
+    flex-direction: column;
+  }
+  
+  .patientInformation,
+  .charts {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .cardsContainer {
+    flex-direction: row; /* Mantém os cards lado a lado quando possível */
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
 @media (max-width: 600px) {
   .cardsContainer {
     flex-direction: column;
-    align-items: center;
-  }
-}
-@media (max-width: 768px) {
-  .chartCard, .lineChartCard {
-    flex: 0 0 100%; 
-    aspect-ratio: auto;
   }
 }

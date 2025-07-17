@@ -1,9 +1,8 @@
 .card {
   background: var(--form-background);
   border: 0.2rem solid var(--blue);
-  border-radius: 1.5rem;
+  border-radius: 0.5rem;
   padding-bottom: 2rem;
-  max-width: 42rem;
   width: 100%;
   overflow: hidden;
   box-shadow: 0 0.6rem 1.6rem rgba(var(--blue-rgb), 0.3);

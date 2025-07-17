@@ -109,44 +109,41 @@ export default function PatientPanel() {
             }
             info="Exibe a data da última classificação negativa registrada para o paciente nos últimos 30 dias."
           />
+          <div className={styles.chartCard}>
+            <RiskDistributionChart dataValues={distribuicaoData} />
+          </div>
         </div>
       </aside>
 
-    <section className={styles.charts}>
-      <h2 className={styles.chartTitle}>Análise de Riscos</h2>
+      <section className={styles.charts}>
+          {erro ? (
+            <p>{erro}</p>
+          ) : isLoading ? (
+            <div className={styles.spinnerWrapper}>
+              <div className={styles.spinnerBackground}>
+                <img
+                  src={LogoBoamente}
+                  alt="Logo do Boamente"
+                  className={styles.fixedImage}
+                />
+                <div className={styles.spinner}></div>
+              </div>
+              <p className={styles.spinnerText}>Carregando dados do paciente...</p>
+            </div>
+          ) : (
+            <>
+              <div className={styles.chartGroup}>
+              <div className={styles.chartCard}>
+                <RiskEvolutionChart labels={evolucaoData.labels} data={evolucaoData.data} />
+              </div>
 
-        {erro ? (
-          <p>{erro}</p>
-        ) : isLoading ? (
-          <div className={styles.spinnerWrapper}>
-            <div className={styles.spinnerBackground}>
-              <img
-                src={LogoBoamente}
-                alt="Logo do Boamente"
-                className={styles.fixedImage}
-              />
-              <div className={styles.spinner}></div>
+              <div className={styles.chartCard}>
+                <RiskAverageChart patientId={id} />
+              </div>
             </div>
-            <p className={styles.spinnerText}>Carregando dados do paciente...</p>
-          </div>
-        ) : (
-          <>
-            <div className={styles.chartGroup}>
-            <div className={styles.chartCard}>
-              <RiskEvolutionChart labels={evolucaoData.labels} data={evolucaoData.data} />
-            </div>
-
-            <div className={styles.chartCard}>
-              <RiskAverageChart patientId={id} />
-            </div>
-
-            <div className={styles.chartCard}>
-              <RiskDistributionChart dataValues={distribuicaoData} />
-            </div>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </section>
     </section>
-  </section>
-);
+  );
 }

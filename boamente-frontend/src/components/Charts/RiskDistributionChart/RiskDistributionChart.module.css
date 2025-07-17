@@ -24,7 +24,7 @@
 /* RiskDistributionChart.module.css */
 .chartWrapper {
   position: relative;
-  height: 350px;
+  height: 250px;
   width: 100%;
   margin: 15px 0;
 }
