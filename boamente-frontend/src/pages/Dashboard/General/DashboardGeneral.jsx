@@ -222,14 +222,14 @@ const DashboardGeneral = () => {
         ? `${dashboardData.activePatients} ${dashboardData.activePatients === 1 ? 'paciente' : 'pacientes'}` 
         : 'Carregando...', 
       loading: dashboardData.activePatients === null,
-      info: 'Número total de pacientes ativos cadastrados na plataforma'
+      info: 'Número total de pacientes ativos cadastrados na plataforma.'
     },
     { 
       title: 'Insight Automático', 
       value: dashboardData.insightData?.insight || 'Carregando...', 
       highlight: true, 
       small: dashboardData.insightData?.context || '',
-      info: 'Resumo automático gerado com base na tendência de classificações negativas'
+      info: 'Resumo automático gerado com base na tendência de classificações negativas.'
     },
     { 
       title: 'Novos Casos de Risco Elevado', 
@@ -237,7 +237,7 @@ const DashboardGeneral = () => {
         ? `${dashboardData.newHighRiskCount} ${dashboardData.newHighRiskCount === 1 ? 'paciente' : 'pacientes'}`
         : 'Carregando...',
       small: 'no último mês',
-      info: 'Pacientes que passaram a ter maioria das classificações como negativas no último mês'
+      info: 'Pacientes que passaram a ter maioria das classificações como negativas no último mês.'
     },
     {
       title: 'Piora no Nível de Risco',
@@ -248,7 +248,7 @@ const DashboardGeneral = () => {
       small: dashboardData.worsenedRisk !== null
         ? `= ${dashboardData.worsenedRisk.percentual}% do total`
         : '',
-      info: 'Pacientes cuja média de risco nas últimas semanas aumentou em relação ao mês anterior'
+      info: 'Pacientes cuja média de risco nas últimas semanas aumentou em relação ao mês anterior.'
     }
   ];
 
@@ -291,7 +291,6 @@ const DashboardGeneral = () => {
 
       <div className={styles.gridCharts}>
         <section>
-          <h2 className={styles.heading}>Distribuição de Pacientes por Faixa Etária</h2>
           <BarAgeChart 
             labels={dashboardData.ageData.labels} 
             dataValues={dashboardData.ageData.values} 
@@ -299,7 +298,6 @@ const DashboardGeneral = () => {
         </section>
         
         <section>
-          <h2 className={styles.heading}>Distribuição de Pacientes por Sexo</h2>
           <PieSexChart dataValues={dashboardData.genderData} />
         </section>
 
@@ -316,14 +314,12 @@ const DashboardGeneral = () => {
         </section>
                 
         <section>
-          <h2 className={styles.heading}>Média Geral do Nível de Risco</h2>
           <AverageRiskLevelChart 
             weeklyData={dashboardData.sentimentDataByPeriod?.week || []} 
           />
         </section>
 
         <section>
-          <h2 className={styles.heading}>Distribuição de Pacientes por Nível de Risco</h2>
           <RiskLevelBarChart 
             labels={dashboardData.riskLevelData.map(item => 
               sentimentTranslationMap[item.sentiment] || item.sentiment

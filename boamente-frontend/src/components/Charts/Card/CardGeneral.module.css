@@ -1,5 +1,5 @@
 .card {
-  background-color: var(--label);
+  background-color: var(--form-background);
   border-radius: 10px;
   padding: 1.8rem;
   transition: transform 0.2s ease-in-out;
@@ -19,19 +19,22 @@
 }
 
 .title {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.5em;
-  color: var(--font-blue);
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2c3e50;
   display: flex;
   align-items: center;
+  gap: 6px;
 }
 
 .value {
   margin: 0;
-  font-size: 1.5em;
+  font-size: 1.4em;
   font-weight: bold;
   color: var(--blue);   
 }
+
 .highlight {
   color: var(--btn-background);  
 }
@@ -49,4 +52,14 @@
   color: #888;
   display: flex;
   align-items: center;
+}
+
+.customTooltip {
+  max-width: 300px;
+  font-size: 14px;
+  line-height: 1.5;
+  z-index: 1000;
+  background: rgba(0,0,0,0.9);
+  padding: 12px;
+  border-radius: 6px;
 }

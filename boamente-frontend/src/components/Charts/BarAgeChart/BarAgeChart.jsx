@@ -5,19 +5,24 @@ import {
   CategoryScale,
   LinearScale,
   Title,
-  Tooltip,
+  Tooltip as ChartJSTooltip,
   Legend
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
+import { ReactComponent as InfoIcon } from '../../../assets/icons/Info.svg';
+
 import "../../../style.css";
 import styles from "./BarAgeChart.module.css";
+import { Tooltip } from "react-tooltip";
+import { min } from "date-fns";
 
-ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
+ChartJS.register(BarElement, CategoryScale, LinearScale, Title, ChartJSTooltip, Legend);
 
 export default function BarAgeChart({ labels, dataValues, isExpandable = true }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const modalRef = useRef();
+  const tooltipId = "bar-age-tooltip";
 
   const resolvedBlue = getComputedStyle(document.documentElement).getPropertyValue('--blue').trim();
 
@@ -40,15 +45,18 @@ export default function BarAgeChart({ labels, dataValues, isExpandable = true })
         title: {
           display: true,
           text: 'Faixa Etária',
-          font: { size: 18, },
+          font: { size: 18 },
         }
       },
       y: {
         beginAtZero: true,
+        ticks: {
+          stepSize: 1,
+        },
         title: {
           display: true,
           text: 'Quantidade',
-          font: { size: 18, },
+          font: { size: 18 },
         }
       }
     },
@@ -78,33 +86,99 @@ export default function BarAgeChart({ labels, dataValues, isExpandable = true })
     };
   }, [isExpanded]);
 
+  const renderChart = () => (
+    <Bar 
+      data={data} 
+      options={options} 
+      className={styles.chart}
+    />
+  );
+
   if (!isExpandable) {
     return (
-      <div className={styles.barChart}>
-        <Bar data={data} options={options} />
+      <div className={styles.chartContainer}>
+        <div className={styles.chartHeader}>
+          <h3 className={styles.chartTitle}>
+            Distribuição de Pacientes por Faixa Etária
+            <span
+              data-tooltip-id={tooltipId}
+              data-tooltip-html="Distribuição dos pacientes por faixa etária.<br/><br/>Mostra a quantidade de pacientes em cada grupo de idade."
+              className={styles.infoIconWrapper}
+            >
+              <InfoIcon width={18} height={18} />
+            </span>
+          </h3>
+        </div>
+
+        <Tooltip id={tooltipId} place="top" className={styles.customTooltip} />
+
+        {(!dataValues || dataValues.every(v => v === 0)) ? (
+          <div className={styles.noDataContainer}>
+            <div className={styles.noDataContent}>
+              <InfoIcon width={48} height={48} className={styles.noDataIcon} />
+              <h4 className={styles.noDataTitle}>Dados Insuficientes</h4>
+              <p className={styles.noDataMessage}>
+                Nenhum paciente registrado nas faixas etárias
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className={styles.chartWrapper}>
+            {renderChart()}
+          </div>
+        )}
       </div>
     );
   }
 
   return (
-    <>
-      <div
-        className={styles.barChart}
-        onClick={() => setIsExpanded(true)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => e.key === "Enter" && setIsExpanded(true)}
-      >
-        <Bar data={data} options={options} />
+    <div className={styles.chartContainer}>
+      <div className={styles.chartHeader}>
+        <h3 className={styles.chartTitle}>
+          Distribuição de Pacientes por Faixa Etária
+          <span
+            data-tooltip-id={tooltipId}
+            data-tooltip-html="Distribuição dos pacientes por faixa etária.<br/><br/>Mostra a quantidade de pacientes em cada grupo de idade."
+            className={styles.infoIconWrapper}
+          >
+            <InfoIcon width={18} height={18} />
+          </span>
+        </h3>
       </div>
 
-      {isExpanded && (
-        <div className={styles.barChartOverlay}>
-          <div ref={modalRef} className={styles.barChartContent}>
-            <Bar data={data} options={options} />
+      <Tooltip id={tooltipId} place="top" className={styles.customTooltip} />
+
+      {(!dataValues || dataValues.every(v => v === 0)) ? (
+        <div className={styles.noDataContainer}>
+          <div className={styles.noDataContent}>
+            <InfoIcon width={48} height={48} className={styles.noDataIcon} />
+            <h4 className={styles.noDataTitle}>Dados Insuficientes</h4>
+            <p className={styles.noDataMessage}>
+              Nenhum paciente registrado nas faixas etárias
+            </p>
           </div>
         </div>
+      ) : (
+        <>
+          <div
+            className={styles.chartWrapper}
+            onClick={() => setIsExpanded(true)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === "Enter" && setIsExpanded(true)}
+          >
+            {renderChart()}
+          </div>
+
+          {isExpanded && (
+            <div className={styles.barChartOverlay}>
+              <div ref={modalRef} className={styles.barChartContent}>
+                {renderChart()}
+              </div>
+            </div>
+          )}
+        </>
       )}
-    </>
+    </div>
   );
 }
