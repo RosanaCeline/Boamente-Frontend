@@ -11,28 +11,26 @@ import { publicRoutes, protectedRoutes, privateRoutes, authRoutes } from './list
 export default function AppRoutes() {
   return (
     <Routes>
-      {/* Rotas de autenticação - sem layout protegido */}
+      {/* Rotas de autenticação */}
       {authRoutes.map(({ path, element }) => (
         <Route key={path} path={path} element={element} />
       ))}
 
-      {/* Rotas públicas normais */}
-      <Route path="/" element={<PublicLayout />}>
+      {/* Rotas públicas */}
+      <Route element={<PublicLayout />}>
         {publicRoutes.map(({ path, element }) => (
           <Route key={path} path={path} element={element} />
         ))}
       </Route>
 
-      {/* Rotas que precisam de token no query param (protegidas, mas com layout público) */}
-      <Route element={<PublicLayout />}>
-        <Route element={<ProtectedRoute routes={protectedRoutes} />}>
-          {protectedRoutes.map(({ path, element }) => (
-            <Route key={path} path={path} element={element} />
-          ))}
-        </Route>
-      </Route>*/
-    
-      {/* Rotas privadas protegidas por token */}
+      {/* Rotas protegidas */}
+      <Route element={<ProtectedRoute />}>
+        {protectedRoutes.map(({ path, element }) => (
+          <Route key={path} path={path} element={<PublicLayout>{element}</PublicLayout>} />
+        ))}
+      </Route>
+
+      {/* Rotas privadas */}
       <Route element={<PrivateRoute />}>
         <Route element={<PrivateLayout routes={privateRoutes} />}>
           {privateRoutes.map(({ path, element }) => (

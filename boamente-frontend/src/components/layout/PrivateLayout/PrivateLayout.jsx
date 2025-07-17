@@ -1,14 +1,28 @@
 import React from 'react';
-import '../../../style.css';
 import { useLocation, Outlet } from 'react-router-dom';
+import { matchRoutes } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import HeaderInternal from '../Header/private/HeaderInternal';
 import { jwtDecode } from 'jwt-decode';
 
 export default function PrivateLayout({ routes }) {
   const location = useLocation();
-  const currentRoute = routes.find(route => route.path === location.pathname);
-  const pageTitle = currentRoute ? currentRoute.title : '';
+  
+  const safeRoutes = Array.isArray(routes) ? routes : [];
+
+  const matchedRoutes = matchRoutes(safeRoutes, location);
+  
+  let currentRoute = null;
+  if (matchedRoutes) {
+    for (let i = matchedRoutes.length - 1; i >= 0; i--) {
+      if (matchedRoutes[i].route.title) {
+        currentRoute = matchedRoutes[i].route;
+        break;
+      }
+    }
+  }
+
+  const pageTitle = currentRoute?.title || 'Boamente';
 
   const token = localStorage.getItem('authToken');
   let firstName = 'Usuário';
@@ -28,7 +42,7 @@ export default function PrivateLayout({ routes }) {
     <>
       <Sidebar userName={firstName} />
       <HeaderInternal pageTitle={pageTitle} />
-      <main style={{ paddingLeft: 72 }}>  
+      <main style={{ paddingLeft: 72 }}>
         <Outlet />
       </main>
     </>
