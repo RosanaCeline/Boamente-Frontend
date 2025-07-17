@@ -11,50 +11,41 @@ import LineChart from "../../../components/Charts/LineChart/LineChart"
 import InsightCard from "../../../components/Charts/InsightCard/InsightCard"
 import RiskAverageChart from "../../../components/Charts/RiskAverageChart/RiskAverageChart"
 import RiskDistributionChart from "../../../components/Charts/RiskDistributionChart/RiskLevelDistribution"
-import RiskEvolutionChart from "../../../components/Charts/RiskEvolutionChart/RiskDistributionChart"
+import RiskEvolutionChart from "../../../components/Charts/RiskEvolutionChart/RiskEvolutionChart"
 
 import {
   fetchPatientInsight,
   fetchPatientLastNegativeClassification,
-  fetchPatientInfo
+  fetchPatientInfo,
+
+  // segundo dashboard
+  fetchPatientRiskEvolution,
+
+  // ultimo dashboard
+  fetchPatientRiskDistribution
 } from "../../../services/dashboardService";
 
 export default function PatientPanel() {
   const { id } = useParams();
-  const [registros, setRegistros] = useState(null);
   const [erro, setErro] = useState(null);
   const [insight, setInsight] = useState(null);
   const [lastNegativeDate, setLastNegativeDate] = useState(null);
   const [paciente, setPaciente] = useState(null);
-
-  // Simulação de carregamento de registros + fetch do insight individual
+  const [evolucaoData, setEvolucaoData] = useState({
+    labels: [],
+    data: []
+  });
+  const [distribuicaoData, setDistribuicaoData] = useState([0, 0, 0]);
+  
   useEffect(() => {
     setTimeout(() => {
       try {
-          fetchPatientInfo(id)
-            .then(data => {
-              console.log("Paciente recebido:", data);
-              setPaciente(data);
-            })
+        fetchPatientInfo(id)
+          .then(data => {
+            console.log("Paciente recebido:", data);
+            setPaciente(data);
+          })
             .catch(() => setPaciente(null));
-
-        setRegistros([
-          { data: "2025-05-01", media: 45.2, sessao: true },
-          { data: "2025-05-02", media: 60.1, sessao: false },
-          { data: "2025-05-03", media: 30.8, sessao: true },
-          { data: "2025-05-04", media: 42.6, sessao: false },
-          { data: "2025-05-05", media: 55.0, sessao: true },
-          { data: "2025-05-06", media: 50.3, sessao: false },
-          { data: "2025-05-07", media: 48.9, sessao: false },
-          { data: "2025-05-08", media: 62.7, sessao: true },
-          { data: "2025-05-09", media: 58.4, sessao: false },
-          { data: "2025-05-10", media: 70.2, sessao: true },
-          { data: "2025-05-11", media: 65.5, sessao: false },
-          { data: "2025-05-12", media: 61.3, sessao: false },
-          { data: "2025-05-13", media: 54.9, sessao: true },
-          { data: "2025-05-14", media: 52.0, sessao: false },
-          { data: "2025-05-15", media: 49.6, sessao: true },
-        ]);
       } catch (err) {
         setErro("Erro ao carregar dados do paciente.");
       }
@@ -65,14 +56,39 @@ export default function PatientPanel() {
       .then(setInsight)
       .catch(() => setInsight(null));
 
-    fetchPatientLastNegativeClassification(id)
+  fetchPatientLastNegativeClassification(id)
+    .then(data => {
+      if (data?.date) {
+        const date = new Date(data.date);
+        const formattedDate = new Intl.DateTimeFormat('pt-BR').format(date);
+        setLastNegativeDate(formattedDate);
+      } else {
+        setLastNegativeDate(null);
+      }
+    })
+    .catch(() => setLastNegativeDate(null));
+    
+    fetchPatientRiskEvolution(id)
       .then(data => {
-        setLastNegativeDate(data?.date || null);
+        setEvolucaoData({
+          labels: data.labels,
+          data: data.data
+        });
       })
-      .catch(() => setLastNegativeDate(null));
+      .catch(() => setEvolucaoData({ labels: [], data: [] }));
+
+    fetchPatientRiskDistribution(id)
+    .then(data => {
+      if (data && typeof data === "object") {
+        setDistribuicaoData([data.positive, data.neutral, data.negative]);
+      } else {
+        setDistribuicaoData([0, 0, 0]);
+      }
+    })
+    .catch(() => setDistribuicaoData([0, 0, 0]));
   }, [id]);
 
-  const isLoading = !Array.isArray(registros) || registros.length === 0;
+  const isLoading = !paciente || !insight || evolucaoData.labels.length === 0;
 
   return (
     <section className={styles.sectionPersonal}>
@@ -87,8 +103,8 @@ export default function PatientPanel() {
           <InsightCard
             title="Último Risco"
             value={
-              insight?.latestClassificationDate
-                ? `Alto (Negativo) em ${insight.latestClassificationDate}`
+              lastNegativeDate
+                ? `Alto (Negativo) em ${lastNegativeDate}`
                 : "Sem riscos negativos nos últimos 30 dias"
             }
             info="Exibe a data da última classificação negativa registrada para o paciente nos últimos 30 dias."
@@ -116,24 +132,15 @@ export default function PatientPanel() {
         ) : (
           <>
             <div className={styles.chartGroup}>
-
             <div className={styles.chartCard}>
-              <h3 className={styles.chartTitle}>Evolução do Risco</h3>
-                <LineChart registros={registros} isExpandable={true} />
-              </div>
-
-            <div className={styles.chartCard}>
-              <h3 className={styles.chartTitle}>Evolução de Níveis de Ideação Suicida</h3>
               <RiskEvolutionChart labels={evolucaoData.labels} data={evolucaoData.data} />
             </div>
 
             <div className={styles.chartCard}>
-              <h3 className={styles.chartTitle}>Média de Risco por Período</h3>
-              <RiskAverageChart datasetsByPeriod={mediaPorPeriodo} />
+              <RiskAverageChart patientId={id} />
             </div>
 
             <div className={styles.chartCard}>
-              <h3 className={styles.chartTitle}>Distribuição de Risco</h3>
               <RiskDistributionChart dataValues={distribuicaoData} />
             </div>
           </div>

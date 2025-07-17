@@ -39,7 +39,7 @@ export const protectedRoutes = [
 export const privateRoutes = [
     { divider: true },
     { path: '/dashboardgeral', element: <DashboardGeneral />, title: 'Dashboard Geral', layout: 'private', visible: true, icon: <LayoutDashboard size={iconSize} /> },
-    { path: '/paineldopaciente/:id', element: <PatientPanel />, title: 'Painel Clínico do Paciente', layout: 'private', visible: false,  icon: <LayoutDashboard size={iconSize} /> },
+    { path: '/paineldopaciente/:id', element: <PatientPanel />, title: 'Painel Clínico do Paciente', layout: 'private', visible: true,  icon: <LayoutDashboard size={iconSize} /> },
     { divider: true },
     { path: '/cadastrarpaciente', element: <CadastroPaciente />, title: 'Cadastro de Pacientes', layout: 'private', visible: true, icon: <UserPlus size={iconSize} /> },
     { path: '/listarpacientes', element: <ListPatient />, title: 'Listagem de Pacientes', layout: 'private', visible: true, icon: <Users size={iconSize} /> },

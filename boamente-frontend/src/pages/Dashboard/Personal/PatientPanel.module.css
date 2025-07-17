@@ -50,7 +50,6 @@
 /* Cada um */
 .chartCard {
   flex: 0 0 40%; 
-  aspect-ratio: 1 / 1;
   background-color: var(--form-background);
   padding: 1.5rem;
   border-radius: 0.5rem;

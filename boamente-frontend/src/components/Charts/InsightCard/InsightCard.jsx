@@ -20,14 +20,15 @@ export default function InsightCard({ title, value, info }) {
                 data-tooltip-content={info}
                 className={styles.infoIconWrapper}
               >
-                <InfoIcon />
+                <InfoIcon width={18} height={18} />
               </span>
-              <Tooltip id={tooltipId} place="top" />
             </>
           )}
         </h3>
       </div>
       <p className={styles.value}>{value}</p>
+
+      <Tooltip id={tooltipId} place="top" className={styles.customTooltip} />
     </div>
   );
 }

@@ -93,3 +93,14 @@ export const fetchPatientInsight = (patientId) =>
 
 export const fetchPatientLastNegativeClassification = (patientId) => 
   fetchData(`patient/${patientId}/latest-negative`, 'Erro ao buscar última classificação negativa do paciente');
+
+export const fetchPatientRiskEvolution = (patientId) =>
+  fetchData(`patient/${patientId}/risk-evolution`, 'Erro ao buscar evolução dos níveis de ideação suicida do paciente');
+
+export const fetchPatientRiskAverage = (patientId) =>
+  fetchData(`patient/${patientId}/risk-average`, 'Erro ao buscar média de risco por período');
+
+export const fetchPatientRiskDistribution = (patientId) =>
+  fetchData(`patient/${patientId}/risk-distribution`, 'Erro ao buscar distribuição de risco do paciente');
+
+
