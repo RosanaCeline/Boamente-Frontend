@@ -52,6 +52,79 @@
   box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
 }
 
+/* Spinner Styles */
+.fullPageSpinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 1000;
+}
+
+.spinnerContainer {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingLogo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  z-index: 2;
+}
+
+.spinner {
+  position: absolute;
+  width: 120px;  /* Tamanho do círculo azul */
+  height: 120px;
+  background-color: var(--blue); /* Cor azul sólida */
+  border-radius: 50%;
+  z-index: 1;
+  
+  /* Cria a borda externa animada */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -12px;  /* Posiciona fora do círculo */
+    left: -12px;
+    right: -12px;
+    bottom: -12px;
+    border: 8px solid rgba(0, 0, 0, 0.1);
+    border-top-color: var(--btn-background);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+.spinnerText {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: var(--font-blue);
+  text-align: center;
+}
+
+.errorText {
+  color: var(--error-color);
+  text-align: center;
+  padding: 2rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Responsividade */
 @media (max-width: 992px) {
   .sectionPersonal {

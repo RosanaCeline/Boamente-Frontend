@@ -88,62 +88,64 @@ export default function PatientPanel() {
     .catch(() => setDistribuicaoData([0, 0, 0]));
   }, [id]);
 
-  const isLoading = !paciente || !insight || evolucaoData.labels.length === 0;
+  const isLoading = !paciente || !insight || lastNegativeDate === null || 
+                   evolucaoData.labels.length === 0 || distribuicaoData.every(v => v === 0);
 
   return (
     <section className={styles.sectionPersonal}>
-      <aside className={styles.patientInformation}>
-        <PatientInfoCard patient={paciente} />
-        <div className={styles.cardsContainer}>
-          <InsightCard
-            title="Insight Individual"
-            value={insight?.insightText || "Carregando..."}
-            info="Indica se o risco do paciente aumentou ou reduziu na última semana com base em classificações negativas."
-          />
-          <InsightCard
-            title="Último Risco"
-            value={
-              lastNegativeDate
-                ? `Alto (Negativo) em ${lastNegativeDate}`
-                : "Sem riscos negativos nos últimos 30 dias"
-            }
-            info="Exibe a data da última classificação negativa registrada para o paciente nos últimos 30 dias."
-          />
-          <div className={styles.chartCard}>
-            <RiskDistributionChart dataValues={distribuicaoData} />
+      {isLoading ? (
+        <div className={styles.fullPageSpinner}>
+          <div className={styles.spinnerContainer}>
+            <img
+              src={LogoBoamente}
+              alt="Logo do Boamente"
+              className={styles.loadingLogo}
+            />
+            <div className={styles.spinner}></div>
           </div>
+          <p className={styles.spinnerText}>Carregando dados do paciente...</p>
         </div>
-      </aside>
-
-      <section className={styles.charts}>
-          {erro ? (
-            <p>{erro}</p>
-          ) : isLoading ? (
-            <div className={styles.spinnerWrapper}>
-              <div className={styles.spinnerBackground}>
-                <img
-                  src={LogoBoamente}
-                  alt="Logo do Boamente"
-                  className={styles.fixedImage}
-                />
-                <div className={styles.spinner}></div>
+      ) : (
+        <>
+          <aside className={styles.patientInformation}>
+            <PatientInfoCard patient={paciente} />
+            <div className={styles.cardsContainer}>
+              <InsightCard
+                title="Insight Individual"
+                value={insight?.insightText || "Sem dados disponíveis"}
+                info="Indica se o risco do paciente aumentou ou reduziu na última semana com base em classificações negativas."
+              />
+              <InsightCard
+                title="Último Risco"
+                value={
+                  lastNegativeDate
+                    ? `Alto (Negativo) em ${lastNegativeDate}`
+                    : "Sem riscos negativos nos últimos 30 dias"
+                }
+                info="Exibe a data da última classificação negativa registrada para o paciente nos últimos 30 dias."
+              />
+              <div className={styles.chartCard}>
+                <RiskDistributionChart dataValues={distribuicaoData} />
               </div>
-              <p className={styles.spinnerText}>Carregando dados do paciente...</p>
             </div>
-          ) : (
-            <>
+          </aside>
+
+          <section className={styles.charts}>
+            {erro ? (
+              <p className={styles.errorText}>{erro}</p>
+            ) : (
               <div className={styles.chartGroup}>
-              <div className={styles.chartCard}>
-                <RiskEvolutionChart labels={evolucaoData.labels} data={evolucaoData.data} />
+                <div className={styles.chartCard}>
+                  <RiskEvolutionChart labels={evolucaoData.labels} data={evolucaoData.data} />
+                </div>
+                <div className={styles.chartCard}>
+                  <RiskAverageChart patientId={id} />
+                </div>
               </div>
-
-              <div className={styles.chartCard}>
-                <RiskAverageChart patientId={id} />
-              </div>
-            </div>
-          </>
-        )}
-      </section>
+            )}
+          </section>
+        </>
+      )}
     </section>
   );
 }
