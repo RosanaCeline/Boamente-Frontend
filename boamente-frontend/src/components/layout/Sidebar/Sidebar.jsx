@@ -5,6 +5,7 @@ import { User } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { privateRoutes } from '../../../routes/listRoutes';
 import { FaBars } from 'react-icons/fa';
+import { X } from "lucide-react";
 
 const iconSize = 25;
 
@@ -28,16 +29,16 @@ export default function Sidebar({ userName }) {
   const toggleSidebar = () => setOpen(prev => !prev);
 
   // Largura da sidebar: no mobile toggle entre 0 e 40vw, no desktop hover entre 4vw e 15vw
-  const widthVw = isMobile ? (open ? 40 : 0) : isHovered ? 15 : 4;
+  const widthPx = isMobile ? (open ? 300 : 0) : isHovered ? 300 : 64;
 
   return (
     <>
       {/* Hamburger só aparece no mobile */}
-      {isMobile && (
+      {isMobile && !open && (
         <button
           className={styles.hamburgerButton}
           onClick={toggleSidebar}
-          aria-label={open ? "Fechar menu" : "Abrir menu"}
+          aria-label="Abrir menu"
         >
           <FaBars size={28} />
         </button>
@@ -49,16 +50,27 @@ export default function Sidebar({ userName }) {
           className={styles.sidebarWrapper}
           onMouseEnter={() => !isMobile && setIsHovered(true)}
           onMouseLeave={() => !isMobile && setIsHovered(false)}
-          onClick={() => isMobile && toggleSidebar()} // clicar fecha no mobile também (opcional)
         >
           <motion.aside
             className={styles.sidebar}
-            animate={{ width: `${widthVw}vw` }}
+            animate={{ width: `${widthPx}px` }}
             transition={{ duration: 0.4 }}
           >
             <div className={styles.userSection}>
               <User size={iconSize + 5} />
-              {(isHovered || isMobile) && <span>Olá, {userName}!</span>}
+              {(isHovered || isMobile) && (
+                <>
+                  <span>Olá, {userName}!</span>
+                  {isMobile && (
+                    <X
+                      size={22}
+                      className={styles.closeIcon}
+                      onClick={toggleSidebar}
+                      aria-label="Fechar menu"
+                    />
+                  )}
+                </>
+              )}
             </div>
 
             <div className={styles.menu}>

@@ -2,9 +2,6 @@
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
-  width: max-content;
-  max-width: 40vw;
   z-index: 1200;
   pointer-events: none;
 }
@@ -30,6 +27,18 @@
   font-size: 1.8rem;
   white-space: nowrap;
   overflow: hidden;
+  width: 100%;
+}
+
+.closeIcon {
+  margin-left: auto;
+  cursor: pointer;
+  color: white;
+  transition: color 0.3s;
+}
+
+.closeIcon:hover {
+  color: #ccc;
 }
 
 .menu {
@@ -52,22 +61,29 @@
   color: var(--light);
   background: none;
   border: none;
+  width: 100%;
+  font-weight: 400;
 }
 
 .menuItem:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+.userSection svg,
 .menuItem svg {
   color: var(--light);
-  transition: color 0.3s;
+  flex-shrink: 0;
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  transition: none;
 }
 
 .menuItem:hover svg {
   color: white;
 }
 
-.menuItem.active,
+.menuItem.active span,
 .menuItem.active svg {
   color: white;
 }
@@ -87,7 +103,6 @@
 
 @media (max-width: 1024px) {
   .userSection {
-    margin-top: 4rem;
     font-size: 1.2rem;
   }
 
