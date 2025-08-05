@@ -1,13 +1,13 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import { AuthHandlers } from '../../services/authHandlers';
 import AuthLayout from '../../components/Auth/AuthLayout';
 
 export default function Register() {
-  const navigate = useNavigate();
+  const [alertMessage, setAlertMessage] = useState(null);
+  const [alertType, setAlertType] = useState('error');
 
   const handleRegisterSubmit = async (formData) => {
-      await AuthHandlers.register(formData, navigate);
+    await AuthHandlers.register(formData, setAlertMessage, setAlertType);
   };
 
   const fields = [
@@ -57,7 +57,7 @@ export default function Register() {
       title="Cadastre-se"
       subtitle={
         <>
-          <p style={{ fontWeight: '700'}}>
+          <p style={{ fontWeight: '700' }}>
             Bem-vindo ao Boamente!
           </p>
           <div style={{
@@ -66,8 +66,8 @@ export default function Register() {
             lineHeight: '1.4',
             padding: '0.5rem',
           }}>
-            Seus dados serão analisados. 
-            Quando validados, você receberá um e-mail com as 
+            Seus dados serão analisados.
+            Quando validados, você receberá um e-mail com as
             instruções de acesso.
           </div>
         </>
@@ -76,6 +76,9 @@ export default function Register() {
       links={links}
       buttonText="Cadastrar-se"
       onSubmit={handleRegisterSubmit}
+      alertMessage={alertMessage}
+      alertType={alertType}
+      onCloseAlert={() => setAlertMessage(null)}
     />
   );
 }

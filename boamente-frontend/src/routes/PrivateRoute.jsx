@@ -27,6 +27,7 @@ export default function PrivateRoute() {
         const backendValid = await validateAuthTokenBackend(token);
         setIsValid(backendValid);
       } catch {
+        localStorage.removeItem('authToken');
         setIsValid(false);
       }
     }

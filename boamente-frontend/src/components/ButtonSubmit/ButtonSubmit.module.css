@@ -13,10 +13,11 @@
     align-items: center;         
     justify-content: center;     
     margin: auto; 
+    transition: all 0.2s ease-in-out;
 }
 
 .button:hover {
     background-color: var(--btn-background-hover);
     color: var(--label);
-    transition: all 0.2s ease-in-out;
+    transform: scale(1.02);
 }

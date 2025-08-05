@@ -46,7 +46,13 @@ export const privateRoutes = [
     { divider: true },
     { path: '/configuracoes', element: <ConfigurationPage />, title: 'Configurações', layout: 'private', visible: true, icon: <Settings size={iconSize} /> },
     { path: '/suporte', element: <Support />, title: 'Suporte', layout: 'private', visible: true, icon: <Headphones size={iconSize} /> },
-    { title: 'Sair', layout: 'private', visible: true, icon: <LogOut size={iconSize} /> , action: () => window.location.href = '/' },
+    { title: 'Sair', layout: 'private', visible: true, icon: <LogOut size={iconSize} /> , 
+        action: () => {
+            localStorage.removeItem('authToken');
+            console.log(localStorage)
+            window.location.href = '/login';
+        }
+    },
 ];
 
 export const authRoutes = [
