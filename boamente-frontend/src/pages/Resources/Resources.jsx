@@ -6,6 +6,9 @@ export default function Resources() {
         <main>
             <section className={styles.artigos}>
                 <h1>Artigos</h1>
+                <p className={styles.descricao}>
+                    Abaixo você encontra os artigos criados e utilizados como base para o desenvolvimento do sistema.
+                </p>
                 <nav className={styles.listagem}>
                     <ResourceCard
                         titulo="Comparative analysis of BERT-based and generative large language models for detecting suicidal ideation: a performance evaluation study"
@@ -30,6 +33,9 @@ export default function Resources() {
 
             <section className={styles.materiais}>
                 <h1>Materiais de Desenvolvimento</h1>
+                <p className={styles.descricao}>
+                    Abaixo você encontra materiais utilizados durante o desenvolvimento do sistema, como repositórios e ferramentas.
+                </p>
                 <nav className={styles.listagem}>
                     <ResourceCard
                         titulo="Repositório do Modelo BERT"

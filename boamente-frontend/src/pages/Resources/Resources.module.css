@@ -22,11 +22,19 @@ h3 {
     font-size: 1.8em;
 }
 
+.descricao {
+    text-align: center;
+    margin: 1.5rem auto 3rem auto;
+    font-size: 1.4rem;
+    color: var(--cor-dark-blue);
+    max-width: 60ch;
+    padding-top: 1rem;
+    width: 85%;
+}
 
 .artigos,
 .materiais {
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
 
@@ -39,21 +47,27 @@ h3 {
 }
 .artigos {
     min-height: 100vh;
-    padding-top: 5%;
+    padding-top: 90px;
 }
-.artigos h1 {
-    margin: 2rem;
-    text-align: center;
-}
+
 .materiais {
     height: calc(100vh - var(--footer-height));
     padding-bottom: 3%;
     align-items: stretch;
 }
-.materiais h1 {
+
+.artigos h1 {
+    margin: 3rem 3rem 0 3rem;
     text-align: center;
-    margin: 2rem;
-    margin-bottom: 3rem;
+    white-space: normal;
+    word-break: break-word; 
+}
+
+.materiais h1 {
+    margin: 3rem 3rem 0 3rem;
+    text-align: center;
+    white-space: normal;
+    word-break: break-word; 
 }
 
 .listagem {
@@ -62,7 +76,7 @@ h3 {
     flex-direction: row;
     justify-content: center;
     gap: 1.5rem;
-    width: 70%;
+    width: 90%;
     align-items: stretch;
     margin: 0 auto;
 }
@@ -82,6 +96,11 @@ h3 {
     gap: 3em;
     box-sizing: border-box;
 }
+
+.recursos span {
+    font-size: 1.2em;
+}
+
 .btnRecursos {
     cursor: pointer;
     background-color: #FFD95A;
@@ -91,49 +110,51 @@ h3 {
     border: 0;
     border-radius: 1.5em;
 
-    height: 2.5rem;
-    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    padding: 1em 1.5em;
+
+    white-space: normal;
+    word-break: break-word; 
+    text-align: center; 
+    transition: all 0.2s ease-in-out;
+
+    max-width: 100%;
 }
+
 .btnRecursos:hover {
     background-color: #417D6D;
     color: #F8F9FA;
-    transition: all 0.2s ease-in-out;
+    transform: scale(1.02);
 }
 
 
 /* Responsiveness */
 
 @media (max-width: 1024px) {
-    .artigos {
-        padding-top: 10%;
-    }
     .materiais {
         padding-bottom: 2%;
     }
-    .artigos h1, .materiais h1 {
-        font-size: 3em;
-    }
-    
-    h3 {
-        font-size: 1.5em;
-    }
-    span {
+    .listagem h3 {
         font-size: 1.5em;
     }
     .listagem {
         flex-direction: column;
+        align-items: center;
         width: 85%;
         gap: 1.5rem;
         padding: 5% 0;
+        height: 100%;
     }
     .recursos {
-        max-width: 90%;
+        width: 90%;
         padding: 6%;
         gap: 2em;
     }
     .btnRecursos {
-        font-size: 1.6em;
-        padding: 0 1.5rem;
+        padding: 1em 1.8em;
     }
 }
 
@@ -149,29 +170,32 @@ h3 {
     .listagem {
         width: 90%;
         flex-direction: column;
+        align-items: center;
         gap: 1.2rem;
     }
 
     .recursos {
         max-width: 90%;
-        padding: 6% 4%;
+        padding: 1em 1.8em;
         gap: 1.5em;
-    }
-
-    .btnRecursos {
-        font-size: 1.5em;
-        height: 3rem;
     }
 }
 
 
 @media (max-width: 480px) {
-    .artigos, .materiais {
-        padding-top: 30%;
+    .materiais {
+        padding-top: 10%;
     }
-    h1 {
-        font-size: 1.5em;
+
+    .artigos h1,
+    .materiais h1 {
+        font-size: 2em;
     }
+
+    .descricao {
+        font-size: 1.2rem;
+    }
+
     .listagem {
         width: 100%;
         flex-direction: column;
@@ -180,14 +204,13 @@ h3 {
 
     .recursos {
         max-width: 90%;
-        padding: 8% 3%;
+        padding: 8% 6%;
         gap: 1.2em;
     }
 
     .btnRecursos {
         width: 90%;
-        font-size: 1.2em;
-        height: 3.2rem;
-        padding: 0 3%;
+        max-height: 55px;
+        font-size: 0.9em;
     }
 }

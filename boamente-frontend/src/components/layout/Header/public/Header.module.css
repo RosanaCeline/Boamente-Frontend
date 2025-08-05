@@ -39,9 +39,9 @@
     align-items: center;
     justify-content: center;
     min-width: 40%;
-    max-height: var(--header-height);
+    max-height: 100%;
     position: relative;
-    margin-right: 2rem;
+    padding-right: 20px;
 }
 .navegation ul {
     display: flex;
@@ -66,6 +66,11 @@
     text-decoration: none;
     font-weight: 500;
     white-space: nowrap;
+    transition: transform 0.2s ease;
+    display: inline-block;
+}
+.navegation a:hover {
+    transform: scale(1.02);
 }
 
 button {
@@ -75,17 +80,35 @@ button {
     border-radius: 1.2em;
     padding: 0.5em 1.8em;
     white-space: nowrap;
+    max-height: 40px;
 }
+
 .btnLogin {
     background-color: #FFD95A;
     color: #000000;
     border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
+.btnLogin:hover {
+    background-color: #e6bf42;
+    transform: scale(1.02);
+}
+
 .btnCadastro {
     background-color: transparent;
-    border: 0.2em solid #F8F9FA;
+    border: 0.15em solid #F8F9FA;
     border-color: #F8F9FA;
     color:#F8F9FA;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btnCadastro:hover {
+    background-color: #F8F9FA;
+    color: #000000;
+    transform: scale(1.02);
 }
 
 .buttonNav {
@@ -127,7 +150,7 @@ button {
         transform-origin: center;
     }
     .topActive {
-        transform: translateY(10px) rotate(45deg);
+        transform: translateY(5px) rotate(45deg);
     }
     .middleActive {
         opacity: 0;
@@ -145,7 +168,6 @@ button {
     right: 0;
     background-color: var(--cor-dark-blue);
     padding: 2rem 1.5rem;
-    box-shadow: -1em 0 1em rgba(0, 0, 0, 0.4);
     z-index: 10500;
   }
   .navegation.active ul {

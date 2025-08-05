@@ -13,6 +13,9 @@ export default function Contact() {
     <main>
       <section className={styles.pesquisadores}>
           <h1>Pesquisadores Responsáveis</h1>
+          <p className={styles.descricao}>
+            Conheça os pesquisadores responsáveis pelo desenvolvimento do sistema, suas áreas de atuação e vínculos institucionais.
+          </p>
           <div className={styles.listagem}>
             <Pessoa
               foto={ArielImg}
@@ -37,6 +40,9 @@ export default function Contact() {
 
       <section className={styles.alunos}>
         <h1>Alunos Pesquisadores</h1>
+        <p className={styles.descricao}>
+          Estes são os alunos que contribuíram com o projeto por meio de pesquisas e desenvolvimento de soluções inovadoras.
+        </p>
         <div className={styles.listagem}>
           <Pessoa
             foto={LaisImg}

@@ -17,8 +17,18 @@ h1 {
     font-weight: bold;
 }
 h3 {
-    font-size: 2em;
+    font-size: 1.8em;
     font-weight: bold;
+}
+
+.descricao {
+    text-align: center;
+    margin: 1.5rem auto 3rem auto;
+    font-size: 1.4rem;
+    color: var(--cor-dark-blue);
+    max-width: 60ch;
+    padding-top: 1rem;
+    width: 85%;
 }
 
 .pesquisadores,
@@ -36,31 +46,30 @@ h3 {
     transition: all 0.2s ease-in-out;
 }
 .pesquisadores {
-    padding-top: 8%;
+    padding-top: 90px;
 }
 .alunos {
     background-color: #D1D3D5;
     height: calc(100vh - var(--footer-height));
-    padding-top: 1%;
+    padding-bottom: 3%;
+    align-items: stretch;
 }
 
 .alunos h1, .pesquisadores h1 {
-    margin: 2rem;
+    margin: 3rem 3rem 0 3rem;
     text-align: center;
-    font-size: 3rem;
+    white-space: normal;
+    word-break: break-word;
 }
 
 .listagem {
     display: flex;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    width: 75%;
-
-    text-align: center;
-    border-radius: 1em;
-    gap: 1.4%;
-    padding-top: 2%;
+    gap: 1.5rem;
+    width: 90%;
+    align-items: stretch;
     margin: 0 auto;
 }
 
@@ -79,8 +88,7 @@ h3 {
 
     background-color: #EFEFEF;
     border-radius: 1em;
-    padding: 2.2em;
-    margin: 0.3rem 0;
+    padding: 4% 3%;
     gap: 1em;
     box-sizing: border-box;
 }
@@ -94,13 +102,24 @@ h3 {
     border: 0;
     border-radius: 1.5em;
 
-    height: 2.5rem;
-    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    padding: 1em 1.5em;
+
+    white-space: normal;
+    word-break: break-word; 
+    text-align: center; 
+    transition: all 0.2s ease-in-out;
+
+    max-width: 100%;
 }
+
 .btnRecursos:hover {
     background-color: #417D6D;
     color: #F8F9FA;
-    transition: all 0.2s ease-in-out;
+    transform: scale(1.02);
 }
 
 /* Responsiveness */
