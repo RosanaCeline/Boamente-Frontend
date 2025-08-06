@@ -14,12 +14,11 @@
 
 .auth {
     display: flex;
-    height: 100vh;
-    background-color: var(--cor-blue-dark);
+    min-height: 100vh;
+    background: linear-gradient(135deg, #012538 20%, #023954 60%, #0277A3 100%);
 }
 
 .authLogo {
-    background-color: var(--cor-blue-dark);
     flex: 2.5;
     display: flex;
     justify-content: center;
@@ -31,6 +30,7 @@
 }
 
 .authForm {
+    position: relative;
     flex: 2;
     display: flex;
     flex-direction: column;
@@ -40,6 +40,7 @@
     background-color: #FFFFFF;
     padding: 4vh 5vw;
     max-width: 100%;
+    border-radius: 5em 0 0 5em;
     box-sizing: border-box;
 }
 .authForm,
@@ -47,6 +48,19 @@
     overflow-wrap: break-word;
     word-break: break-word;
 }
+
+.goBack {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  align-self: flex-start;
+  justify-self: auto;
+  padding: 2vh 3vw;
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+}
+
 .authFormTitles {
     text-align: center;
     max-width: 60%;
@@ -81,15 +95,33 @@
     box-shadow: 0 .2em .3em #000000;
 }
 
+.checkboxField {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  box-shadow: 0 0 0;
+  margin-bottom: 2rem;
+}
+
 .link {
     color: var(--cor-texto-link);
     text-decoration: none;
     align-self: flex-end;
     margin: 0.5em 0 2em 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.link:hover {
+    transform: scale(1.02);
 }
 
 /* Responsiveness */
 @media screen and (max-width: 1300px) {
+    .authFormTitles {
+        max-width: 80%;
+    }
+
     .authForm form {
         max-width: 80%;
     }
@@ -97,7 +129,6 @@
 
 @media screen and (max-width: 1024px) {
     .authForm {
-        justify-content: right;
         gap: 0;
     }
     .authLogo {
@@ -106,10 +137,12 @@
     .authForm {
         display: flex;
         margin: 10%;
-        padding: 5% 0;
+        padding: 0;
         overflow-y: auto;   
         overflow-x: hidden; 
         box-sizing: border-box;
+        border-radius: 0;
+        justify-content: center;
     }
     .authFormTitles {
         max-width: 80%;
@@ -132,7 +165,10 @@
     .authForm {
         margin: 5%;
         padding: 10% 0;
+        justify-content: center;
     }
 
-    
+    .authFormTitles span {
+        font-size: 1em;
+    }
 }

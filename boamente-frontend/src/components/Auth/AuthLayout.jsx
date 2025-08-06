@@ -2,14 +2,20 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Undo2  } from 'lucide-react';
 import * as yup from 'yup';
 import styles from './AuthLayout.module.css';
 import logoBoamente from '../../assets/images/homepage/logo-boamente-upscale-Ctitulo.png';
 import ButtonSubmit from '../ButtonSubmit/ButtonSubmit';
 import LabelInput from '../LabelInput/LabelInput';
+import Alert from '../Alert/Alert';
 
-export default function AuthLayout({ title, subtitle, fields, links, onSubmit, buttonText, redirectOnSubmit }) {
+export default function AuthLayout({ title, subtitle, fields, links, onSubmit, buttonText, redirectOnSubmit, alertMessage, alertType, onCloseAlert }) {
   const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate('/');
+  };
 
   // Define o schema dinamicamente com base nos campos recebidos
   const validationSchema = yup.object().shape(
@@ -38,7 +44,7 @@ export default function AuthLayout({ title, subtitle, fields, links, onSubmit, b
           acc[field.name] = yup
             .string()
             .required('CRP/CRM é obrigatório.')
-            .max(10, 'CRP/CRM deve ter no máximo 10 caracteres.');
+            .max(20, 'CRP/CRM deve ter no máximo 20 caracteres.');
           break;
         case 'uf':
           acc[field.name] = yup
@@ -83,13 +89,39 @@ export default function AuthLayout({ title, subtitle, fields, links, onSubmit, b
       </div>
 
       <section className={styles.authForm}>
+        <span className={styles.goBack} onClick={handleGoBack} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && handleGoBack()}>
+          <Undo2  size={20} style={{ marginRight: '0.5rem' }} />
+          Voltar
+        </span>
         <div className={styles.authFormTitles}>
           <h1>{title}</h1>
           {subtitle && <span>{subtitle}</span>}
         </div>
 
+        {alertMessage && (
+          <Alert 
+            message={alertMessage} 
+            type={alertType} 
+            onClose={onCloseAlert} 
+          />
+        )}
+
         <form onSubmit={handleSubmit(internalSubmit)} noValidate>
           {fields.map(({ id, label, type, name, placeholder }) => {
+            if (type === 'checkbox') {
+              return (
+                <div key={id} className={styles.checkboxField}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      {...register(name)}
+                    />
+                    {label}
+                  </label>
+                </div>
+              );
+            }
+
             if (fieldsWithMask.includes(name)) {
               return (
                 <Controller
