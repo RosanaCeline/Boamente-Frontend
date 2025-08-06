@@ -1,0 +1,102 @@
+.container {
+  margin: 5rem 5rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+}
+
+.configurationContainer {
+  background-color: var(--form-background);
+  padding: 1.5rem;
+}
+
+.headerSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--grey);  
+  padding-bottom: 0.5rem;  
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--font-blue);
+  margin: 0;
+  text-align: left;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--grey);
+  margin: 0;
+  text-align: left;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.gridTwoColumns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.fieldRow .inputAndButtons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  justify-content: space-between;
+}
+
+.fieldRow > *:first-child {
+  flex-grow: 1;
+  min-width: 0; 
+  margin-right: 16px;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+submitButton {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  background-color: var(--btn-background);
+  color: var(--font-blue);
+  font-weight: 600;
+  margin-top: 2rem;
+  transition: background-color 0.3s ease;
+  min-width: 140px;
+}
+
+.submitButton:hover {
+  background-color: var(--btn-background-hover);
+  color: var(--label);
+  transform: translateY(-2px);
+}
+
+.footerMessage {
+  font-size: 0.875rem;
+  color: #666;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.labelGrayDark {
+  color: #444;
+  font-weight: 500;
+}
