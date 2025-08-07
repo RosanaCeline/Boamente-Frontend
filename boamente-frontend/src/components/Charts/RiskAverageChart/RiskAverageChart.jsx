@@ -10,7 +10,7 @@ export default function RiskAverageChart({ patientId }) {
   const canvasRef = useRef(null);
   const tooltipId = "tooltip-risk-average";
   const chartRef = useRef(null);
-  const [selectedPeriod, setSelectedPeriod] = useState("mes");
+  const [selectedPeriod, setSelectedPeriod] = useState("dia");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [chartData, setChartData] = useState({
@@ -109,7 +109,7 @@ export default function RiskAverageChart({ patientId }) {
                   const value = context.raw;
                   let riskLevel = "";
                   if (value <= 1.3) riskLevel = "Baixo";
-                  else if (value <= 2.3) riskLevel = "Moderado";
+                  else if (value < 2.4) riskLevel = "Moderado";
                   else riskLevel = "Alto";
                   
                   return [
@@ -209,7 +209,16 @@ export default function RiskAverageChart({ patientId }) {
           Média de Risco por Período
           <span
             data-tooltip-id={tooltipId}
-            data-tooltip-html="Este gráfico mostra a média do nível de risco em diferentes períodos.<br/><br/><strong>Cores:</strong><br/>• Mensal <span style='color:#4E79A7'>■</span><br/>• Semanal <span style='color:#F28E2B'>■</span><br/>• Diário <span style='color:#59A14F'>■</span>"
+            data-tooltip-html="
+              Este gráfico mostra a média do nível de risco em diferentes períodos.<br/><br/>
+              <strong>Cores:</strong><br/>
+              • Diário <span style='color:#59A14F'>■</span><br/>
+              • Semanal <span style='color:#F28E2B'>■</span><br/>
+              • Mensal <span style='color:#4E79A7'>■</span><br/><br/>
+              <strong>Interpretação:</strong><br/>
+              • 1-1.3: Risco Baixo <br/>
+              • 1.4-2.3: Risco Moderado<br/>
+              • 2.4-3: Risco Alto"
             className={styles.infoIconWrapper}
           >
             <InfoIcon width={18} height={18} />
@@ -233,9 +242,9 @@ export default function RiskAverageChart({ patientId }) {
             borderColor: periodColors[selectedPeriod]
           }}
         >
-          <option value="mes">Últimos 3 meses</option>
-          <option value="semana">Últimas 4 semanas</option>
           <option value="dia">Últimos 7 dias</option>
+          <option value="semana">Últimas 4 semanas</option>
+          <option value="mes">Últimos 3 meses</option>
         </select>
       </div>
 

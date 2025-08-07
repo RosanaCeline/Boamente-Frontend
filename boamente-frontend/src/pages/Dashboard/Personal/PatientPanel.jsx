@@ -29,67 +29,75 @@ export default function PatientPanel() {
   const { id } = useParams();
   const [erro, setErro] = useState(null);
   const [insight, setInsight] = useState(null);
-  const [lastNegativeDate, setLastNegativeDate] = useState(null);
+  const [lastNegativeDate, setLastNegativeDate] =  useState(undefined);
   const [paciente, setPaciente] = useState(null);
   const [evolucaoData, setEvolucaoData] = useState({
     labels: [],
     data: []
   });
   const [distribuicaoData, setDistribuicaoData] = useState([0, 0, 0]);
+
+  const [loadingPaciente, setLoadingPaciente] = useState(true);
+  const [loadingInsight, setLoadingInsight] = useState(true);
+  const [loadingLastNegativeDate, setLoadingLastNegativeDate] = useState(true);
+  const [loadingEvolucao, setLoadingEvolucao] = useState(true);
+  const [loadingDistribuicao, setLoadingDistribuicao] = useState(true);
   
   useEffect(() => {
-    setTimeout(() => {
-      try {
-        fetchPatientInfo(id)
-          .then(data => {
-            console.log("Paciente recebido:", data);
-            setPaciente(data);
-          })
-            .catch(() => setPaciente(null));
-      } catch (err) {
-        setErro("Erro ao carregar dados do paciente.");
-      }
-    }, 2000);
+    setLoadingPaciente(true);
+    setLoadingInsight(true);
+    setLoadingLastNegativeDate(true);
+    setLoadingEvolucao(true);
+    setLoadingDistribuicao(true);
 
-    // Busca o insight individual da API
+    fetchPatientInfo(id)
+      .then(data => setPaciente(data))
+      .catch(() => setPaciente(null))
+      .finally(() => setLoadingPaciente(false));
+
     fetchPatientInsight(id)
-      .then(setInsight)
-      .catch(() => setInsight(null));
+      .then(data => setInsight(data))
+      .catch(() => setInsight(null))
+      .finally(() => setLoadingInsight(false));
 
-  fetchPatientLastNegativeClassification(id)
-    .then(data => {
-      if (data?.date) {
-        const date = new Date(data.date);
-        const formattedDate = new Intl.DateTimeFormat('pt-BR').format(date);
-        setLastNegativeDate(formattedDate);
-      } else {
-        setLastNegativeDate(null);
-      }
-    })
-    .catch(() => setLastNegativeDate(null));
-    
-    fetchPatientRiskEvolution(id)
+    fetchPatientLastNegativeClassification(id)
       .then(data => {
-        setEvolucaoData({
-          labels: data.labels,
-          data: data.data
-        });
+        if (data?.date) {
+          const date = new Date(data.date);
+          const formattedDate = new Intl.DateTimeFormat('pt-BR').format(date);
+          setLastNegativeDate(formattedDate);
+        } else {
+          setLastNegativeDate(null);
+        }
       })
-      .catch(() => setEvolucaoData({ labels: [], data: [] }));
+      .catch(() => setLastNegativeDate(null))
+      .finally(() => setLoadingLastNegativeDate(false));
+
+    fetchPatientRiskEvolution(id)
+      .then(data => setEvolucaoData({ labels: data.labels, data: data.data }))
+      .catch(() => setEvolucaoData({ labels: [], data: [] }))
+      .finally(() => setLoadingEvolucao(false));
 
     fetchPatientRiskDistribution(id)
-    .then(data => {
-      if (data && typeof data === "object") {
-        setDistribuicaoData([data.positive, data.neutral, data.negative]);
-      } else {
-        setDistribuicaoData([0, 0, 0]);
-      }
-    })
-    .catch(() => setDistribuicaoData([0, 0, 0]));
+      .then(data => {
+        if (data && typeof data === "object") {
+          setDistribuicaoData([data.positive, data.neutral, data.negative]);
+        } else {
+          setDistribuicaoData([0, 0, 0]);
+        }
+      })
+      .catch(() => setDistribuicaoData([0, 0, 0]))
+      .finally(() => setLoadingDistribuicao(false));
   }, [id]);
 
-  const isLoading = !paciente || !insight || lastNegativeDate === null || 
-                   evolucaoData.labels.length === 0 || distribuicaoData.every(v => v === 0);
+  console.log("Paciente: " + paciente)
+  console.log("Insight: " + insight)
+  console.log("Ultima data: " + lastNegativeDate)
+  console.log("EvolucaoData tamanho: " + evolucaoData.labels.length)
+  console.log("Distribuição Data: " + distribuicaoData)
+
+  const isLoading = loadingPaciente || loadingInsight || loadingLastNegativeDate ||
+                  loadingEvolucao || loadingDistribuicao;
 
   return (
     <section className={styles.sectionPersonal}>

@@ -29,14 +29,20 @@
 }
 
 .value {
+  display: flex;
+  align-items: center;
   margin: 0;
   font-size: 1.4em;
   font-weight: bold;
-  color: var(--blue);   
+  color: var(--blue);  
+  height: 100%;
 }
 
 .highlight {
+  display: flex;
+  align-items: center;
   color: var(--btn-background);  
+  height: 100%;
 }
 
 .small {

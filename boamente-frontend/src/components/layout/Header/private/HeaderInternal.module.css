@@ -25,7 +25,7 @@
   display: flex;
   align-items: center;
   gap: 3rem;
-  margin-left: auto;
+  margin-left: 0;
 }
 
 .iconButton {
@@ -40,4 +40,17 @@
 .iconButton:focus {
   background-color: rgba(0, 0, 0, 0.05);
   outline: none;
+}
+
+@media (max-width: 480px) {
+  .header {
+    margin-left: 0;
+    padding: 0 1.5rem;
+    border-bottom-left-radius: 0;
+  }
+
+  .title {
+    margin-left: 2em;
+    font-size: 1.5em;
+  }
 }

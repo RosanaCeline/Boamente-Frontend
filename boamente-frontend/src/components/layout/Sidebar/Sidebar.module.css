@@ -24,7 +24,7 @@
   gap: 0.75rem;
   padding: 0 1.2rem 1.8rem;
   font-weight: bold;
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   white-space: nowrap;
   overflow: hidden;
   width: 100%;
@@ -99,6 +99,10 @@
   height: 1px;
   background-color: var(--label);
   margin: 0.5rem 1rem;
+}
+
+.hamburgerButton {
+  padding: 0.5em 0;
 }
 
 @media (max-width: 1024px) {

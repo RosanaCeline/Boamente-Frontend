@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { PatientService } from "../../services/patientService";
 import "../../style.css";
 import style from "./ListPatient.module.css";
+import { Archive } from "lucide-react";
+import { ReactComponent as SearchIcon } from "../../assets/icons/search-dashboards.svg";
+
 
 export default function ListPatient({ onInspect, onArchive }) {
   const [patients, setPatients] = useState([]);
@@ -117,7 +120,7 @@ export default function ListPatient({ onInspect, onArchive }) {
                       aria-label={`Inspecionar paciente ${fullName}`}
                       title="Inspecionar"
                     >
-                      🔍
+                      <SearchIcon className={style.searchIcon} />
                     </button>
                     <button
                       className={style.archiveBtn}
@@ -126,7 +129,7 @@ export default function ListPatient({ onInspect, onArchive }) {
                       title="Arquivar"
                       disabled={status === "INATIVO"}
                     >
-                      🗄️
+                      <Archive className={style.archiveIcon} />
                     </button>
                   </td>
                 </tr>

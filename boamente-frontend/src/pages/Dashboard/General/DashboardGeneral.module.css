@@ -80,15 +80,6 @@
   outline: none;
 }
 
-/* Titulo */
-.heading {
-  margin-top: 1.8rem;
-  margin-bottom: 2.5rem;
-  font-size: 1.8rem;
-  color: var(--font-blue);
-  text-align: center;
-}
-
 /* Indicadores */
 /* Cards */
 .gridIndicators {
@@ -107,6 +98,7 @@
   gap: 3rem;
   justify-content: center;
   margin-right: 5rem;
+  padding-bottom: 2rem;
 }
 
 /* Espaço dos graficos */

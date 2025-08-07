@@ -14,18 +14,26 @@ import styles from "./RiskLevelBarChart.module.css";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, ChartTooltip, Legend);
 
-export default function RiskLevelBarChart({ labels, dataValues }) {
+export default function RiskLevelBarChart({ riskLevelBarToday }) {
   const tooltipId = "risk-level-bar-tooltip";
   
-  // Get colors from CSS variables with fallbacks
   const green = getComputedStyle(document.documentElement).getPropertyValue('--green').trim() || '#0A5C32';
   const yellow = getComputedStyle(document.documentElement).getPropertyValue('--yellow').trim() || '#FFD95A';
   const red = getComputedStyle(document.documentElement).getPropertyValue('--red').trim() || '#dc3545';
 
-  const hasData = dataValues && dataValues.some(value => value > 0);
+  // Transformar o objeto em arrays para labels e valores
+  const labels = ['Baixo', 'Moderado', 'Alto'];
+  const dataValues = [
+    riskLevelBarToday.baixo || 0,
+    riskLevelBarToday.moderado || 0,
+    riskLevelBarToday.alto || 0
+  ];
+  const totalActivePatients = riskLevelBarToday.quantidadePacientes || 0;
+
+  const hasData = dataValues.some(value => value > 0);
 
   const data = {
-    labels: labels,
+    labels,
     datasets: [
       {
         label: "Pacientes",
@@ -46,6 +54,7 @@ export default function RiskLevelBarChart({ labels, dataValues }) {
     scales: {
       x: {
         beginAtZero: true,
+        max: totalActivePatients,
         title: {
           display: true,
           text: "Quantidade de Pacientes",
@@ -54,6 +63,9 @@ export default function RiskLevelBarChart({ labels, dataValues }) {
             weight: '500'
           },
           padding: { top: 20, bottom: 10 }
+        },
+        ticks: {
+          stepSize: 1
         },
         grid: {
           color: 'rgba(0, 0, 0, 0.05)'
@@ -93,19 +105,7 @@ export default function RiskLevelBarChart({ labels, dataValues }) {
         padding: 12
       },
       legend: {
-        display: true,
-        position: 'top',
-        align: 'start',
-        labels: {
-          usePointStyle: true,
-          pointStyle: 'rectRounded',
-          boxWidth: 12,
-          boxHeight: 12,
-          padding: 20,
-          font: {
-            size: 14
-          }
-        }
+        display: false
       }
     }
   };
@@ -114,10 +114,10 @@ export default function RiskLevelBarChart({ labels, dataValues }) {
     <div className={styles.chartContainer}>
       <div className={styles.chartHeader}>
         <h3 className={styles.chartTitle}>
-          Distribuição de Pacientes por Nível de Risco
+          Distribuição de Pacientes Ativos por Nível de Risco
           <span
             data-tooltip-id={tooltipId}
-            data-tooltip-html="Distribuição dos pacientes por nível de risco<br/><br/><strong>Legenda:</strong><br/>• Baixo <span style='color:#0A5C32'>■</span><br/>• Moderado <span style='color:#FFD95A'>■</span><br/>• Alto <span style='color:#dc3545'>■</span>"
+            data-tooltip-html="Distribuição dos pacientes ativos, classificados por nível de risco.<br/><br/><strong>Período:</strong> Hoje, da meia-noite até o momento atual.<br/><br/><strong>Legenda:</strong><br/>• Baixo <span style='color:#0A5C32'>■</span><br/>• Moderado <span style='color:#FFD95A'>■</span><br/>• Alto <span style='color:#dc3545'>■</span>"
             className={styles.infoIconWrapper}
           >
             <InfoIcon width={18} height={18} />

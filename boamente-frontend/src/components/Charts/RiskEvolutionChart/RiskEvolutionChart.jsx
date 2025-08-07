@@ -165,7 +165,12 @@ export default function RiskEvolutionChart({ labels, data }) {
           Variação do Nível de Risco nas últimas 24 horas
           <span
             data-tooltip-id={tooltipId}
-            data-tooltip-html="Este gráfico mostra a variação do nível de risco nas últimas 24 horas.<br/><br/><strong>Interpretação:</strong><br/>• 1-1.3: Risco Baixo <span style='color:#0A5C32'>■</span><br/>• 1.4-2.3: Risco Moderado <span style='color:#E67E22'>■</span><br/>• 2.4-3: Risco Alto <span style='color:#E74C3C'>■</span>"
+            data-tooltip-html="
+            Este gráfico mostra a variação do nível de risco nas últimas 24 horas.<br/><br/>
+            <strong>Interpretação:</strong><br/>
+            • 1-1.3: Risco Baixo <span style='color:#0A5C32'>■</span><br/>
+            • 1.4-2.3: Risco Moderado <span style='color:#E67E22'>■</span><br/>
+            • 2.4-3: Risco Alto <span style='color:#E74C3C'>■</span>"
             className={styles.infoIconWrapper}
           >
             <InfoIcon width={18} height={18} />

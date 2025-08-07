@@ -58,21 +58,23 @@ export const fetchPatientsByAgeGroup = () =>
 export const fetchPatientsByGender = () => 
   fetchData('sex-distribution', 'Erro ao buscar pacientes por sexo');
 
-export const fetchRiskEvolutionOverTime = (periodType) => {
-  return fetchData('risk-evolution', 'Erro ao buscar evolução do nível de risco', { periodType });
-};
+export const fetchRiskEvolutionOverTime = () =>
+  fetchData('risk-evolution', 'Erro ao buscar evolução do nível de risco');
 
+export const fetchAverageRiskLevel = () =>
+  fetchData('average-risk', 'Erro ao obter evolução diária média de risco');
 
-
+export const fetchRiskLevelBar = () =>
+  fetchData('risk-distribution', 'Erro ao obter nível de risco atual');
 
 
 export const fetchPatientsByRiskLevel = () => 
-  fetchData('risk-distribution', 'Erro ao buscar pacientes por nível de risco');
+  fetchData('sex-distribution', 'Erro ao buscar pacientes por nível de risco');
 
 // Atualize esta função específica
 export const fetchSentimentByPeriod = (periodType, startDate, endDate) => {
   return fetchData(
-    'sentiment-distribution',
+    'sex-distribution',
     'Erro ao buscar evolução de sentimentos',
     {
       periodType,

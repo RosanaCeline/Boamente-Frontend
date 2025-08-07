@@ -18,7 +18,7 @@
 .formInput:focus,
 .formInputSelect:focus {
   outline: none;
-  background-color: var(--light);
+  background-color: var(--light-input);
   box-shadow:
     0 0 0 3px rgba(13, 164, 173, 0.2),
     0 2px 5px rgba(150, 150, 150, 0.4);
@@ -65,7 +65,7 @@
 
 .formTextarea:focus {
   outline: none;
-  background-color: var(--light);
+  background-color: var(--light-input);
   box-shadow:
     0 0 0 3px rgba(13, 164, 173, 0.2),
     0 2px 5px rgba(150, 150, 150, 0.4);

@@ -1,3 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
+.chartTitle {
+  color: #2C3E50;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.chartWrapper {
+  position: relative;
+  height: 350px;
+  width: 100%;
+  margin: 15px 0;
+}
+
+.infoIconWrapper {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #7F8C8D;
+  transition: color 0.3s;
+}
+
+.infoIconWrapper:hover {
+  color: #3498DB;
+}
+
+.customTooltip {
+  max-width: 300px;
+  font-size: 14px;
+  line-height: 1.5;
+  z-index: 1000;
+  background: rgba(0,0,0,0.9);
+  padding: 12px;
+  border-radius: 6px;
+}
+
 .chartSection {
   height: 100%;
   width: 100%;
@@ -11,24 +54,53 @@
   box-sizing: border-box;
 }
 
+.controls {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.periodLabel {
+  font-size: 14px;
+  color: #2C3E50;
+}
+
 .periodSelect {
-  align-self: center;
-  margin-bottom: 1rem;
+  color: #2C3E50;
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+#period-select {
+  padding: 0.5rem 1rem;
   font-size: 1rem;
-  padding: 0.5rem;
-  border-radius: 0.3rem;
-  border: 1px solid var(--grey);
-  background-color: var(--form-background);
-  color: var(--font-blue);
-  cursor: pointer;
-  max-width: 200px;
-  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: fit-content;
 }
 
 .chartWrapper {
   flex: 1;  
   position: relative;
   min-height: 0; 
+}
+
+.chart {
+  max-width: 100%;
+  max-height: 400px;
+  width: 400px;
+  height: 350px;
+}
+
+.noDataContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+  text-align: center;
 }
 
 /* Responsividade */

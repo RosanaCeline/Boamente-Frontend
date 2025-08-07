@@ -17,24 +17,26 @@ ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, ChartToo
 
 export default function AverageRiskLevelChart({ weeklyData }) {
   const tooltipId = "risk-level-tooltip";
-  
-  const calcularMedia = (dado) => {
-    const total = dado.baixo + dado.moderado + dado.alto;
-    if (total === 0) return 0;
-    const somaPesos = dado.baixo * 1 + dado.moderado * 2 + dado.alto * 3;
-    return +(somaPesos / total).toFixed(2);
+
+  console.log("weeklyData", weeklyData);
+
+  const hasData = weeklyData && weeklyData.labels && weeklyData.data && weeklyData.data.length > 0;
+
+  const labels = hasData ? weeklyData.labels : [];
+  const medias = hasData ? weeklyData.data : [];
+
+  const chartColors = {
+    lightBlue: '#4D9CB9',
+    lightBlueRgb: '77, 156, 185',
+    gridColor: 'rgba(77, 156, 185, 0.1)'
   };
 
-  const hasData = weeklyData && weeklyData.length > 0 && weeklyData.some(d => 
-    d.baixo > 0 || d.moderado > 0 || d.alto > 0
-  );
+  const riskColors = {
+    low: '#0A5C32',
+    medium: '#E67E22',
+    high: '#E74C3C'
+  };
 
-  const labels = hasData ? weeklyData.map((dado) => dado.semana) : [];
-  const medias = hasData ? weeklyData.map(calcularMedia) : [];
-
-  // Cores baseadas no tema
-  const lineColor = getComputedStyle(document.documentElement).getPropertyValue('--red').trim() || '#dc3545';
-  const fillColor = getComputedStyle(document.documentElement).getPropertyValue('--red-rgb').trim() || '220, 53, 69';
 
   const data = {
     labels,
@@ -42,14 +44,19 @@ export default function AverageRiskLevelChart({ weeklyData }) {
       {
         label: "Média do nível de risco",
         data: medias,
-        borderColor: lineColor,
-        backgroundColor: `rgba(${fillColor}, 0.3)`,
+        borderColor: chartColors.lightBlue,
+        backgroundColor: `rgba(${chartColors.lightBlueRgb}, 0.15)`,
         borderWidth: 2,
         fill: true,
         tension: 0.3,
         pointRadius: 5,
         pointHoverRadius: 8,
-        pointBackgroundColor: lineColor,
+        pointBackgroundColor: (context) => {
+          const value = context.dataset.data[context.dataIndex];
+          if (value <= 1.3) return riskColors.low;
+          if (value <= 2.3) return riskColors.medium;
+          return riskColors.high;
+        },
         pointBorderColor: '#fff',
         pointBorderWidth: 2,
       },
@@ -83,13 +90,13 @@ export default function AverageRiskLevelChart({ weeklyData }) {
           },
         },
         grid: {
-          color: 'rgba(0, 0, 0, 0.1)',
+          color: chartColors.gridColor,
         },
       },
       x: {
         title: {
           display: true,
-          text: "Período (Semanas)",
+          text: "Últimos 7 dias",
           font: { 
             size: 16,
             weight: '500',
@@ -103,16 +110,7 @@ export default function AverageRiskLevelChart({ weeklyData }) {
     plugins: {
       tooltip: {
         callbacks: {
-          label: (ctx) => {
-            const weekData = weeklyData[ctx.dataIndex];
-            const total = weekData.baixo + weekData.moderado + weekData.alto;
-            return [
-              `Média: ${ctx.parsed.y.toFixed(2)}`,
-              `Baixo: ${weekData.baixo} (${total > 0 ? ((weekData.baixo/total)*100).toFixed(1) : 0}%)`,
-              `Moderado: ${weekData.moderado} (${total > 0 ? ((weekData.moderado/total)*100).toFixed(1) : 0}%)`,
-              `Alto: ${weekData.alto} (${total > 0 ? ((weekData.alto/total)*100).toFixed(1) : 0}%)`
-            ];
-          },
+          label: (ctx) => `Média: ${ctx.parsed.y.toFixed(2)}`
         },
         backgroundColor: 'rgba(255, 255, 255, 0.9)',
         titleColor: '#000',
@@ -123,14 +121,7 @@ export default function AverageRiskLevelChart({ weeklyData }) {
         usePointStyle: true,
       },
       legend: {
-        position: "top",
-        labels: {
-          usePointStyle: true,
-          font: {
-            size: 14,
-          },
-          padding: 20,
-        },
+        display: false
       },
     },
     maintainAspectRatio: false,
@@ -143,7 +134,14 @@ export default function AverageRiskLevelChart({ weeklyData }) {
           Evolução do Nível Médio de Risco
           <span
             data-tooltip-id={tooltipId}
-            data-tooltip-html="Média ponderada do nível de risco por semana.<br/><br/>Escala:<br/>• 1.0 = Baixo risco<br/>• 2.0 = Moderado<br/>• 3.0 = Alto risco<br/><br/>A linha mostra a tendência geral."
+            data-tooltip-html="
+              Média ponderada do nível de risco nos últimos 7 dias.<br/><br/>
+              <strong>Interpretação:</strong><br/>
+              • 1-1.3: Risco Baixo <span style='color:#0A5C32'>■</span><br/>
+              • 1.4-2.3: Risco Moderado <span style='color:#E67E22'>■</span><br/>
+              • 2.4-3: Risco Alto <span style='color:#E74C3C'>■</span><br/><br/>
+              A linha mostra a tendência geral.
+            "
             className={styles.infoIconWrapper}
           >
             <InfoIcon width={18} height={18} />

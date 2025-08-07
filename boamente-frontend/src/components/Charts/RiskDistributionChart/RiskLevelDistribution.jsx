@@ -110,7 +110,12 @@ export default function RiskDistributionChart({ dataValues }) {
           Distribuição de Classificações por Nível de Risco
           <span
             data-tooltip-id={tooltipId}
-            data-tooltip-html="Distribuição das classificações de risco do paciente nos últimos 30 dias.<br/><br/><strong>Legenda:</strong><br/>• Baixo <span style='color:#66BB6A'>■</span><br/>• Moderado <span style='color:#FFEE58'>■</span><br/>• Alto <span style='color:#EF5350'>■</span>"
+            data-tooltip-html="
+              Distribuição das classificações de risco do paciente nos últimos 30 dias.<br/><br/>
+              <strong>Legenda:</strong><br/>
+              • Baixo <span style='color:#66BB6A'>■</span><br/>
+              • Moderado <span style='color:#FFEE58'>■</span><br/>
+              • Alto <span style='color:#EF5350'>■</span><br/><br/>"
             className={styles.infoIconWrapper}
           >
             <InfoIcon width={18} height={18} />

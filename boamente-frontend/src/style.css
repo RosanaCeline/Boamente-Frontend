@@ -1,9 +1,9 @@
 :root {
     --font-blue: #012538;
     --label: #F2F2F2;
-    --btn-background: #FFD95A;
+    --btn-background: #E6C34F;
     --btn-background-hover: #012538;
-    --form-background: #FFFFFF;
+    --form-background: #F8F9FA;
     --btn-font: #333333;
     --grey: #4D555B;
     --black: #000000;
@@ -11,7 +11,8 @@
 
     --blue: #1B768E;
     --blue-rgb: 27, 118, 142;
-    --light: #F8F9FA;
+    --light: #E9ECEF;
+    --light-input: #F8F9FA;
     --green: #0A5C32;
 }
 body.themeDark {
@@ -27,6 +28,7 @@ body.themeDark {
     --blue: #012538;
     --blue-rgb: 1, 37, 56;
     --light: #D1D3D5;
+    --light-input: #D1D3D5;
 }
 
 

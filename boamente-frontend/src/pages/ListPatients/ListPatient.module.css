@@ -139,6 +139,12 @@
   outline: none;
 }
 
+.searchIcon,
+.archiveIcon {
+  width: 25px;
+  height: 25px;
+}
+
 @media (max-width: 37.5rem) {
   .patientTable {
     min-width: 25rem;
