@@ -80,6 +80,7 @@ export default function ListPatient({ onInspect, onArchive }) {
               <tr>
                 <th>ID</th>
                 <th>Nome</th>
+                <th>Criado em</th>
                 <th>Idade</th>
                 <th>Sexo</th>
                 <th>Status</th>
@@ -87,7 +88,7 @@ export default function ListPatient({ onInspect, onArchive }) {
               </tr>
             </thead>
             <tbody>
-              {filteredPatients.map(({ id, fullName, age, gender, status }, i) => (
+              {filteredPatients.map(({ id, fullName, createdAt, age, gender, status }, i) => (
                 <tr
                   key={id}
                   className={`${status === "inativo" ? style.inactive : ""} ${
@@ -96,6 +97,17 @@ export default function ListPatient({ onInspect, onArchive }) {
                 >
                   <td>{formatId(id)}</td>
                   <td>{fullName}</td>
+                  <td>
+                    {createdAt
+                      ? new Date(createdAt).toLocaleString("pt-BR", {
+                          day: "2-digit",
+                          month: "2-digit",
+                          year: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })
+                      : "Não informado"}
+                  </td>
                   <td>{age}</td>
                   <td>
                     {gender === "F" ? "Feminino" :

@@ -1,7 +1,6 @@
 .listPatient {
   margin: 5rem 3rem;
   padding: 1.5rem;
-  font-family: "Inter", sans-serif;
   max-width: 100%;
   color: var(--font-blue);
   background-color: var(--form-background);

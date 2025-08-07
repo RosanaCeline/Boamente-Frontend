@@ -31,6 +31,34 @@ export default function PatientInfoCard({ patient }) {
           <span className={styles.label}>Nascimento</span>
           <p className={styles.value}>{patient.birthDate}</p>
         </div>
+        <div className={styles.infoBlock}>
+          <span className={styles.label}>Criado em</span>
+          <p className={styles.value}>
+            {patient.createdAt
+              ? new Date(patient.createdAt).toLocaleString("pt-BR", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
+              : "Não informado"}
+          </p>
+        </div>
+        <div className={styles.infoBlock}>
+          <span className={styles.label}>Arquivado em</span>
+          <p className={styles.value}>
+            {patient.archivedAt
+              ? new Date(patient.archivedAt).toLocaleString("pt-BR", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
+              : "Não informado"}
+          </p>
+        </div>
       </div>
     </div>
   );
