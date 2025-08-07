@@ -144,6 +144,117 @@
   height: 25px;
 }
 
+.confirmModal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+
+.modalContent {
+  position: relative;
+  background: var(--form-background);
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  min-height: 300px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalContent .headerModal {
+  font-size: 1.2rem;
+  color: var(--font-blue);
+  margin-bottom: 1rem;
+  align-self: center;
+}
+
+.modalButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.modalButtons button {
+  padding: 0.7rem 1.3rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.modalButtons button:first-child {
+  background-color: var(--btn-background);
+  color: var(--font-blue);
+}
+
+.modalButtons button:first-child:hover {
+  background-color: var(--btn-background-hover);
+  color: var(--label);
+}
+
+.modalButtons button:last-child {
+  background-color: var(--grey);
+  color: var(--label);
+}
+
+.modalButtons button:last-child:hover {
+  background-color: #999;
+}
+
+
+/* Texto de aviso dentro do modal */
+.modalContent .archiveWarning {
+  color: var(--font-gray); /* cor cinza para o texto do aviso */
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+  max-width: 350px;
+  text-align: center;
+  font-style: italic;
+}
+
+.closeIconBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--font-blue);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.closeIconBtn:hover {
+  transform: scale(1.02);
+}
+
+.errorMessage, .successMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
 @media (max-width: 37.5rem) {
   .patientTable {
     min-width: 25rem;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { ConfigurationService } from "../../services/configurationService";
+import { CheckCircle, AlertCircle, X } from "lucide-react";
 import style from "./ConfigurationPage.module.css";
 import LabelInput from "../../components/LabelInput/LabelInput";
 import editIcon from '../../assets/icons/edit_button.svg';
@@ -345,59 +346,81 @@ export default function ConfigurationPage() {
             </div>
             
             {!isInactive ? (
-                <>
-                    {/* Botão + mensagens */}
-                    <button
-                        type="button"
-                        className={style.inactivateButton}
-                        onClick={() => setShowConfirm(true)}
-                    >
-                        Inativar Conta
-                    </button>
+            <>
+                {/* Botão + mensagens */}
+                <button
+                type="button"
+                className={style.inactivateButton}
+                onClick={() => setShowConfirm(true)}
+                >
+                Inativar Conta
+                </button>
 
-                    {/* Sucesso geral (verde) */}
-                    {deactivateSuccess && (
-                        <p className={style.successMessage}>{deactivateSuccess}</p>
-                    )}
-
-                    {/* Modal de confirmação */}
-                    {showConfirm && (
-                    <div className={style.confirmModal}>
-                        <div className={style.modalContent}>
-                        <p className={style.headerModal}>Tem certeza que deseja inativar sua conta?</p>
-                        <div className={style.modalButtons}>
-                            <button
-                            onClick={handleDeactivateAccount}
-                            disabled={deactivateLoading}
-                            >
-                            {deactivateLoading ? 'Inativando...' : 'Sim, inativar'}
-                            </button>
-                            <button onClick={() => setShowConfirm(false)}>Cancelar</button>
-                        </div>
-                        {deactivateError && (
-                        <p className={style.errorMessage}>{deactivateError}</p>
-                        )}
-                        {deactivateSuccess && (
-                            <p className={style.successMessage}>{deactivateSuccess}</p>
-                        )}
-                        </div>
-                    </div>
-                    )}
-                </>
-                ) : (
-                <>
-                    <p className={style.inactiveMessage}>
-                    Sua conta está inativa. Para reativá‑la, envie um email para boamente.oficial@gmail.com ou abra um ticket de suporte
-                    </p>
-                    <button
-                    type="button"
-                    className={style.reactivateButton}
-                    onClick={handleReactivateClick}
-                    >
-                    Reativar Conta
-                    </button>
-                </>
+                {/* Mensagem de sucesso com ícone */}
+                {deactivateSuccess && (
+                <p className={style.successMessage}>
+                    <CheckCircle size={20} style={{ marginRight: 8, color: '#5cb85c', verticalAlign: 'middle' }} />
+                    {deactivateSuccess}
+                </p>
                 )}
+
+                {/* Modal de confirmação */}
+                {showConfirm && (
+                <div className={style.confirmModal} onClick={() => setShowConfirm(false)}>
+                    <div className={style.modalContent} onClick={e => e.stopPropagation()}>
+                    <button 
+                        className={style.closeIconBtn} 
+                        aria-label="Fechar modal"
+                        onClick={() => setShowConfirm(false)}
+                    >
+                        <X size={20} />
+                    </button>
+
+                    <p className={style.headerModal}>Tem certeza que deseja inativar sua conta?</p>
+
+                    <div className={style.modalButtons}>
+                        <button
+                        onClick={handleDeactivateAccount}
+                        disabled={deactivateLoading}
+                        >
+                        {deactivateLoading ? 'Inativando...' : 'Sim, inativar'}
+                        </button>
+                        <button onClick={() => setShowConfirm(false)}>Cancelar</button>
+                    </div>
+
+                    {/* Mensagem de erro com ícone */}
+                    {deactivateError && (
+                        <p className={style.errorMessage}>
+                        <AlertCircle size={20} style={{ marginRight: 8, color: '#d9534f', verticalAlign: 'middle' }} />
+                        {deactivateError}
+                        </p>
+                    )}
+
+                    {/* Repetir mensagem de sucesso dentro do modal, opcional */}
+                    {deactivateSuccess && (
+                        <p className={style.successMessage}>
+                        <CheckCircle size={20} style={{ marginRight: 8, color: '#5cb85c', verticalAlign: 'middle' }} />
+                        {deactivateSuccess}
+                        </p>
+                    )}
+                    </div>
+                </div>
+                )}
+            </>
+            ) : (
+            <>
+                <p className={style.inactiveMessage}>
+                Sua conta está inativa. Para reativá‑la, envie um email para boamente.oficial@gmail.com ou abra um ticket de suporte
+                </p>
+                <button
+                type="button"
+                className={style.reactivateButton}
+                onClick={handleReactivateClick}
+                >
+                Reativar Conta
+                </button>
+            </>
+            )}
         </main>
     );
 }

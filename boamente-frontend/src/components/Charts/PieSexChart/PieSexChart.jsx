@@ -74,7 +74,7 @@ export default function PieSexChart({ dataValues }) {
           Distribuição por Sexo
           <span
             data-tooltip-id={tooltipId}
-            data-tooltip-html="Distribuição dos pacientes por sexo."
+            data-tooltip-html="Distribuição dos pacientes ativos por sexo."
             className={styles.infoIconWrapper}
           >
             <InfoIcon width={18} height={18} />

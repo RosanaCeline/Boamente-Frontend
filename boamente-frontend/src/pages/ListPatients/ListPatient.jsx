@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { PatientService } from "../../services/patientService";
 import "../../style.css";
 import style from "./ListPatient.module.css";
-import { Archive } from "lucide-react";
+import { Archive, X, CheckCircle, AlertCircle } from "lucide-react";
 import { ReactComponent as SearchIcon } from "../../assets/icons/search-dashboards.svg";
 
 
@@ -12,6 +12,11 @@ export default function ListPatient({ onInspect, onArchive }) {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [error] = useState(null);
+  const [showArchiveConfirm, setShowArchiveConfirm] = useState(false);
+  const [patientToArchive, setPatientToArchive] = useState(null);
+  const [archiveLoading, setArchiveLoading] = useState(false);
+  const [archiveError, setArchiveError] = useState('');
+  const [archiveSuccess, setArchiveSuccess] = useState('');
   const navigate = useNavigate(); 
   
   useEffect(() => {
@@ -37,6 +42,25 @@ export default function ListPatient({ onInspect, onArchive }) {
 
   const handleInspect = (patientId) => {
     navigate(`/paineldopaciente/${patientId}`);
+  };
+
+  const confirmArchive = async () => {
+    setArchiveLoading(true);
+    setArchiveError('');
+    setArchiveSuccess('');
+    try {
+      await PatientService.arquivarPaciente(patientToArchive.id);
+      setPatients((prev) =>
+        prev.map((p) =>
+          p.id === patientToArchive.id ? { ...p, status: "INATIVO" } : p
+        )
+      );
+      setArchiveSuccess('Paciente arquivado com sucesso!');
+    } catch (err) {
+      setArchiveError('Falha ao arquivar paciente.');
+    } finally {
+      setArchiveLoading(false);
+    }
   };
 
   const filteredPatients = useMemo(() => {
@@ -91,7 +115,7 @@ export default function ListPatient({ onInspect, onArchive }) {
               {filteredPatients.map(({ id, fullName, createdAt, age, gender, status }, i) => (
                 <tr
                   key={id}
-                  className={`${status === "inativo" ? style.inactive : ""} ${
+                  className={`${status === "INATIVO" ? style.inactive : ""} ${
                     i % 2 === 0 ? style.stripedRow : ""
                   }`}
                 >
@@ -136,10 +160,15 @@ export default function ListPatient({ onInspect, onArchive }) {
                     </button>
                     <button
                       className={style.archiveBtn}
-                      onClick={() => onArchive?.(id)}
+                      onClick={() => {
+                        console.log("Abrindo modal para arquivar paciente", id, fullName);
+                        setPatientToArchive({ id, fullName, status  });
+                        setArchiveError('');
+                        setArchiveSuccess('');
+                        setShowArchiveConfirm(true);
+                      }}
                       aria-label={`Arquivar paciente ${fullName}`}
                       title="Arquivar"
-                      disabled={status === "INATIVO"}
                     >
                       <Archive className={style.archiveIcon} />
                     </button>
@@ -148,6 +177,64 @@ export default function ListPatient({ onInspect, onArchive }) {
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {showArchiveConfirm && (
+        <div className={style.confirmModal} onClick={() => setShowArchiveConfirm(false)}>
+          <div className={style.modalContent} onClick={e => e.stopPropagation()}>
+            
+            <button 
+              className={style.closeIconBtn} 
+              aria-label="Fechar modal"
+              onClick={() => setShowArchiveConfirm(false)}
+            >
+              <X size={20} />
+            </button>
+
+            {patientToArchive.status === "INATIVO" ? (
+              <>
+                <Archive size={100} style={{ padding: '20px' }}/>
+                <p className={style.headerModal}>
+                  O paciente <strong>{patientToArchive.fullName}</strong> já está inativo.
+                </p>
+              </>
+            ) : (
+              <>
+                <p className={style.headerModal}>
+                  Tem certeza que deseja arquivar o paciente <strong>{patientToArchive.fullName}</strong>?
+                </p>
+
+                <p className={style.archiveWarning}>
+                  Aviso: O paciente não poderá mais enviar classificações, seus dados antigos permanecerão armazenados. 
+                  Para reativá-lo, é necessário abrir um ticket na aba Suporte.
+                </p>
+
+                <div className={style.modalButtons}>
+                  <button
+                    onClick={confirmArchive}
+                    disabled={archiveLoading}
+                  >
+                    {archiveLoading ? 'Arquivando...' : 'Sim, arquivar'}
+                  </button>
+                  <button onClick={() => setShowArchiveConfirm(false)}>Cancelar</button>
+                </div>
+
+                {archiveError && (
+                  <p className={style.errorMessage}>
+                    <AlertCircle size={20} style={{ marginRight: '8px', verticalAlign: 'middle', color: '#d9534f' }} />
+                    {archiveError}
+                  </p>
+                )}
+                {archiveSuccess && (
+                  <p className={style.successMessage}>
+                    <CheckCircle size={20} style={{ marginRight: '8px', verticalAlign: 'middle', color: '#5cb85c' }} />
+                    {archiveSuccess}
+                  </p>
+                )}
+              </>
+            )}
+          </div>
         </div>
       )}
     </section>

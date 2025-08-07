@@ -114,7 +114,7 @@ export default function BarAgeChart({ labels, dataValues, isExpandable = true })
             Distribuição de Pacientes por Faixa Etária
             <span
               data-tooltip-id={tooltipId}
-              data-tooltip-html="Distribuição dos pacientes por faixa etária.<br/><br/>Mostra a quantidade de pacientes em cada grupo de idade."
+              data-tooltip-html="Distribuição dos pacientes por faixa etária.<br/><br/>Mostra a quantidade de pacientes ativos em cada grupo de idade."
               className={styles.infoIconWrapper}
             >
               <InfoIcon width={18} height={18} />
@@ -150,7 +150,7 @@ export default function BarAgeChart({ labels, dataValues, isExpandable = true })
           Distribuição de Pacientes por Faixa Etária
           <span
             data-tooltip-id={tooltipId}
-            data-tooltip-html="Distribuição dos pacientes por faixa etária.<br/><br/>Mostra a quantidade de pacientes em cada grupo de idade."
+            data-tooltip-html="Distribuição dos pacientes ativos por faixa etária.<br/><br/>Mostra a quantidade de pacientes em cada grupo de idade."
             className={styles.infoIconWrapper}
           >
             <InfoIcon width={18} height={18} />

@@ -144,16 +144,19 @@
 }
 
 .modalContent {
+  position: relative;
   background: var(--form-background);
   padding: 2rem;
   border-radius: 8px;
   max-width: 400px;
   width: 100%;
+  min-height: 300px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .modalContent .headerModal {
@@ -216,14 +219,30 @@
   margin-right: 8px;
 }
 
-.errorMessage {
-  color: #e63946; /* Vermelho forte */
-  margin: 8px 0;
+.successMessage, .errorMessage {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  margin-top: 1rem;
+  justify-content: center;
 }
 
-.successMessage {
-  color: #2a9d8f; /* Verde suave */
-  margin: 8px 0;
+.closeIconBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--font-blue);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+.closeIconBtn:hover {
+  color: var(--btn-background-hover);
 }
 
 /* Botões Inativar / Reativar */
