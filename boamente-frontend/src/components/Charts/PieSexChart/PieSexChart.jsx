@@ -47,18 +47,17 @@ export default function PieSexChart({ dataValues }) {
         },
         displayColors: true,
         usePointStyle: true,
-        bodyFont: {
-          size: 14,
-        },
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        titleFont: { size: 14 },
+        bodyFont: { size: 12 }
       },
       legend: {
         position: "bottom",
         labels: {
           usePointStyle: true,
           pointStyle: "circle",
-          font: { 
-            size: 14,
-            family: "'Inter', sans-serif",
+          font: {
+            size: 14
           },
           padding: 20,
         },

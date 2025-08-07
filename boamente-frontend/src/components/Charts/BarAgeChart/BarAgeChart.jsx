@@ -45,7 +45,10 @@ export default function BarAgeChart({ labels, dataValues, isExpandable = true })
         title: {
           display: true,
           text: 'Faixa Etária',
-          font: { size: 18 },
+          font: {
+            weight: 'bold',
+            size: 14
+          }
         }
       },
       y: {
@@ -56,17 +59,26 @@ export default function BarAgeChart({ labels, dataValues, isExpandable = true })
         title: {
           display: true,
           text: 'Quantidade',
-          font: { size: 18 },
+          font: {
+            weight: 'bold',
+            size: 14
+          }
         }
       }
     },
     plugins: {
       tooltip: {
         callbacks: {
-          label: (context) => `${context.dataset.label}: ${context.raw} pacientes`
+          title: function(context) {
+            return `Faixa etária de ${context[0].label}`;
+          },
+          label: (context) => `${context.dataset.label} : ${context.raw} pacientes`
         }
       },
-      legend: { display: false }
+      legend: { display: false },
+      backgroundColor: 'rgba(0, 0, 0, 0.8)',
+      titleFont: { size: 14 },
+      bodyFont: { size: 12 }
     }
   };
 

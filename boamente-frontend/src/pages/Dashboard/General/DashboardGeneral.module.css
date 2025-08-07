@@ -1,11 +1,12 @@
 /* Geral */
 .container {
   margin: 0 auto;
-  padding: 8rem 0 0 6rem;
+  padding: 0 0 0 2rem;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   z-index: 800;
+  margin-top: 6rem;
 }
 
 /* Spinner Carregamento */
@@ -83,23 +84,31 @@
 /* Indicadores */
 /* Cards */
 .gridIndicators {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
   margin-bottom: 2rem;
-  margin-right: 5rem;
+  margin-right: 2rem;
 }
 
 /* Graficos */
 .gridCharts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
-  gap: 3rem;
+  grid-template-columns: repeat(4, 1fr); /* 4 colunas */
+  grid-template-areas:
+    "avgChart avgChart avgChart barChart"
+    "riskBar riskEvol riskEvol pieChart";
+  gap: 2rem;
   justify-content: center;
-  margin-right: 5rem;
+  margin-right: 2rem;
   padding-bottom: 2rem;
 }
+
+.avgChart { grid-area: avgChart; }
+.barChart { grid-area: barChart; }
+.riskBar { grid-area: riskBar; }
+.riskEvol { grid-area: riskEvol; }
+.pieChart { grid-area: pieChart; }
 
 /* Espaço dos graficos */
 .gridCharts section {

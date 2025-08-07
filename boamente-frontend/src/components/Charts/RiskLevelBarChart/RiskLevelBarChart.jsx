@@ -59,8 +59,8 @@ export default function RiskLevelBarChart({ riskLevelBarToday }) {
           display: true,
           text: "Quantidade de Pacientes",
           font: { 
-            size: 16,
-            weight: '500'
+            weight: 'bold',
+            size: 14
           },
           padding: { top: 20, bottom: 10 }
         },
@@ -76,8 +76,8 @@ export default function RiskLevelBarChart({ riskLevelBarToday }) {
           display: true,
           text: "Nível de Risco",
           font: { 
-            size: 16,
-            weight: '500'
+            weight: 'bold',
+            size: 14
           },
           padding: { bottom: 20, top: 10 }
         },
@@ -97,12 +97,9 @@ export default function RiskLevelBarChart({ riskLevelBarToday }) {
         },
         displayColors: true,
         usePointStyle: true,
-        backgroundColor: 'rgba(255, 255, 255, 0.95)',
-        titleColor: '#000',
-        bodyColor: '#000',
-        borderColor: 'rgba(0, 0, 0, 0.1)',
-        borderWidth: 1,
-        padding: 12
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        titleFont: { size: 14 },
+        bodyFont: { size: 12 }
       },
       legend: {
         display: false

@@ -142,7 +142,8 @@ export default function RiskAverageChart({ patientId }) {
                 display: true,
                 text: "Nível de Risco",
                 font: {
-                  weight: 'bold'
+                  weight: 'bold',
+                  size: 14
                 }
               },
               grid: {
@@ -164,7 +165,8 @@ export default function RiskAverageChart({ patientId }) {
                 display: true,
                 text: "Período",
                 font: {
-                  weight: 'bold'
+                  weight: 'bold',
+                  size: 14
                 }
               },
               grid: {

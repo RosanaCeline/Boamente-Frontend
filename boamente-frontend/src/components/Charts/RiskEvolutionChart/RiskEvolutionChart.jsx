@@ -128,7 +128,8 @@ export default function RiskEvolutionChart({ labels, data }) {
               display: true,
               text: "Nível de Risco",
               font: {
-                weight: 'bold'
+                weight: 'bold',
+                size: 14
               }
             },
             afterBuildTicks: function(axis) {
@@ -143,7 +144,8 @@ export default function RiskEvolutionChart({ labels, data }) {
               display: true,
               text: "Períodos das últimas 24 horas",
               font: {
-                weight: 'bold'
+                weight: 'bold',
+                size: 14
               }
             }
           }

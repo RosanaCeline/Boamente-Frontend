@@ -60,6 +60,7 @@ export default function RiskDistributionChart({ dataValues }) {
               usePointStyle: true,
               pointStyle: 'circle',
               font: {
+                weight: 'bold',
                 size: 12
               },
               color: '#333'
@@ -77,15 +78,9 @@ export default function RiskDistributionChart({ dataValues }) {
                 return `${label}: ${value} (${percentage}%)`;
               }
             },
-            backgroundColor: 'rgba(0, 0, 0, 0.85)',
-            titleFont: { 
-              size: 14,
-              family: "'Segoe UI', Roboto, sans-serif"
-            },
-            bodyFont: { 
-              size: 12,
-              family: "'Segoe UI', Roboto, sans-serif" 
-            },
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            titleFont: { size: 14 },
+            bodyFont: { size: 12 },
             boxPadding: 6
           }
         },

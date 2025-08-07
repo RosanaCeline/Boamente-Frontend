@@ -77,16 +77,10 @@ export default function RiskDistributionChart({ dataValues }) {
                 return `${label}: ${value} (${percentage}%)`;
               }
             },
-            backgroundColor: 'rgba(0, 0, 0, 0.85)',
-            titleFont: { 
-              size: 14,
-              family: "'Segoe UI', Roboto, sans-serif"
-            },
-            bodyFont: { 
-              size: 12,
-              family: "'Segoe UI', Roboto, sans-serif" 
-            },
-            boxPadding: 6
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            titleFont: { size: 14 },
+            bodyFont: { size: 12 },
+            padding: 6
           }
         },
         animation: {

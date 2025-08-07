@@ -68,7 +68,13 @@ export default function RiskLevelEvolutionChart({ dataSetsByPeriod }) {
     responsive: true,
     plugins: {
       legend: { position: "top" },
-      tooltip: { mode: "index", intersect: false },
+      tooltip: { 
+        mode: "index", 
+        intersect: false,
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        titleFont: { size: 14 },
+        bodyFont: { size: 12 } 
+      },
     },
     scales: {
       x: {
@@ -76,7 +82,10 @@ export default function RiskLevelEvolutionChart({ dataSetsByPeriod }) {
         title: {
           display: true,
           text: "Tempo",
-          font: { size: 18 },
+          font: {
+            weight: 'bold',
+            size: 14
+          }
         },
       },
       y: {
@@ -85,7 +94,10 @@ export default function RiskLevelEvolutionChart({ dataSetsByPeriod }) {
         title: {
           display: true,
           text: "Quantidade de Pacientes",
-          font: { size: 18 },
+          font: {
+            weight: 'bold',
+            size: 14
+          }
         },
         ticks: {
           stepSize: 1,

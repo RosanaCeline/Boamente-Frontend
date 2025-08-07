@@ -9,7 +9,6 @@
   max-width: 400px;
   width: 100%;
   box-sizing: border-box;
-  font-family: sans-serif;
   background-color: rgba(46, 46, 46, 0.05);
   animation: fadeIn 0.3s ease-in-out;
 }

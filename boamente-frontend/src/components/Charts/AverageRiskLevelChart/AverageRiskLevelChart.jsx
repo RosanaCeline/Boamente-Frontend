@@ -84,10 +84,10 @@ export default function AverageRiskLevelChart({ weeklyData }) {
         title: {
           display: true,
           text: "Nível médio de risco",
-          font: { 
-            size: 16,
-            weight: '500',
-          },
+          font: {
+            weight: 'bold',
+            size: 14
+          }
         },
         grid: {
           color: chartColors.gridColor,
@@ -97,10 +97,10 @@ export default function AverageRiskLevelChart({ weeklyData }) {
         title: {
           display: true,
           text: "Últimos 7 dias",
-          font: { 
-            size: 16,
-            weight: '500',
-          },
+          font: {
+            weight: 'bold',
+            size: 14
+          }
         },
         grid: {
           display: false,
@@ -112,11 +112,9 @@ export default function AverageRiskLevelChart({ weeklyData }) {
         callbacks: {
           label: (ctx) => `Média: ${ctx.parsed.y.toFixed(2)}`
         },
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
-        titleColor: '#000',
-        bodyColor: '#000',
-        borderColor: 'rgba(0, 0, 0, 0.1)',
-        borderWidth: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        titleFont: { size: 14 },
+        bodyFont: { size: 12 },
         padding: 12,
         usePointStyle: true,
       },

@@ -36,7 +36,10 @@ export default function GroupedBarAgeRiskChart({ labels, datasetsData }) {
         title: {
           display: true,
           text: "Faixa Etária",
-          font: { size: 18, },
+          font: {
+            weight: 'bold',
+            size: 14
+          }
         },
         stacked: false,
       },
@@ -45,7 +48,10 @@ export default function GroupedBarAgeRiskChart({ labels, datasetsData }) {
         title: {
           display: true,
           text: "Quantidade de Pacientes",
-          font: { size: 18, },
+          font: {
+            weight: 'bold',
+            size: 14
+          }
         },
         stacked: false,
       },

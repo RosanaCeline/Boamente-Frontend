@@ -183,32 +183,33 @@ const DashboardGeneral = () => {
       </div>
       
       <div className={styles.gridCharts}>
-        <section>
+        <section className={styles.avgChart}>
+          <AverageRiskLevelChart 
+            weeklyData={averageDataByPeriod} 
+          />
+        </section>
+
+        <section className={styles.barChart}>
           <BarAgeChart 
             labels={dashboardData.ageData.labels} 
             dataValues={dashboardData.ageData.values} 
           />
         </section>
-        
-        <section>
-          <PieSexChart dataValues={dashboardData.genderData} />
+
+        <section className={styles.riskBar}>
+          <RiskLevelBarChart
+            riskLevelBarToday={riskLevelBarToday}
+          />
         </section>
 
-        <section>
+        <section className={styles.riskEvol}>
           <RiskLevelEvolutionChart
             dataSetsByPeriod={riskDataByPeriod} // Já está no formato { labels, Positive, Neutral, Negative }
           />
         </section>
 
-        <section>
-          <AverageRiskLevelChart 
-            weeklyData={averageDataByPeriod} 
-          />
-        </section>
-        <section>
-          <RiskLevelBarChart
-            riskLevelBarToday={riskLevelBarToday}
-          />
+        <section className={styles.pieChart}>
+          <PieSexChart dataValues={dashboardData.genderData} />
         </section>
       </div>
     </div>
